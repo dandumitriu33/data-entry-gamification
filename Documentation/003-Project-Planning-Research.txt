@@ -39,6 +39,14 @@ As a quick example, displaying a score based on how many tasks were completed
 next to the user’s profile picture like a badge, creating AllTime and Periodic 
 Leaderboards and so on.
 
+The solution will also contain a Help section with tutorials for people that 
+are completely untrained on the task. This will have step by step instructions 
+on how to use the tools and input the data so that even a person that has 
+minimum computer skills can get started without additional help. This will 
+allow other employees to quickly understand and get started or will put the 
+infrastructure in place in the event Business decides the pace is very slow 
+and hiring additional employees for this task is necessary.
+
 Goal Statement
 
 
