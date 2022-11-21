@@ -1,0 +1,54 @@
+https://www.softkraft.co/starting-software-project/
+
+The first document is the Project Plan and it has a few key components
+
+Project Charter type (there are also Project Initiation Document, BOSCARD, 
+Agile Inception Deck)
+
+I. Problem Statement
+
+The world is going through a process of Digitalization. In a lot of cases this 
+means transferring data from paper to digital storage solutions in order to 
+make it available for Data Science and other tools.
+
+This is a problem because it is not a simple thing to do especially when your 
+organization is for example a government institution with years of data in 
+large volumes. It is simply too expensive to hire employees for this task. 
+
+Hiring in cheaper regions has risks as the cultural/language differences might 
+influence the reliability of the transferred data.
+
+
+II. Business Case 
+
+One solution is to hire employees for this purpose, train them, give them 
+equipment and support and additional resources depending on the project.
+
+Another solution, which we are using in this project, is to organize the 
+process of transferring the data similar to a game, with appropriate rewards, 
+and make it available to the current employees. This strategy will minimize the 
+efforts and costs of having to hire a new department and the related costs to 
+that strategy as current employees already have training, resources and the 
+equipment.
+
+In this project we will build a solution that will organize the data transfer 
+in small individual tasks, that will be easy to resolve by users in small 
+chunks of time, will have a small reward for each task and will contain other 
+small mechanisms that will help increase motivation for completing these tasks. 
+As a quick example, displaying a score based on how many tasks were completed 
+next to the user’s profile picture like a badge, creating AllTime and Periodic 
+Leaderboards and so on.
+
+Goal Statement
+
+
+Timeline
+
+
+Scope
+
+
+Team
+
+
+
