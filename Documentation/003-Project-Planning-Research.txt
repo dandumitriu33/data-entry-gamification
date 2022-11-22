@@ -93,13 +93,35 @@ the amount of questions the new users ask the training personnel which will
 expose gaps in the knowledge transfer.
 
 
-Timeline
+    V. Timeline - Milestones
+
+    1. MVP - 1 month
+
+Simple system with an input web interface and a database and adding an item 
+from paper to the database can be demo-ed.
+
+    2. Complete User Input System - 1 month
+
+User accounts, security and reward system every entry 1 point.
+
+    3. Telemetry and Analytics system - 1 month
+
+Pages with reports on how much input was done, progress rate, history covered.
+
+    4. Training materials and knowledge base - 1 month
+
+Pages with information that is easily accessed by users and covers all data 
+input steps.
+
+    5. Beta testing - 1 month
+
+    6. Deployment
 
 
-Scope
+    VI. Scope
 
 
-Team
+    VII. Team
 
 
 
