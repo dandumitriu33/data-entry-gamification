@@ -1,0 +1,2 @@
+1. Find a site with a simple example [ ]
+2. Implement the example [ ]
