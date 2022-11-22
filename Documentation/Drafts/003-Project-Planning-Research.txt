@@ -1,0 +1,8 @@
+https://www.softkraft.co/starting-software-project/
+
+The first document is the Project Plan and it has a few key components
+
+Project Charter type (there are also Project Initiation Document, BOSCARD, 
+Agile Inception Deck)
+
+    

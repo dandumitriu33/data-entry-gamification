@@ -1,0 +1,156 @@
+
+                    Data Entry - Gamification
+
+    I. Problem Statement
+
+The world is going through a process of Digitalization. In a lot of cases this 
+means transferring data from paper to digital storage solutions in order to 
+make it available for Data Science and other tools.
+
+This is a problem because it is not a simple thing to do especially when your 
+organization is for example a government institution with years of data in 
+large volumes. It is simply too expensive to hire employees for this task. 
+
+Hiring in cheaper regions has risks as the cultural/language differences might 
+influence the reliability of the transferred data.
+
+
+    II. Business Case 
+
+One solution is to hire employees for this purpose, train them, give them 
+equipment and support and additional resources depending on the project.
+
+Another solution, which we are using in this project, is to organize the 
+process of transferring the data similar to a game, with appropriate rewards, 
+and make it available to the current employees. 
+
+    1. Reduced costs
+
+This strategy will minimize the efforts and costs of having to hire a new 
+department and the related costs to that strategy as current employees already 
+have training, resources and the equipment.
+
+    2. Improved motivation
+
+Gamifying boring tasks results in improved motivation to complete this type of 
+work because of the additional rewards.
+
+    3. Quick Training
+
+The solution will contain interactive training similar to a game or a tutorial 
+one might find on the Internet with images and from the beginner level.
+
+    4. Easy scaling
+
+If additional resources are required for the data input volume to increase, 
+they can be assigned from other departments or hired more quickly into the 
+already existing mechanism. 
+
+
+    III. Stakeholder Map - email communications
+
+    1. High influence, high interest (updated often)
+
+Data Science team Leadership.
+
+    2. High influence, low interest (update on milestones)
+
+Company, HR, Data Science, current Archive leadership.
+
+    3. Low influence, low interest (update on need basis, crowdsource if needed)
+
+All possible employees that might be participating.
+
+    4. Low influence, high interest (update on milestones, pilot often)
+
+Employees that will manage and use the system primarily - data scientists, QA, 
+trainers.
+
+
+    IV. Goal Statement
+
+Currently there is no system to add Archive data from paper into the system, 
+at the end of the project we will have one. 
+
+That system will give us metrics on how fast data is being introduced, how 
+much is left and estimations on how much more time it will take if we increase 
+resources.
+
+If we were to train a person from a beginner level at this time, it would take 
+another person and two working days. The training materials and the level by 
+level approach will not require the additional person except for a small number 
+of edge cases and work on the beginner level tasks can begin in a few hours.
+
+We will know the system is done when the flow of data input is in place and 
+works successfully with proof the data is added as intended. At the same time, 
+the training materials are also successful at giving the beginner users 
+complete information on how to do the tasks successfully. We measure this by 
+the amount of questions the new users ask the training personnel which will 
+expose gaps in the knowledge transfer.
+
+
+    V. Timeline - Milestones
+
+    1. MVP - 1 month
+
+Simple system with an input web interface and a database and adding an item 
+from paper to the database can be demo-ed.
+
+    2. Complete User Input System - 1 month
+
+User accounts, security and reward system every entry 1 point.
+
+    3. Telemetry and Analytics system - 1 month
+
+Pages with reports on how much input was done, progress rate, history covered.
+
+    4. Training materials and knowledge base - 1 month
+
+Pages with information that is easily accessed by users and covers all data 
+input steps.
+
+    5. Beta testing - 1 month
+
+    6. Deployment
+
+
+    VI. Scope
+
+    1. The Input System
+    - User account creation 
+    - Authentication
+    - Authorization
+    - HTTPS
+    - Traceability with log lines - User “abcd” added Archive Item “1234”
+    - 1 point added to user for every entry
+    - User level up from 5 points to level 1, afterwards, level experience 
+    increase is previous level points + 20%
+    - html form to type the data in that will add it to the Database
+    - SQL database with user and data tables with fields for all information 
+    types
+
+    2. Telemetry and Analytics system
+    - How many entries this day
+    - How many average daily entries
+    - How many total entries since beginning
+    - How far back in time the entries reached (input is done from most recent 
+    to oldest)
+    - Quality % - QA team will analyze 10 input entries and determine the 
+    percentage from that every day
+    - Quality history
+
+    3. Training materials
+    - Page for account creation
+    - Page for how points and levels work
+    - Page for every field in the form, how to fill it and how to avoid mistakes
+
+
+    VII. Team
+
+    Project Manager - John Doe
+    Senior Developer - Jane Smith
+    Developer - Mike Adams
+    Junior Developer - Bill Bob
+
+
+
