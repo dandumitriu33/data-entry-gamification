@@ -120,6 +120,34 @@ input steps.
 
     VI. Scope
 
+    1. The Input System
+    - User account creation 
+    - Authentication
+    - Authorization
+    - HTTPS
+    - Traceability with log lines - User “abcd” added Archive Item “1234”
+    - 1 point added to user for every entry
+    - User level up from 5 points to level 1, afterwards, level experience 
+    increase is previous level points + 20%
+    - html form to type the data in that will add it to the Database
+    - SQL database with user and data tables with fields for all information 
+    types
+
+    2. Telemetry and Analytics system
+    - How many entries this day
+    - How many average daily entries
+    - How many total entries since beginning
+    - How far back in time the entries reached (input is done from most recent 
+    to oldest)
+    - Quality % - QA team will analyze 10 input entries and determine the 
+    percentage from that every day
+    - Quality history
+
+    3. Training materials
+    - Page for account creation
+    - Page for how points and levels work
+    - Page for every field in the form, how to fill it and how to avoid mistakes
+
 
     VII. Team
 
