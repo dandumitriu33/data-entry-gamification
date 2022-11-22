@@ -151,5 +151,10 @@ input steps.
 
     VII. Team
 
+    Project Manager - John Doe
+    Senior Developer - Jane Smith
+    Developer - Mike Adams
+    Junior Developer - Bill Bob
+
 
 
