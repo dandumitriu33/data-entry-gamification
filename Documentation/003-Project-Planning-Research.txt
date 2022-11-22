@@ -51,6 +51,25 @@ they can be assigned from other departments or hired more quickly into the
 already existing mechanism. 
 
 
+III. Stakeholder Map - email communications
+
+    1. High influence, high interest (updated often)
+
+Data Science team Leadership.
+
+    2. High influence, low interest (update on milestones)
+
+Company, HR, Data Science, current Archive leadership.
+
+    3. Low influence, low interest (update on need basis, crowdsource if needed)
+
+All possible employees that might be participating.
+
+    4. Low influence, high interest (update on milestones, pilot often)
+
+Employees that will manage and use the system primarily - data scientists, QA, 
+trainers.
+
 Goal Statement
 
 
