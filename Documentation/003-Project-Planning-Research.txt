@@ -70,7 +70,27 @@ All possible employees that might be participating.
 Employees that will manage and use the system primarily - data scientists, QA, 
 trainers.
 
-Goal Statement
+
+    IV. Goal Statement
+
+Currently there is no system to add Archive data from paper into the system, 
+at the end of the project we will have one. 
+
+That system will give us metrics on how fast data is being introduced, how 
+much is left and estimations on how much more time it will take if we increase 
+resources.
+
+If we were to train a person from a beginner level at this time, it would take 
+another person and two working days. The training materials and the level by 
+level approach will not require the additional person except for a small number 
+of edge cases and work on the beginner level tasks can begin in a few hours.
+
+We will know the system is done when the flow of data input is in place and 
+works successfully with proof the data is added as intended. At the same time, 
+the training materials are also successful at giving the beginner users 
+complete information on how to do the tasks successfully. We measure this by 
+the amount of questions the new users ask the training personnel which will 
+expose gaps in the knowledge transfer.
 
 
 Timeline
