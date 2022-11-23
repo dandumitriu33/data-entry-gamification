@@ -1,0 +1,6 @@
+Extensive guide with images and tool links
+https://www.altexsoft.com/blog/business/technical-documentation-in-software-development-types-best-practices-and-tools/
+
+Simple guide for small projects
+https://dev.to/mage_ai/how-to-write-technical-design-docs-c02
+
