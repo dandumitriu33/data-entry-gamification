@@ -1,0 +1,68 @@
+Database entry table | Priority 1 | Estimate 1 day
+As an input user
+I want to add data from the paper sheet given to me to a database table
+So that the data can be stored digitally on a persistence layer with all the 
+necessary fields
+
+Acceptance criteria: entry table in database with entry ID, entry date, entry 
+event date, and all fields from paper sample
+
+--------------------------------------------------------------------------------
+Database user table | Priority 1 | Estimate 1 day
+As an input user
+I want to have my user ID in a table in the database
+So that the entries that I add can be attached to my user for tracking and  
+statistics
+
+Acceptance criteria: table in database with username, email, password, ID, 
+points, level
+
+--------------------------------------------------------------------------------
+Database user-entry table | Priority 1 | Estimate 1 day
+As an input user
+I want the data that I add to the database to be counted for my user
+So that the statistics about how many entries I have can be persistent
+
+Acceptance criteria: 1-1 table in database with user ID - entry ID
+
+--------------------------------------------------------------------------------
+Entry page with working form | Priority 2 | Estimate 3 days
+As an input user
+I want to add data to the database via a web page
+So that the data is typed in input html boxes and a Submit button is pressed as 
+opposed to SQL queries
+
+Acceptance criteria: backend has a REST API that accepts JSON for each entry. 
+Backend serves an html page with the form and Javascript. Javascript FETCH API 
+sends the data to the backend API on Submit press and refreshes the page. The 
+backend API adds the entry to the database.
+The user ID is added manually in a field and an entry to the statistics table 
+is also done by the same backend API. 
+Coupled to the User Login story.
+
+--------------------------------------------------------------------------------
+User Login page with working form | Priority 2 | Estimate 4 days
+As an input user
+I want to have a login page
+So that the data that I add to the database is counted on my user automatically
+
+Acceptance criteria: user login system to authenticate users and the html page 
+for it. 
+JWT login. No logout button at this time, just a session lease set for 8 hours. 
+No other UI indicators of login
+On the entry form table, the user ID field is completed automatically or 
+removed so that the counting in the database is done based on logged in user 
+and the user doesn’t have to manually put it in every time.
+
+--------------------------------------------------------------------------------
+Statistics Page | Priority 3 | Estimate 4 days
+As any user
+I want to have an analytics page
+So that I can see the progress of the data being added
+
+Acceptance criteria: analytics page with the data from the database displayed
+Total entries, total entries since project start, oldest entry date, quality 
+today, total quality
+
+--------------------------------------------------------------------------------
+
