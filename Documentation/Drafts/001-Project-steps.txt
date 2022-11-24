@@ -1,4 +1,4 @@
 1. Research SDLC components and stages documents [x]
     Project Plan, Design Document, User Stories
-2. Create a list of components with tasks on how to build them [ ]
+2. Create detailed User Stories [ ]
 3. Go through the list of tasks [ ]
