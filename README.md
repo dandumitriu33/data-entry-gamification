@@ -12,12 +12,12 @@ The strategy of developing this product is to have multiple iterations.
 Each iteration will build on the previous version based on evidence and  
 user feedback.  
 
-There is also another point from the software world which is: bring value to  
-the users/beneficiaries as soon as possible and build on that.
+There is also another point from the software world: bring value to the 
+users/beneficiaries as soon as possible and build on that.
 
-The first iteration is a simple MVP that we can give users to start inputing  
-data in the first and fastest way possible even though it may contain errors  
-or difficulties.  
+The first iteration is a simple MVP that we can give users so that they can  
+start inputing data as soon as possible even though it may contain errors or  
+present difficulties.  
 
 Based on the feedback and measured results of this initial version, we will  
 add functionality or improvements and use metrics and feedback to confirm  
