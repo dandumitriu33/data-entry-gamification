@@ -12,7 +12,7 @@ The strategy of developing this product is to have multiple iterations.
 Each iteration will build on the previous version based on evidence and  
 user feedback.  
 
-There is also another point from the software world: bring value to the 
+There is also another point from the software world: bring value to the  
 users/beneficiaries as soon as possible and build on that.
 
 The first iteration is a simple MVP that we can give users so that they can  
