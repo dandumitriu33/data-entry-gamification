@@ -65,4 +65,24 @@ Total entries, total entries since project start, oldest entry date, quality
 today, total quality
 
 --------------------------------------------------------------------------------
+User Account Page | Priority 3 | Estimate 4 days
+As an input user
+I want to have a my account page
+So that I can see my level and points
+
+Acceptance criteria: my account page similar to wireframe. Displays user points 
+and level next to the picture section. 
+Points and level are “GET” from the database tables.
+
+--------------------------------------------------------------------------------
+User Picture | Priority 4 | Estimate 4 days
+As an input user
+I want to have a picture/avatar
+So that I can see it on different pages with my points and level 
+
+Acceptance criteria: ability to upload a picture and have it displayed with 
+points and level on multiple pages as indicated in the wireframes. 
+On my account, new entry and analytics page at minimum
+
+--------------------------------------------------------------------------------
 
