@@ -1,9 +1,11 @@
 package main
 
 import (
-    "net/http"
+	"log"
+	"net/http"
+	"os"
 
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 // album represents data about a record album.
@@ -22,6 +24,16 @@ var albums = []album{
 }
 
 func main() {
+	varName := "MYSQL_DEV_USERNAME"	
+	value, exists := os.LookupEnv(varName)
+
+	if exists {
+		log.Printf(">>>>>>> Got ENV: %s\n", value)
+	} else {
+		log.Printf(">>>>>>> %s does not exist.\n", varName)
+	}
+
+
     router := gin.Default()
     router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
