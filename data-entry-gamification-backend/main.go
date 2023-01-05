@@ -1,67 +1,84 @@
 package main
 
 import (
-    "net/http"
+	"log"
+	"net/http"
+	"os"
+	"strconv"
 
-    "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
-// album represents data about a record album.
-type album struct {
-    ID     string  `json:"id"`
-    Title  string  `json:"title"`
-    Artist string  `json:"artist"`
-    Price  float64 `json:"price"`
+type receipt struct {
+	ID        int    `json:"id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Make      string `json:"make"`
+	ModelYear int    `json:"model_year"`
+	State     string `json:"state"`
+	Vin       string `json:"vin"`
 }
 
 // albums slice to seed record album data.
-var albums = []album{
-    {ID: "1", Title: "Blue Train", Artist: "John Coltrane", Price: 56.99},
-    {ID: "2", Title: "Jeru", Artist: "Gerry Mulligan", Price: 17.99},
-    {ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
+var receipts = []receipt{
+	{ID: 1, FirstName: "Michael", LastName: "Motorist", Make: "Honda", ModelYear: 1999, State: "NY", Vin: "JHMCB7682PC021209"},
+	{ID: 2, FirstName: "John", LastName: "Motorist", Make: "Honda", ModelYear: 2012, State: "NY", Vin: "JHMCB7682PC021204"},
+	{ID: 3, FirstName: "Jane", LastName: "Motorist", Make: "Honda", ModelYear: 2002, State: "NY", Vin: "JHMCB7682PC021203"},
 }
 
 func main() {
-    router := gin.Default()
-    router.GET("/albums", getAlbums)
-	router.GET("/albums/:id", getAlbumByID)
-    router.POST("/albums", postAlbums)
+	varName := "MYSQL_DEV_USERNAME"
+	value, exists := os.LookupEnv(varName)
 
-    router.Run("localhost:8080")
+	if exists {
+		log.Printf(">>>>>>> Got ENV: %s\n", value)
+	} else {
+		log.Printf(">>>>>>> %s does not exist.\n", varName)
+	}
+
+	router := gin.Default()
+	router.GET("/receipts", getReceipts)
+	router.GET("/receipts/:id", getReceiptByID)
+	router.POST("/receipts", postReceipts)
+
+	router.Run("localhost:8080")
 }
 
-// getAlbums responds with the list of all albums as JSON.
-func getAlbums(c *gin.Context) {
-    c.IndentedJSON(http.StatusOK, albums)
+// getReceipts responds with the list of all receipts as JSON.
+func getReceipts(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, receipts)
 }
 
-// postAlbums adds an album from JSON received in the request body.
-func postAlbums(c *gin.Context) {
-    var newAlbum album
+// postReceipts adds a receipt from JSON received in the request body.
+func postReceipts(c *gin.Context) {
+	var newReceipt receipt
 
-    // Call BindJSON to bind the received JSON to
-    // newAlbum.
-    if err := c.BindJSON(&newAlbum); err != nil {
-        return
-    }
+	// Call BindJSON to bind the received JSON to
+	// newReceipt.
+	if err := c.BindJSON(&newReceipt); err != nil {
+		return
+	}
 
-    // Add the new album to the slice.
-    albums = append(albums, newAlbum)
-    c.IndentedJSON(http.StatusCreated, newAlbum)
+	// Add the new receipt to the slice.
+	receipts = append(receipts, newReceipt)
+	c.IndentedJSON(http.StatusCreated, newReceipt)
 }
 
-// getAlbumByID locates the album whose ID value matches the id
-// parameter sent by the client, then returns that album as a response.
-func getAlbumByID(c *gin.Context) {
-    id := c.Param("id")
+// getReceiptByID locates the receipt whose ID value matches the id
+// parameter sent by the client, then returns that receipt as a response.
+func getReceiptByID(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		log.Panicf("Error converting ID from path: %s\n", err)
+	}
 
-    // Loop over the list of albums, looking for
-    // an album whose ID value matches the parameter.
-    for _, a := range albums {
-        if a.ID == id {
-            c.IndentedJSON(http.StatusOK, a)
-            return
-        }
-    }
-    c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+	// Loop over the list of receipts, looking for
+	// a receipt whose ID value matches the parameter.
+	for _, r := range receipts {
+		if r.ID == id {
+			c.IndentedJSON(http.StatusOK, r)
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "receipt not found"})
 }
