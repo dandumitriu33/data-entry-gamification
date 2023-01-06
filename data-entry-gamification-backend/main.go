@@ -34,7 +34,7 @@ func main() {
 	// router.GET("/receipts", getReceipts)
 	router.GET("/receipts", func(c *gin.Context) {
 		c.JSON(http.StatusOK, receiptStore.GetAll())
-	})
+	})    
 	// router.GET("/receipts/:id", getReceiptByID)
 	router.GET("/receipts/:id", func(c *gin.Context) {
 		// Get the ID from the path parameter
@@ -54,6 +54,15 @@ func main() {
 		c.JSON(http.StatusOK, receipt)
 	})
 	// router.POST("/receipts", postReceipts)
+	router.POST("/receipts", func(c *gin.Context) {
+        var newReceipt model.Receipt
+        if err := c.BindJSON(&newReceipt); err != nil {
+                return
+            }
+
+        receiptStore.PostReceipt(newReceipt)
+		c.JSON(http.StatusOK, newReceipt)
+	})
 
 	router.Run("localhost:8080")
 }

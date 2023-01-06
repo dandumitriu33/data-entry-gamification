@@ -25,3 +25,8 @@ func (s *ReceiptMemoryStore) GetByID(id int) (model.Receipt, error) {
 
 	return model.Receipt{}, fmt.Errorf("receipt not found")
 }
+
+// PostReceipt adds a new receipt to the store
+func (s *ReceiptMemoryStore) PostReceipt(receipt model.Receipt) {
+	s.Receipts = append(s.Receipts, receipt)
+}
