@@ -1,23 +1,15 @@
 package main
 
 import (
+	"data-entry-gamification/model"
+	"data-entry-gamification/storage"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
-    "data-entry-gamification/model"
 
 	"github.com/gin-gonic/gin"
 )
-
-
-
-// albums slice to seed record album data.
-var receipts = []model.Receipt{
-	{ID: 1, FirstName: "Michael", LastName: "Motorist", Make: "Honda", ModelYear: 1999, State: "NY", Vin: "JHMCB7682PC021209"},
-	{ID: 2, FirstName: "John", LastName: "Motorist", Make: "Honda", ModelYear: 2012, State: "NY", Vin: "JHMCB7682PC021204"},
-	{ID: 3, FirstName: "Jane", LastName: "Motorist", Make: "Honda", ModelYear: 2002, State: "NY", Vin: "JHMCB7682PC021203"},
-}
 
 func main() {
 	varName := "MYSQL_DEV_USERNAME"
@@ -39,7 +31,7 @@ func main() {
 
 // getReceipts responds with the list of all receipts as JSON.
 func getReceipts(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, receipts)
+	c.IndentedJSON(http.StatusOK, storage.Receipts)
 }
 
 // postReceipts adds a receipt from JSON received in the request body.
@@ -53,7 +45,7 @@ func postReceipts(c *gin.Context) {
 	}
 
 	// Add the new receipt to the slice.
-	receipts = append(receipts, newReceipt)
+	storage.Receipts = append(storage.Receipts, newReceipt)
 	c.IndentedJSON(http.StatusCreated, newReceipt)
 }
 
@@ -67,7 +59,7 @@ func getReceiptByID(c *gin.Context) {
 
 	// Loop over the list of receipts, looking for
 	// a receipt whose ID value matches the parameter.
-	for _, r := range receipts {
+	for _, r := range storage.Receipts {
 		if r.ID == id {
 			c.IndentedJSON(http.StatusOK, r)
 			return
