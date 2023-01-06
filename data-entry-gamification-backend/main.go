@@ -5,22 +5,15 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+    "data-entry-gamification/model"
 
 	"github.com/gin-gonic/gin"
 )
 
-type receipt struct {
-	ID        int    `json:"id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Make      string `json:"make"`
-	ModelYear int    `json:"model_year"`
-	State     string `json:"state"`
-	Vin       string `json:"vin"`
-}
+
 
 // albums slice to seed record album data.
-var receipts = []receipt{
+var receipts = []model.Receipt{
 	{ID: 1, FirstName: "Michael", LastName: "Motorist", Make: "Honda", ModelYear: 1999, State: "NY", Vin: "JHMCB7682PC021209"},
 	{ID: 2, FirstName: "John", LastName: "Motorist", Make: "Honda", ModelYear: 2012, State: "NY", Vin: "JHMCB7682PC021204"},
 	{ID: 3, FirstName: "Jane", LastName: "Motorist", Make: "Honda", ModelYear: 2002, State: "NY", Vin: "JHMCB7682PC021203"},
@@ -51,7 +44,7 @@ func getReceipts(c *gin.Context) {
 
 // postReceipts adds a receipt from JSON received in the request body.
 func postReceipts(c *gin.Context) {
-	var newReceipt receipt
+	var newReceipt model.Receipt
 
 	// Call BindJSON to bind the received JSON to
 	// newReceipt.
