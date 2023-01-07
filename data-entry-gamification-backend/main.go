@@ -3,38 +3,22 @@ package main
 import (
 	"data-entry-gamification/model"
 	"data-entry-gamification/service"
-	"log"
 	"net/http"
-	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	varName := "MYSQL_DEV_USERNAME"
-	value, exists := os.LookupEnv(varName)
-
-	if exists {
-		log.Printf(">>>>>>> Got ENV: %s\n", value)
-	} else {
-		log.Printf(">>>>>>> %s does not exist.\n", varName)
-	}
-
-	// Create a new ReceiptMemoryStore with some sample data
-	receiptStore := &service.ReceiptMemoryStore{
-		Receipts: []model.Receipt{
-			{ID: 1, FirstName: "Michael", LastName: "Motorist", Make: "Honda", ModelYear: 1999, State: "NY", Vin: "JHMCB7682PC021209"},
-			{ID: 2, FirstName: "John", LastName: "Motorist", Make: "Honda", ModelYear: 2012, State: "NY", Vin: "JHMCB7682PC021204"},
-			{ID: 3, FirstName: "Jane", LastName: "Motorist", Make: "Honda", ModelYear: 2002, State: "NY", Vin: "JHMCB7682PC021203"},
-		},
-	}
+	receiptStore := &service.MySQL{}
 
 	router := gin.Default()
 	// router.GET("/receipts", getReceipts)
 	router.GET("/receipts", func(c *gin.Context) {
 		c.JSON(http.StatusOK, receiptStore.GetAll())
-	})    
+	})
 	// router.GET("/receipts/:id", getReceiptByID)
 	router.GET("/receipts/:id", func(c *gin.Context) {
 		// Get the ID from the path parameter
@@ -55,12 +39,12 @@ func main() {
 	})
 	// router.POST("/receipts", postReceipts)
 	router.POST("/receipts", func(c *gin.Context) {
-        var newReceipt model.Receipt
-        if err := c.BindJSON(&newReceipt); err != nil {
-                return
-            }
+		var newReceipt model.Receipt
+		if err := c.BindJSON(&newReceipt); err != nil {
+			return
+		}
 
-        receiptStore.PostReceipt(newReceipt)
+		receiptStore.PostReceipt(newReceipt)
 		c.JSON(http.StatusOK, newReceipt)
 	})
 
