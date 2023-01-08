@@ -64,7 +64,24 @@ func (m *MySQL) GetAll() []model.Receipt {
 
 // PostReceipt adds a new receipt to the store
 func (m *MySQL) PostReceipt(receipt model.Receipt) {
+	m.Connect()
+	defer m.Disconnect()
 
+	stmt, err := m.DB.Prepare("INSERT INTO receipts(model_year, make, vin, first_name, last_name, state) VALUES(?, ?, ?, ?, ?, ?)")
+	if err != nil {
+		panic(err.Error())
+	}
+	model_year := receipt.ModelYear
+	make := receipt.Make
+	vin := receipt.Vin
+	first_name := receipt.FirstName
+	last_name := receipt.LastName
+	state := receipt.State
+	_, err = stmt.Exec(model_year, make, vin, first_name, last_name, state)
+	if err != nil {
+		panic(err.Error())
+	}
+	log.Println("Receipt added to database.")
 }
 
 // GetByID returns the receipts with the given ID, or an error if no such receipts exists
