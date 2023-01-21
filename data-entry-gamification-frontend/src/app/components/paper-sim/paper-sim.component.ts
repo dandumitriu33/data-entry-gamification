@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './paper-sim.component.html',
   styleUrls: ['./paper-sim.component.css']
 })
+
 export class PaperSimComponent {
   firstName = "Jim"
   lastName = "Smith"
@@ -12,6 +13,10 @@ export class PaperSimComponent {
   make = "Honda"
   vin = "123ABC345"
   state = "NY"
+
+  ngOnInit(): void {
+    this.newReceiptData();
+  }
 
   newReceiptData() {
     this.firstName = this.getRandomFirstName();
