@@ -1,0 +1,21 @@
+.yellow-paper {
+  overflow: hidden;
+  margin: 10px auto;
+  
+  width: 600px;
+  padding: 20px;
+  
+  border-width: 1px;
+  border-style: solid;
+  border-color: #959595;
+  
+  background-color: #dad6c7;
+  background-image: url(../../../../../Documentation/PaperSimulationSample/test_bg.jpg);
+
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.03);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.03);
+}
+
+  
+  
