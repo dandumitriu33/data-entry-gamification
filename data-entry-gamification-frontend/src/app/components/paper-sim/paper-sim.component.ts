@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./paper-sim.component.css']
 })
 export class PaperSimComponent {
-
+  firstName = "Jim"
+  lastName = "Smith"
+  year = 1999
+  make = "Honda"
+  vin = "123ABC345"
+  state = "NY"
 }
