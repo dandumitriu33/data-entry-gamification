@@ -12,4 +12,15 @@ export class PaperSimComponent {
   make = "Honda"
   vin = "123ABC345"
   state = "NY"
+
+  newReceiptData() {
+    this.firstName = this.getRandomFirstName();
+  }
+
+  getRandomFirstName() {
+    const firstNames = ["January", "February", "March", "April", "May", "June", "July"];
+
+    const random = Math.floor(Math.random() * firstNames.length);
+    return firstNames[random]
+  }
 }
