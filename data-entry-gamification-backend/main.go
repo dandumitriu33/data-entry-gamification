@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -15,6 +16,7 @@ func main() {
 	receiptStore := &service.MySQL{}
 
 	router := gin.Default()
+	router.Use(cors.Default())
 	// router.GET("/receipts", getReceipts)
 	router.GET("/receipts", func(c *gin.Context) {
 		c.JSON(http.StatusOK, receiptStore.GetAll())
