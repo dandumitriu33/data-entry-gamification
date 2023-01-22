@@ -9,6 +9,8 @@ import { PaperSimComponent } from './components/paper-sim/paper-sim.component';
 import { HomeComponent } from './components/home/home.component';
 import { InputComponent } from './components/input/input.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ReceiptComponent } from './components/receipt/receipt.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,10 @@ import { ProfileComponent } from './components/profile/profile.component';
     HomeComponent,
     InputComponent,
     ProfileComponent,
+    ReceiptComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule
   ],
