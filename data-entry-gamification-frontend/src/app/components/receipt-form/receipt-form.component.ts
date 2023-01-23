@@ -8,8 +8,14 @@ import { Receipt } from 'src/app/entities/receipt';
 })
 export class ReceiptFormComponent {
 
-  model = new Receipt(0, 1999, "Honda", "ABC123", "John", "Johnson", "NY")
-  submitted = false
-  onSubmit() { this.submitted = true}
+  receipt: Receipt = {id: 0, modelYear: 0, make: "", vin: "", firstName: "", lastName: "", state: ""};
+
+  onSubmitTemplateBased(receipt: Receipt) { 
+    console.log("receipt: ", receipt)
+  }
+
+  newReceipt() {
+    console.log("new receipt clicked")
+  }
 
 }
