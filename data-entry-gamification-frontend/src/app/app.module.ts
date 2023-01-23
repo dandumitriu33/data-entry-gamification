@@ -11,6 +11,8 @@ import { InputComponent } from './components/input/input.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ReceiptComponent } from './components/receipt/receipt.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReceiptFormComponent } from './components/receipt-form/receipt-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,8 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
     InputComponent,
     ProfileComponent,
     ReceiptComponent,
+    ReceiptFormComponent,
   ],
   imports: [
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule
