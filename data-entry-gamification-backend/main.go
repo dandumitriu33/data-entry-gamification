@@ -1,13 +1,14 @@
 package main
 
 import (
+	"data-entry-gamification/controller/users"
 	"data-entry-gamification/model"
 	"data-entry-gamification/service"
 	"net/http"
 	"strconv"
 
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -49,6 +50,8 @@ func main() {
 		receiptStore.PostReceipt(newReceipt)
 		c.JSON(http.StatusOK, newReceipt)
 	})
+
+	router.POST("/api/register", users.Register)
 
 	router.Run("localhost:8080")
 }
