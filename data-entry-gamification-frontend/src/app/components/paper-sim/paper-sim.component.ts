@@ -58,7 +58,7 @@ export class PaperSimComponent {
 
   getRandomMake() {
     const makes = ["Honda", "Toyota", "Chevrolet", "Ford", "Mercedes-Benz", "Jeep",
-                    "BMW", "Porsche", "Subaru", "Nissan", "Cadillac", "VolksWagen",
+                    "BMW", "Porsche", "Subaru", "Nissan", "Cadillac", "Volkswagen",
                     "Lexus", "Audi", "Volvo", "Jaguar", "GMC", "Buick", "Acura",
                     "Dodge", "Hyundai", "Lincoln", "Mazda", "Tesla", "Kia",
                     "Mitsubishi", "Fiat", "Suzuki", "Renault"];
