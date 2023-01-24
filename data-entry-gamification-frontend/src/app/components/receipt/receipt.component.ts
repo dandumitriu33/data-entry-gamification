@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Receipt } from 'src/app/interfaces/receipt';
+import { InterfaceReceipt } from 'src/app/interfaces/interface-receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReceiptComponent {
 
-  @Input() receipt?: Receipt;
+  @Input() receipt?: InterfaceReceipt;
 
   ngOnInit(): void {
     this.getReceipt();
