@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Receipt } from '../interfaces/receipt';
+import { InterfaceReceipt } from '../interfaces/interface-receipt';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -16,11 +16,19 @@ export class ReceiptService {
   constructor(private http: HttpClient) { }
 
   /** GET receipt by id. Will 404 if id not found */
-  getReceipt(id: number): Observable<Receipt> {
+  getReceipt(id: number): Observable<InterfaceReceipt> {
     const url = `${this.receiptsUrl}/${id}`;
-    return this.http.get<Receipt>(url).pipe(
+    return this.http.get<InterfaceReceipt>(url).pipe(
       tap(_ => console.info(`fetched receipt id=${id}`)),
-      catchError(this.handleError<Receipt>(`getReceipt id=${id}`))
+      catchError(this.handleError<InterfaceReceipt>(`getReceipt id=${id}`))
+    );
+  }
+
+  /** POST: add a new receipt to the server */
+  addReceipt(receipt: InterfaceReceipt): Observable<InterfaceReceipt> {
+    return this.http.post<InterfaceReceipt>(this.receiptsUrl, receipt, this.httpOptions).pipe(
+      tap((newReceipt: InterfaceReceipt) => console.info(`added receipt w/ id=${newReceipt.id}`)),
+      catchError(this.handleError<InterfaceReceipt>('addReceipt'))
     );
   }
 

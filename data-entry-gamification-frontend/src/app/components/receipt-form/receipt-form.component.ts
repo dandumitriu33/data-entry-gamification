@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Receipt } from 'src/app/entities/receipt';
+import { ReceiptService } from 'src/app/services/receipt.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-receipt-form',
@@ -8,14 +10,25 @@ import { Receipt } from 'src/app/entities/receipt';
 })
 export class ReceiptFormComponent {
 
-  receipt: Receipt = {id: 0, modelYear: 0, make: "", vin: "", firstName: "", lastName: "", state: ""};
+  constructor(
+    private receiptService: ReceiptService,
+    private route: ActivatedRoute
+  ) {}
 
-  onSubmitTemplateBased(receipt: Receipt) { 
-    console.log("receipt: ", receipt)
+  receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: ""};
+
+  onSubmitTemplateBased(receiptFromForm: Receipt) { 
+    console.log("this.receipt: ", this.receipt)
+    receiptFromForm.id = 0;
+    console.log("receiptFromForm: ", receiptFromForm)
+    this.receiptService.addReceipt(receiptFromForm)
+      .subscribe(receiptFromForm => {
+        console.log("receipt added successfully: ", receiptFromForm);
+      });
   }
 
   newReceipt() {
-    console.log("new receipt clicked")
+    console.log("new receipt added")
   }
 
 }

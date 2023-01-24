@@ -1,4 +1,4 @@
-Database entry table | Priority 1 | Estimate 1 day
+[x] Database entry table | Priority 1 | Estimate 1 day | COMPLETE
 As an input user
 I want to add data from the paper sheet given to me to a database table
 So that the data can be stored digitally on a persistence layer with all the 
@@ -6,6 +6,9 @@ necessary fields
 
 Acceptance criteria: entry table in database with entry ID, entry date, entry 
 event date, and all fields from paper sample
+
+Development note: skipped entry date, not used at this time, will add later for
+data analytics purposes.
 
 --------------------------------------------------------------------------------
 Database user table | Priority 1 | Estimate 1 day
@@ -26,7 +29,7 @@ So that the statistics about how many entries I have can be persistent
 Acceptance criteria: 1-1 table in database with user ID - entry ID
 
 --------------------------------------------------------------------------------
-Entry page with working form | Priority 2 | Estimate 3 days
+Entry page with working form | Priority 2 | Estimate 3 days | IN PROGRESS
 As an input user
 I want to add data to the database via a web page
 So that the data is typed in input html boxes and a Submit button is pressed as 
