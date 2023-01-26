@@ -41,3 +41,13 @@ func GetUser(user model.User) (*model.User, *errors.RestErr) {
 	resultWp := &model.User{ID: result.ID, FirstName: result.FirstName, LastName: result.LastName, Email: result.Email}
 	return resultWp, nil
 }
+
+func GetUserByID(userId int64) (*model.User, *errors.RestErr) {
+	result := &model.User{ID: userId}
+
+	if err := result.GetByID(); err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
