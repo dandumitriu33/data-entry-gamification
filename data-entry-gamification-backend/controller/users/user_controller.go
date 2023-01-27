@@ -36,7 +36,7 @@ func Register(c *gin.Context) {
 
 func Login(c *gin.Context) {
 	var user model.User
-
+	
 	if err := c.ShouldBindJSON(&user); err != nil {
 		err := errors.NewBadRequestError("invalid json")
 		c.JSON(err.Status, err)
