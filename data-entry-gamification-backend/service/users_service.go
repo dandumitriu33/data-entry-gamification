@@ -29,7 +29,6 @@ func CreateUser(user model.User) (*model.User, *errors.RestErr) {
 
 func GetUser(user model.User) (*model.User, *errors.RestErr) {
 	result := &model.User{Email: user.Email}
-
 	if err := result.GetByEmail(); err != nil {
 		return nil, err
 	}
