@@ -12,7 +12,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ReceiptComponent } from './components/receipt/receipt.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReceiptFormComponent } from './components/receipt-form/receipt-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
@@ -32,6 +32,7 @@ import { LoginComponent } from './components/login/login.component';
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule
