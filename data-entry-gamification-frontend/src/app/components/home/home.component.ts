@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Emitters } from 'src/app/emitters/emitters';
 
 @Component({
   selector: 'app-home',
@@ -18,10 +19,12 @@ export class HomeComponent implements OnInit {
     this.http.get(this.getUserUrl, {withCredentials: true}).subscribe(
       (res: any) => {
         this.message = `Hello ${res.first_name}`;
+        Emitters.authEmitter.emit(true);
       },
       err => {
         console.error(err);
         this.message = "You are not logged in."
+        Emitters.authEmitter.emit(false);
       }
     );
   }
