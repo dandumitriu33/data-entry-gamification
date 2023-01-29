@@ -6,6 +6,7 @@ import (
 	"data-entry-gamification/service"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -17,7 +18,18 @@ func main() {
 	receiptStore := &service.MySQL{}
 
 	router := gin.Default()
-	router.Use(cors.Default())
+	// router.Use(cors.Default())
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:4200"},
+		AllowMethods:     []string{"GET", "POST"},
+		AllowHeaders:     []string{"Content-Type"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			return origin == "http://localhost:4200"
+		},
+		MaxAge: 12 * time.Hour,
+	}))
 	// router.GET("/receipts", getReceipts)
 	router.GET("/receipts", func(c *gin.Context) {
 		c.JSON(http.StatusOK, receiptStore.GetAll())
