@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"os"
+	"time"
 
 	"data-entry-gamification/model"
 
@@ -46,10 +47,10 @@ func (m *MySQL) GetAll() []model.Receipt {
 		panic(err.Error())
 	}
 	defer rows.Close()
-	
-	result := []model.Receipt{}	
+
+	result := []model.Receipt{}
 	for rows.Next() {
-		var receipt model.Receipt		
+		var receipt model.Receipt
 		err = rows.Scan(&receipt.ID, &receipt.ModelYear, &receipt.Make, &receipt.Vin, &receipt.FirstName, &receipt.LastName, &receipt.State)
 		if err != nil {
 			panic(err.Error())
@@ -64,7 +65,7 @@ func (m *MySQL) PostReceipt(receipt model.Receipt) {
 	m.Connect()
 	defer m.Disconnect()
 
-	stmt, err := m.DB.Prepare("INSERT INTO receipts(model_year, make, vin, first_name, last_name, state) VALUES(?, ?, ?, ?, ?, ?)")
+	stmt, err := m.DB.Prepare("INSERT INTO receipts(model_year, make, vin, first_name, last_name, state, date_added) VALUES(?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -74,7 +75,9 @@ func (m *MySQL) PostReceipt(receipt model.Receipt) {
 	first_name := receipt.FirstName
 	last_name := receipt.LastName
 	state := receipt.State
-	_, err = stmt.Exec(model_year, make, vin, first_name, last_name, state)
+	currentTime := time.Now()
+	date_added := currentTime.Format("20060102150405")
+	_, err = stmt.Exec(model_year, make, vin, first_name, last_name, state, date_added)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -95,7 +98,7 @@ func (m *MySQL) GetByID(id int) (model.Receipt, error) {
 	for result.Next() {
 		err := result.Scan(&receipt.ID, &receipt.ModelYear, &receipt.Make, &receipt.Vin, &receipt.FirstName, &receipt.LastName, &receipt.State)
 		if err != nil {
-		  panic(err.Error())
+			panic(err.Error())
 		}
 	}
 	return receipt, nil
