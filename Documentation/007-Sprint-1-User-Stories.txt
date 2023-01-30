@@ -7,8 +7,8 @@ necessary fields
 Acceptance criteria: entry table in database with entry ID, entry date, entry 
 event date, and all fields from paper sample
 
-Development note: skipped entry date, not used at this time, will add later for
-data analytics purposes.
+Development note: skipped entry event date, not used at this time, not in the 
+paper document simulation.
 
 --------------------------------------------------------------------------------
 Database user table | Priority 1 | Estimate 1 day
