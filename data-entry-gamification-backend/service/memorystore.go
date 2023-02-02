@@ -25,7 +25,7 @@ func (s *ReceiptMemoryStore) GetAll() []model.Receipt {
 }
 
 // GetByID returns the receipts with the given ID, or an error if no such receipts exists
-func (s *ReceiptMemoryStore) GetByID(id int) (model.Receipt, error) {
+func (s *ReceiptMemoryStore) GetByID(id int64) (model.Receipt, error) {
 	for _, u := range s.Receipts {
 		if u.ID == id {
 			return u, nil
