@@ -11,7 +11,7 @@ Development note: skipped entry event date, not used at this time, not in the
 paper document simulation.
 
 --------------------------------------------------------------------------------
-Database user table | Priority 1 | Estimate 1 day
+[x] Database user table | Priority 1 | Estimate 1 day
 As an input user
 I want to have my user ID in a table in the database
 So that the entries that I add can be attached to my user for tracking and  
@@ -21,7 +21,7 @@ Acceptance criteria: table in database with username, email, password, ID,
 points, level
 
 --------------------------------------------------------------------------------
-Database user-entry table | Priority 1 | Estimate 1 day
+[x] Database user-entry table | Priority 1 | Estimate 1 day
 As an input user
 I want the data that I add to the database to be counted for my user
 So that the statistics about how many entries I have can be persistent
@@ -42,6 +42,9 @@ backend API adds the entry to the database.
 The user ID is added manually in a field and an entry to the statistics table 
 is also done by the same backend API. 
 Coupled to the User Login story.
+
+Note: Frontend is now an Angular project and authentication via JWT.
+
 
 --------------------------------------------------------------------------------
 User Login page with working form | Priority 2 | Estimate 4 days
