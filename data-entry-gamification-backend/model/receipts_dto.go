@@ -8,7 +8,7 @@ import (
 )
 
 type Receipt struct {
-	ID        int64    `json:"id"`
+	ID        int64  `json:"id"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 	Make      string `json:"make"`
