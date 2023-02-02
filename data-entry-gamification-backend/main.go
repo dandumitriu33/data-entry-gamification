@@ -1,8 +1,8 @@
 package main
 
 import (
+	"data-entry-gamification/controller/receipts"
 	"data-entry-gamification/controller/users"
-	"data-entry-gamification/model"
 	"data-entry-gamification/service"
 	"net/http"
 	"strconv"
@@ -53,15 +53,17 @@ func main() {
 		c.JSON(http.StatusOK, receipt)
 	})
 	// router.POST("/receipts", postReceipts)
-	router.POST("/receipts", func(c *gin.Context) {
-		var newReceipt model.Receipt
-		if err := c.BindJSON(&newReceipt); err != nil {
-			return
-		}
+	// router.POST("/receipts", func(c *gin.Context) {
+	// 	var newReceipt model.Receipt
+	// 	if err := c.BindJSON(&newReceipt); err != nil {
+	// 		return
+	// 	}
 
-		receiptStore.PostReceipt(newReceipt)
-		c.JSON(http.StatusOK, newReceipt)
-	})
+	// 	receiptStore.PostReceipt(newReceipt)
+	// 	c.JSON(http.StatusOK, newReceipt)
+	// })
+
+	router.POST("/receipts", receipts.AddReceipt)
 
 	router.POST("/api/register", users.Register)
 	router.POST("/api/login", users.Login)
