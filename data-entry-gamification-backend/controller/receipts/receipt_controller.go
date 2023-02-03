@@ -26,3 +26,12 @@ func AddReceipt(c *gin.Context) {
 
 	c.JSON(http.StatusOK, result)
 }
+
+func GetAllCount(c *gin.Context) {
+	result, err := service.GetAllCount()
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+	c.JSON(http.StatusOK, result)
+}
