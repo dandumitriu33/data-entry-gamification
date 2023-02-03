@@ -16,3 +16,23 @@ func CreateReceipt(receipt model.Receipt) (*model.Receipt, *errors.RestErr) {
 
 	return &receipt, nil
 }
+
+func GetAllCount() (int64, *errors.RestErr) {
+	var receipt model.Receipt
+	count, err := receipt.GetAllCount()
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}
+
+func GetAllCountToday() (int64, *errors.RestErr) {
+	var receipt model.Receipt
+	count, err := receipt.GetAllCountToday()
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}

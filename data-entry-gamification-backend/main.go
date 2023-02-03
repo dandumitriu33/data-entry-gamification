@@ -65,6 +65,9 @@ func main() {
 
 	router.POST("/receipts", receipts.AddReceipt)
 
+	router.GET("/api/receipts/allcount", receipts.GetAllCount)
+	router.GET("/api/receipts/allcounttoday", receipts.GetAllCountToday)
+
 	router.POST("/api/register", users.Register)
 	router.POST("/api/login", users.Login)
 	router.GET("/api/user", users.Get)
