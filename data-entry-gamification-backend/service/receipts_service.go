@@ -26,3 +26,13 @@ func GetAllCount() (int64, *errors.RestErr) {
 
 	return count, nil
 }
+
+func GetAllCountToday() (int64, *errors.RestErr) {
+	var receipt model.Receipt
+	count, err := receipt.GetAllCountToday()
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}

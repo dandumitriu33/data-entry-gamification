@@ -9,6 +9,7 @@ import (
 var (
 	queryInsertReceipt = "INSERT INTO receipts (model_year, make, vin, first_name, last_name, state, date_added) VALUES (?, ?, ?, ?, ?, ?, ?);"
 	queryGetAllCount = "SELECT COUNT(*) FROM receipts;"
+	queryGetAllCountToday = "SELECT COUNT(*) FROM receipts WHERE DATE(date_added) = DATE(NOW());"
 )
 
 func (receipt *Receipt) Save() *errors.RestErr {
@@ -36,6 +37,18 @@ func (receipt *Receipt) GetAllCount() (int64, *errors.RestErr) {
 	var count int64	
 
 	row := receipts_db.Client.QueryRow(queryGetAllCount)
+	err := row.Scan(&count)
+	if err != nil {
+		return 0, errors.NewInternalServerError("database error")
+	}
+
+	return count, nil
+}
+
+func (receipt *Receipt) GetAllCountToday() (int64, *errors.RestErr) {
+	var count int64	
+
+	row := receipts_db.Client.QueryRow(queryGetAllCountToday)
 	err := row.Scan(&count)
 	if err != nil {
 		return 0, errors.NewInternalServerError("database error")
