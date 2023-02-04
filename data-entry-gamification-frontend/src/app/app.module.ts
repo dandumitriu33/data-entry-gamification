@@ -15,6 +15,7 @@ import { ReceiptFormComponent } from './components/receipt-form/receipt-form.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoginComponent } from './components/login/login.component';
     ReceiptFormComponent,
     RegisterComponent,
     LoginComponent,
+    StatisticsComponent,
   ],
   imports: [
     FormsModule,
