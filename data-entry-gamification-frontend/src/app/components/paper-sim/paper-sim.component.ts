@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Emitters } from 'src/app/emitters/emitters';
 
 @Component({
   selector: 'app-paper-sim',
@@ -16,6 +17,11 @@ export class PaperSimComponent {
 
   ngOnInit(): void {
     this.newReceiptData();
+    Emitters.inputEmitter.subscribe(
+      () => {
+        this.newReceiptData();
+      }
+    );
   }
 
   newReceiptData() {

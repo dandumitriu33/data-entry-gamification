@@ -10,6 +10,8 @@ export class StatisticsComponent implements OnInit {
 
   allTime = 0;
   today = 0;
+  receiptsQA = 0;
+  scoreQA = 100;
   getAllTimeAddedUrl = "http://localhost:8080/api/receipts/allcount";
   getTodayAddedUrl = "http://localhost:8080/api/receipts/allcounttoday";
 

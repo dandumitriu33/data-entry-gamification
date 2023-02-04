@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { ActivatedRoute } from '@angular/router';
+import { Emitters } from 'src/app/emitters/emitters';
 
 @Component({
   selector: 'app-receipt-form',
@@ -25,6 +26,8 @@ export class ReceiptFormComponent {
       .subscribe(receiptFromForm => {
         console.log("receipt added successfully: ", receiptFromForm);
       });
+    console.log("Emitting input event.");
+    Emitters.inputEmitter.emit();
   }
 
   newReceipt() {

@@ -61,7 +61,7 @@ removed so that the counting in the database is done based on logged in user
 and the user doesn’t have to manually put it in every time.
 
 --------------------------------------------------------------------------------
-Statistics Page | Priority 3 | Estimate 4 days
+[x] Statistics Page | Priority 3 | Estimate 4 days
 As any user
 I want to have an analytics page
 So that I can see the progress of the data being added
@@ -69,6 +69,10 @@ So that I can see the progress of the data being added
 Acceptance criteria: analytics page with the data from the database displayed
 Total entries, total entries since project start, oldest entry date, quality 
 today, total quality
+
+Note: simple placeholders in QA until system is designed and implemented
+Note: oldest entry date is the oldest receipt date from the issuing - not in 
+designed data at this time
 
 --------------------------------------------------------------------------------
 User Account Page | Priority 3 | Estimate 4 days
