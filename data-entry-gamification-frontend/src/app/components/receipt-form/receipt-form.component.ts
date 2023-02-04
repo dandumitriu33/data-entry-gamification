@@ -27,8 +27,7 @@ export class ReceiptFormComponent {
         console.log("receipt added successfully: ", receiptFromForm);
       });
     console.log("Emitting input event.");
-    let dateTime = new Date();
-    Emitters.inputEmitter.emit(dateTime);
+    Emitters.inputEmitter.emit();
   }
 
   newReceipt() {

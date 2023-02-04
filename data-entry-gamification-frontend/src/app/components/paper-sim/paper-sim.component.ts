@@ -18,8 +18,7 @@ export class PaperSimComponent {
   ngOnInit(): void {
     this.newReceiptData();
     Emitters.inputEmitter.subscribe(
-      (dateTime: Date) => {
-        console.log("date from subscriber: ", dateTime)
+      () => {
         this.newReceiptData();
       }
     );
