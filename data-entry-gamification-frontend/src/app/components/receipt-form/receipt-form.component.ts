@@ -30,6 +30,18 @@ export class ReceiptFormComponent {
     Emitters.inputEmitter.emit();
   }
 
+  onSubmitTemplateBased2(receiptFromForm: Receipt) { 
+    console.log("this.receipt: ", this.receipt)
+    receiptFromForm.id = 0;
+    console.log("receiptFromForm: ", receiptFromForm)
+    this.receiptService.addReceipt(receiptFromForm)
+      .subscribe(receiptFromForm => {
+        console.log("receipt added successfully: ", receiptFromForm);
+      });
+    console.log("Emitting input event.");
+    Emitters.inputEmitter.emit();
+  }
+
   newReceipt() {
     console.log("new receipt added")
   }

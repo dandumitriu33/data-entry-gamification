@@ -10,7 +10,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class ReceiptService {
   private receiptsUrl = 'http://localhost:8080/receipts';  // URL to web api
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredentials: true
   };
 
   constructor(private http: HttpClient) { }

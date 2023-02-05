@@ -1,16 +1,17 @@
 package service
 
 import (
+	"context"
 	"data-entry-gamification/model"
 	"data-entry-gamification/utils/errors"
 )
 
-func CreateReceipt(receipt model.Receipt) (*model.Receipt, *errors.RestErr) {
+func CreateReceipt(ctx context.Context, receipt model.Receipt, user model.User) (*model.Receipt, *errors.RestErr) {
 	if err := receipt.Validate(); err != nil {
 		return nil, err
 	}
 
-	if err := receipt.Save(); err != nil {
+	if err := receipt.Save(ctx, user.ID); err != nil {
 		return nil, err
 	}
 
