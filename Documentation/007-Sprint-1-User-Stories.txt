@@ -29,7 +29,7 @@ So that the statistics about how many entries I have can be persistent
 Acceptance criteria: 1-1 table in database with user ID - entry ID
 
 --------------------------------------------------------------------------------
-Entry page with working form | Priority 2 | Estimate 3 days | IN PROGRESS
+[x] Entry page with working form | Priority 2 | Estimate 3 days | IN PROGRESS
 As an input user
 I want to add data to the database via a web page
 So that the data is typed in input html boxes and a Submit button is pressed as 
@@ -47,7 +47,7 @@ Note: Frontend is now an Angular project and authentication via JWT.
 
 
 --------------------------------------------------------------------------------
-User Login page with working form | Priority 2 | Estimate 4 days
+[x] User Login page with working form | Priority 2 | Estimate 4 days
 As an input user
 I want to have a login page
 So that the data that I add to the database is counted on my user automatically
@@ -59,6 +59,8 @@ No other UI indicators of login
 On the entry form table, the user ID field is completed automatically or 
 removed so that the counting in the database is done based on logged in user 
 and the user doesn’t have to manually put it in every time.
+
+Note: Counting in the DB updated based on JWT token cookie
 
 --------------------------------------------------------------------------------
 [x] Statistics Page | Priority 3 | Estimate 4 days
