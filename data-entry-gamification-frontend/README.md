@@ -28,3 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Gin JWT: https://www.youtube.com/watch?v=QD2BCikYCyc  
 Angular JWT: https://www.youtube.com/watch?v=brb4SO-dO_k  
+Bootstrap icons: https://icons.getbootstrap.com/icons/person-circle/  
+
