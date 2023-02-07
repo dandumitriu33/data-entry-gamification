@@ -3,8 +3,8 @@
     <div class="container">
         <div class="row form-group">
             <label class="col-4" for="modelYear">Model Year</label>
-            <input type="number" class="form-control col-sm" id="modelYear"
-            required
+            <input type="number" class="form-control col-sm" #modelYear id="modelYear"
+            required autofocus
             (ngModel)="receipt.model_year" name="model_year">
         </div>
         <div class="row form-group">

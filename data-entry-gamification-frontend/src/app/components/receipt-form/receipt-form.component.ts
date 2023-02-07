@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,14 +9,25 @@ import { Emitters } from 'src/app/emitters/emitters';
   templateUrl: './receipt-form.component.html',
   styleUrls: ['./receipt-form.component.css']
 })
-export class ReceiptFormComponent {
+export class ReceiptFormComponent implements OnInit {
+  @ViewChild("modelYear", {  }) modelYear: ElementRef;
+
+  receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: ""};
 
   constructor(
     private receiptService: ReceiptService,
     private route: ActivatedRoute
   ) {}
 
-  receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: ""};
+  ngOnInit(): void {
+    Emitters.inputEmitter.subscribe(
+      () => {
+        this.modelYear.nativeElement.focus()
+        console.log("focus true")
+      }
+    );
+  }
+  
 
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
     console.log("this.receipt: ", this.receipt)
