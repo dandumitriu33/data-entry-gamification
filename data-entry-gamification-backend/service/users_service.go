@@ -50,3 +50,13 @@ func GetUserByID(userId int64) (*model.User, *errors.RestErr) {
 
 	return result, nil
 }
+
+func GetUserInfoByID(userId int64) (*model.UserInfo, *errors.RestErr) {
+	result := &model.UserInfo{UserID: userId}
+
+	if err := result.GetUserInfoByID(); err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
