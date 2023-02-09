@@ -20,22 +20,25 @@ export class AvatarComponent implements OnInit {
     this.refreshPoints(); 
     Emitters.inputEmitter.subscribe(
       (input: boolean) => {
-        console.log("refreshing points input", input)
-        this.refreshPoints()
+        console.log("avatar refreshing points input")
+        setTimeout(() => {
+          this.refreshPoints()
+        }, 5000); 
       }
     );
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
-        console.log("refreshing points")
+        console.log("avatar refreshing points auth")
         this.refreshPoints()
       }
     );
   }  
 
   refreshPoints(): void {
-    console.log("refreshing points func")
+    console.log("refreshing points in 5 seconds")
     this.http.get(this.getUserInfoUrl, {withCredentials: true}).subscribe(
       (res: any) => {
+        console.log(res)
         this.userPoints = this.formatNumberToString(res.points);
         this.userLevel = res.level;
       },
