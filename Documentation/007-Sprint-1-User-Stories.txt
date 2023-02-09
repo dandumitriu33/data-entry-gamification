@@ -1,4 +1,4 @@
-[x] Database entry table | Priority 1 | Estimate 1 day | COMPLETE
+[x] Database entry table | Priority 1 | Estimate 1 day
 As an input user
 I want to add data from the paper sheet given to me to a database table
 So that the data can be stored digitally on a persistence layer with all the 
@@ -29,7 +29,7 @@ So that the statistics about how many entries I have can be persistent
 Acceptance criteria: 1-1 table in database with user ID - entry ID
 
 --------------------------------------------------------------------------------
-[x] Entry page with working form | Priority 2 | Estimate 3 days | IN PROGRESS
+[x] Entry page with working form | Priority 2 | Estimate 3 days
 As an input user
 I want to add data to the database via a web page
 So that the data is typed in input html boxes and a Submit button is pressed as 
@@ -77,7 +77,7 @@ Note: oldest entry date is the oldest receipt date from the issuing - not in
 designed data at this time
 
 --------------------------------------------------------------------------------
-User Account Page | Priority 3 | Estimate 4 days
+[x] User Account Page | Priority 3 | Estimate 4 days
 As an input user
 I want to have a my account page
 So that I can see my level and points
@@ -87,7 +87,7 @@ and level next to the picture section.
 Points and level are “GET” from the database tables.
 
 --------------------------------------------------------------------------------
-User Picture | Priority 4 | Estimate 4 days
+User Picture | Priority 4 | Estimate 4 days | IN PROGRESS
 As an input user
 I want to have a picture/avatar
 So that I can see it on different pages with my points and level 
