@@ -11,6 +11,7 @@ export class AvatarComponent implements OnInit {
   userPoints = "0"; // points over 1k will be dislpayed as 1.2 K
   userLevel = 0;
   getUserInfoUrl = "http://localhost:8080/api/user/info";
+  avatarURI = "/assets/img/001-Default-Avatar.jpg"
 
   constructor(private http: HttpClient) {
 
