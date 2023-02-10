@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	queryGetUserInfoByID = "SELECT user_id, points, level FROM user_points WHERE user_id=?;"
+	queryGetUserInfoByID = "SELECT user_id, points, level FROM user_info WHERE user_id=?;"
 )
 
 func (userInfo *UserInfo) GetUserInfoByID() *errors.RestErr {
