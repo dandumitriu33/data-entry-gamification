@@ -12,9 +12,9 @@ var (
 	queryGetAllCount           = "SELECT COUNT(*) FROM receipts;"
 	queryGetAllCountToday      = "SELECT COUNT(*) FROM receipts WHERE DATE(date_added) = DATE(NOW());"
 	queryInsertUserIDReceiptID = "INSERT INTO user_receipts (user_id, receipt_id) VALUES (?, ?);"
-	queryGetUserPointsByUserID = "SELECT points FROM user_points WHERE user_id = ?;"
-	queryInsertNewUserPoints   = "INSERT INTO user_points (user_id, points, level) VALUES (?, ?, ?);"
-	queryUpdateUserPoints      = "UPDATE user_points SET points = ?, level = ? WHERE user_id = ?;"
+	queryGetUserPointsByUserID = "SELECT points FROM user_info WHERE user_id = ?;"
+	queryInsertNewUserPoints   = "INSERT INTO user_info (user_id, points, level) VALUES (?, ?, ?);"
+	queryUpdateUserPoints      = "UPDATE user_info SET points = ?, level = ? WHERE user_id = ?;"
 )
 
 func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr {

@@ -30,8 +30,9 @@ CREATE TABLE `user_receipts` (
   `receipt_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `user_points` (
+CREATE TABLE `user_info` (
   `user_id` int NOT NULL,
   `points` int NOT NULL,
-  `level` int NOT NULL
+  `level` int NOT NULL,
+  `img_uri` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
