@@ -1,8 +1,12 @@
 package service
 
 import (
+	// "context"
 	"data-entry-gamification/model"
 	"data-entry-gamification/utils/errors"
+	"log"
+
+	"github.com/gin-gonic/gin"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -59,4 +63,15 @@ func GetUserInfoByID(userId int64) (*model.UserInfo, *errors.RestErr) {
 	}
 
 	return result, nil
+}
+
+func PutUserAvatar(ctx *gin.Context, userInfo model.UserInfo, userAvatar model.UserAvatar) (*model.UserAvatar, *errors.RestErr) {
+	// TODO: validate avatar
+	log.Println("service reached")
+	// PUT
+	if err := userInfo.UpdateAvatar(ctx, userAvatar, userInfo.UserID); err != nil {
+		return nil, err
+	}
+
+	return &userAvatar, nil
 }
