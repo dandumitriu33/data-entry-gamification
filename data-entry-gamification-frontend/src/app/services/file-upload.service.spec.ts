@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FileUploadServiceTsService } from './file-upload.service.ts.service';
+import { FileUploadServiceTsService } from './file-upload.service';
 
 describe('FileUploadServiceTsService', () => {
   let service: FileUploadServiceTsService;

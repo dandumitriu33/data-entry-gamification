@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadServiceTsService {
+export class FileUploadService {
 
   private avatarUploadURL = "http://localhost:8080/api/user/avatar";
 
@@ -25,6 +25,7 @@ export class FileUploadServiceTsService {
   }
 
   getFiles(): Observable<any> {
-    return this.http.get(this.avatarUploadURL);
+    // return this.http.get(this.avatarUploadURL);
+    return this.http.get("http://localhost:8080/api/user/info");
   }
 }
