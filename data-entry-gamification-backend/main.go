@@ -72,6 +72,7 @@ func main() {
 	router.POST("/api/login", users.Login)
 	router.GET("/api/user", users.Get)
 	router.GET("/api/user/info", users.GetUserInfo)
+	router.PUT("/api/user/avatar", users.PutUserAvatar)
 	router.GET("/api/logout", users.Logout)
 
 	router.Run("localhost:8080")
