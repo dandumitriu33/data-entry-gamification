@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfo } from 'src/app/entities/user_info';
 import { HttpClient } from '@angular/common/http';
-import { FileDownloadService } from 'src/app/services/file-download.service';
+import { Emitters } from 'src/app/emitters/emitters';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +19,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshData();
+    Emitters.uploadAvatarEmitter.subscribe(
+      () => {
+        console.log("upload of profile image detected. Refreshing");
+        console.log("avatar refreshing image auth")
+        this.downloadUserAvatarURL = "/assets/img/loading.gif";
+        setTimeout(() => this.downloadUserAvatarURL = "http://localhost:8080/api/user/avatar", 1000);
+      }
+    );
   }
 
   refreshData() {

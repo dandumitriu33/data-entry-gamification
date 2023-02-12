@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { Emitters } from 'src/app/emitters/emitters';
 
 @Component({
   selector: 'app-image-upload',
@@ -20,7 +21,6 @@ export class ImageUploadComponent {
   constructor(private uploadService: FileUploadService) {}
 
   ngOnInit(): void {
-    this.imageInfos = this.uploadService.getFiles();
   }
 
   selectFile(event: any): void {
@@ -63,7 +63,8 @@ export class ImageUploadComponent {
               this.progress = Math.round((100 * event.loaded) / event.total);
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;
-              this.imageInfos = this.uploadService.getFiles();
+              // emit upload is done in order to refresh the profile image
+              Emitters.uploadAvatarEmitter.emit();
             }
           },
           error: (err: any) => {

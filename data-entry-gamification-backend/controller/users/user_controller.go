@@ -112,8 +112,10 @@ func Logout(c *gin.Context) {
 
 func GetUserInfo(c *gin.Context) {
 	cookie, err := c.Cookie("jwt")
+	log.Println(cookie);
+	log.Println(err);
 	if err != nil {
-		getErr := errors.NewInternalServerError("could not retrieve cookie")
+		getErr := errors.NewInternalServerError("GetUserInfo could not retrieve cookie")
 		c.JSON(getErr.Status, getErr)
 		return
 	}

@@ -25,9 +25,4 @@ export class FileUploadService {
 
     return this.http.request(req);
   }
-
-  getFiles(): Observable<any> {
-    // return this.http.get(this.avatarUploadURL);
-    return this.http.get("http://localhost:8080/api/user/info");
-  }
 }
