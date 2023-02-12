@@ -14,9 +14,11 @@ export class FileUploadService {
   upload(file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
 
-    formData.append('file', file);
+    formData.append('avatar', file);
+    console.log("avatar:", file);
 
     const req = new HttpRequest('PUT', this.avatarUploadURL, formData, {
+      withCredentials: true,
       reportProgress: true,
       responseType: 'json',
     });
