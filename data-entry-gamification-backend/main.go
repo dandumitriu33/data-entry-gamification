@@ -21,7 +21,7 @@ func main() {
 	// router.Use(cors.Default())
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:4200"},
-		AllowMethods:     []string{"GET", "POST"},
+		AllowMethods:     []string{"GET", "POST", "PUT"},
 		AllowHeaders:     []string{"Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
@@ -72,6 +72,7 @@ func main() {
 	router.POST("/api/login", users.Login)
 	router.GET("/api/user", users.Get)
 	router.GET("/api/user/info", users.GetUserInfo)
+	router.GET("/api/user/avatar", users.GetUserAvatar)
 	router.PUT("/api/user/avatar", users.PutUserAvatar)
 	router.GET("/api/logout", users.Logout)
 

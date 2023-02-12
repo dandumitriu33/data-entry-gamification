@@ -4,6 +4,7 @@ import (
 	"data-entry-gamification/model"
 	"data-entry-gamification/service"
 	"data-entry-gamification/utils/errors"
+	// "fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -37,7 +38,7 @@ func Register(c *gin.Context) {
 
 func Login(c *gin.Context) {
 	var user model.User
-	
+
 	if err := c.ShouldBindJSON(&user); err != nil {
 		err := errors.NewBadRequestError("invalid json")
 		c.JSON(err.Status, err)
@@ -111,8 +112,10 @@ func Logout(c *gin.Context) {
 
 func GetUserInfo(c *gin.Context) {
 	cookie, err := c.Cookie("jwt")
+	log.Println(cookie);
+	log.Println(err);
 	if err != nil {
-		getErr := errors.NewInternalServerError("could not retrieve cookie")
+		getErr := errors.NewInternalServerError("GetUserInfo could not retrieve cookie")
 		c.JSON(getErr.Status, getErr)
 		return
 	}
@@ -142,6 +145,44 @@ func GetUserInfo(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
+}
+
+func GetUserAvatar(c *gin.Context) {
+	cookie, err := c.Cookie("jwt")
+	if err != nil {
+		getErr := errors.NewInternalServerError("could not retrieve cookie")
+		c.JSON(getErr.Status, getErr)
+		return
+	}
+
+	// token, err := jwt.ParseWithClaims(cookie, &jwt.RegisteredClaims{}, func(*jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(*jwt.Token) (interface{}, error) {
+		return []byte(SecretKey), nil
+	})
+	if err != nil {
+		restErr := errors.NewInternalServerError("error parsing cookie")
+		c.JSON(restErr.Status, restErr)
+		return
+	}
+
+	claims := token.Claims.(*jwt.StandardClaims)
+	issuer, err := strconv.ParseInt(claims.Issuer, 10, 64)
+	if err != nil {
+		restErr := errors.NewBadRequestError("user id should be a number")
+		c.JSON(restErr.Status, restErr)
+		return
+	}
+
+	log.Println("getting user by user ID", issuer)
+	userInfo, restErr := service.GetUserInfoByID(issuer)
+	if restErr != nil {
+		c.JSON(restErr.Status, restErr)
+		return
+	}
+	log.Println("got user info:", userInfo)
+
+	// Serving the avatar file
+	c.File(userInfo.ImageURI)
 }
 
 func PutUserAvatar(c *gin.Context) {
@@ -187,7 +228,7 @@ func PutUserAvatar(c *gin.Context) {
 		return
 	}
 	log.Println("av bod: ", requestUserAvatar)
-	
+
 	log.Println("PUT user start:", requestUserAvatar)
 	result, restErr := service.PutUserAvatar(c, *userInfo, requestUserAvatar)
 	if restErr != nil {
@@ -196,5 +237,5 @@ func PutUserAvatar(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, result)	
+	c.JSON(http.StatusOK, result)
 }

@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     RegisterComponent,
     LoginComponent,
     StatisticsComponent,
+    ImageUploadComponent,
   ],
   imports: [
     FormsModule,

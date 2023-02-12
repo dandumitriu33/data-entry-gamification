@@ -11,7 +11,8 @@ export class AvatarComponent implements OnInit {
   userPoints = "0"; // points over 1k will be dislpayed as 1.2 K
   userLevel = 0;
   getUserInfoUrl = "http://localhost:8080/api/user/info";
-  avatarURI = "/assets/img/001-Default-Avatar.jpg"
+  // avatarURI = "/assets/img/001-Default-Avatar.jpg"
+  avatarURI = "http://localhost:8080/api/user/avatar"
 
   constructor(private http: HttpClient) {
 
@@ -31,6 +32,13 @@ export class AvatarComponent implements OnInit {
       (auth: boolean) => {
         console.log("avatar refreshing points auth")
         this.refreshPoints()
+      }
+    );
+    Emitters.uploadAvatarEmitter.subscribe(
+      (auth: boolean) => {
+        console.log("avatar refreshing image auth")
+        this.avatarURI = "/assets/img/loading.gif";
+        setTimeout(() => this.avatarURI = "http://localhost:8080/api/user/avatar", 1000);
       }
     );
   }  

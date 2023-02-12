@@ -29,4 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Gin JWT: https://www.youtube.com/watch?v=QD2BCikYCyc  
 Angular JWT: https://www.youtube.com/watch?v=brb4SO-dO_k  
 Bootstrap icons: https://icons.getbootstrap.com/icons/person-circle/  
+Go Gin upload image: https://towardsdev.com/uploading-an-image-in-golang-using-gin-framework-eb81fdfec1ee  
+Angular upload image: https://www.bezkoder.com/angular-14-image-upload-preview/  
+
 
