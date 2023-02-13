@@ -87,7 +87,7 @@ and level next to the picture section.
 Points and level are “GET” from the database tables.
 
 --------------------------------------------------------------------------------
-User Picture | Priority 4 | Estimate 4 days | IN PROGRESS
+[x] User Picture | Priority 4 | Estimate 4 days | IN PROGRESS
 As an input user
 I want to have a picture/avatar
 So that I can see it on different pages with my points and level 
