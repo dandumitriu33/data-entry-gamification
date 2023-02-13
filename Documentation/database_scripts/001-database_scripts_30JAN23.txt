@@ -1,3 +1,4 @@
+
 CREATE TABLE `receipts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `model_year` int DEFAULT NULL,
@@ -7,9 +8,12 @@ CREATE TABLE `receipts` (
   `last_name` varchar(45) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
   `date_added` datetime NOT NULL DEFAULT '2011-01-26 14:30:00',
+  `qa_score` int DEFAULT NULL,
+  `qa_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ID_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 INSERT into receipts (model_year, make, vin, first_name, last_name, state, date_added)
 VALUES (2008, 'Mercedes', 'ZBMCB7682PC021431', 'Michael', 'Jones', 'NY', 20110127154552);
