@@ -17,6 +17,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { QaComponent } from './components/qa/qa.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     LoginComponent,
     StatisticsComponent,
     ImageUploadComponent,
+    QaComponent,
   ],
   imports: [
     FormsModule,
