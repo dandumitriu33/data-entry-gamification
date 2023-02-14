@@ -37,3 +37,14 @@ func GetAllCountToday() (int64, *errors.RestErr) {
 
 	return count, nil
 }
+
+func GetUnverifiedReceipt() (*model.Receipt, *errors.RestErr) {
+	result := &model.Receipt{}
+
+	err := result.GetUnverifiedReceipt()
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}

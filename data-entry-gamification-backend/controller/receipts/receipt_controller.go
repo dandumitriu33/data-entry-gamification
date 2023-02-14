@@ -102,3 +102,12 @@ func GetAllCountToday(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, result)
 }
+
+func GetUnverifiedReceipt(c *gin.Context) {
+	result, err := service.GetUnverifiedReceipt()
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+	c.JSON(http.StatusOK, result)
+}
