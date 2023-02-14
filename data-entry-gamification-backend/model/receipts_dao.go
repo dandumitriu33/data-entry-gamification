@@ -4,6 +4,7 @@ import (
 	"context"
 	"data-entry-gamification/storage/receipts_db"
 	"data-entry-gamification/utils/errors"
+	"log"
 	"time"
 )
 
@@ -15,6 +16,7 @@ var (
 	queryGetUserPointsByUserID = "SELECT points FROM user_info WHERE user_id = ?;"
 	queryInsertNewUserPoints   = "INSERT INTO user_info (user_id, points, level) VALUES (?, ?, ?);"
 	queryUpdateUserPoints      = "UPDATE user_info SET points = ?, level = ? WHERE user_id = ?;"
+	queryGetLatestUnverifiedReceipt = "SELECT id, model_year, make, vin, first_name, last_name, state, date_added, qa_date FROM receipts WHERE qa_score IS NULL ORDER BY date_added DESC LIMIT 1;"
 )
 
 func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr {
@@ -114,4 +116,29 @@ func (receipt *Receipt) GetAllCountToday() (int64, *errors.RestErr) {
 	}
 
 	return count, nil
+}
+
+func (receipt *Receipt) GetUnverifiedReceipt() *errors.RestErr {
+	// TODO - on retrieval, add a score of 0 so that other QA requests don't get the same receipt to score
+	// 0 score should be updated to something once the evaluation is done
+	// if evaluation fails or is not done - user that submitted the receipt should inform the 0 score - DB fix to null
+	stmt, err := receipts_db.Client.Prepare(queryGetLatestUnverifiedReceipt)
+	if err != nil {
+		return errors.NewInternalServerError("error preparing unverified receipt")
+	}
+	defer stmt.Close()
+
+	result := stmt.QueryRow()
+	if getErr := result.Scan(&receipt.ID, &receipt.ModelYear, &receipt.Make, &receipt.Vin, &receipt.FirstName, &receipt.LastName, &receipt.State, &receipt.DateAdded, &receipt.QADate); getErr != nil {
+		return errors.NewInternalServerError("error retrieving unverified receipt")
+	}
+	// return nil
+
+	log.Println("receipt:", receipt)
+	if receipt.ID == int64(0) {
+		// No valid receipts were found - all verified
+		return errors.NewBadRequestError("could not find unverified receipts")
+	}
+
+	return nil
 }
