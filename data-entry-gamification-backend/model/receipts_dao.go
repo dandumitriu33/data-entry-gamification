@@ -17,6 +17,7 @@ var (
 	queryInsertNewUserPoints   = "INSERT INTO user_info (user_id, points, level) VALUES (?, ?, ?);"
 	queryUpdateUserPoints      = "UPDATE user_info SET points = ?, level = ? WHERE user_id = ?;"
 	queryGetLatestUnverifiedReceipt = "SELECT id, model_year, make, vin, first_name, last_name, state, date_added, qa_date FROM receipts WHERE qa_score IS NULL ORDER BY date_added DESC LIMIT 1;"
+	queryUpdateReceipt = "UPDATE receipts SET model_year = ?, make = ?, vin = ?, first_name = ?, last_name = ?, state = ?, qa_score = ?, qa_date = ? WHERE id = ?;"
 )
 
 func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr {
@@ -140,5 +141,27 @@ func (receipt *Receipt) GetUnverifiedReceipt() *errors.RestErr {
 		return errors.NewBadRequestError("could not find unverified receipts")
 	}
 
+	return nil
+}
+
+func (receipt *Receipt) UpdateReceipt() *errors.RestErr {
+	stmt, err := receipts_db.Client.Prepare(queryUpdateReceipt)
+	if err != nil {
+		return errors.NewInternalServerError("database error update receipt stmt")
+	}
+	defer stmt.Close()
+	currentTime := time.Now()
+	qaDate := currentTime.Format("20060102150405")
+	// "UPDATE receipts SET model_year = ?, make = ?, vin = ?, first_name = ?, last_name = ?, state = ?, qa_score = ?, qa_date = ? WHERE id = ?;"
+	updateResult, saveErr := stmt.Exec(receipt.ModelYear, receipt.Make, receipt.Vin, receipt.FirstName, receipt.LastName, receipt.State, receipt.QAScore, qaDate, receipt.ID)
+	if saveErr != nil {
+		return errors.NewInternalServerError("database error updating receipt")
+	}
+
+	receiptID, err := updateResult.LastInsertId()
+	if err != nil {
+		return errors.NewInternalServerError("database error getting update ID")
+	}
+	receipt.ID = receiptID
 	return nil
 }
