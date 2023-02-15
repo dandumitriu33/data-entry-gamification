@@ -4,6 +4,7 @@ import (
 	"data-entry-gamification/model"
 	"data-entry-gamification/service"
 	"data-entry-gamification/utils/errors"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -109,5 +110,27 @@ func GetUnverifiedReceipt(c *gin.Context) {
 		c.JSON(err.Status, err)
 		return
 	}
+	c.JSON(http.StatusOK, result)
+}
+
+func UpdateReceipt(c *gin.Context) {
+	// TODO: JWT authentication?
+
+	// PUT request
+	var receipt model.Receipt
+	log.Println(receipt)
+
+	if err := c.ShouldBind(&receipt); err != nil {
+		err := errors.NewBadRequestError("invalid receipt data")
+		c.JSON(err.Status, err)
+		return
+	}
+	
+	result, restErr := service.UpdateReceipt(receipt)
+	if restErr != nil {
+		c.JSON(restErr.Status, restErr)
+		return
+	}
+
 	c.JSON(http.StatusOK, result)
 }

@@ -48,3 +48,11 @@ func GetUnverifiedReceipt() (*model.Receipt, *errors.RestErr) {
 
 	return result, nil
 }
+
+func UpdateReceipt(receipt model.Receipt) (*model.Receipt, *errors.RestErr) {
+	if err := receipt.UpdateReceipt(); err != nil {
+		return nil, err
+	}
+
+	return &receipt, nil
+}
