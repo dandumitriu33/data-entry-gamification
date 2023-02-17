@@ -3,50 +3,68 @@
 <form #receiptForm="ngForm" (ngSubmit)="onSubmitTemplateBased(receiptForm.value); receiptForm.reset()"  class="mx-auto" style="width: 400px;">
     <div class="container">
         <div class="row form-group">
+            <label class="col-4" for="id">ID</label>
+            <input type="number" class="form-control col-sm" #id id="id"
+            required disabled
+            [(ngModel)]="receipt.id" name="id">
+        </div>
+        <div class="row form-group">
             <label class="col-4" for="modelYear">Model Year</label>
             <input type="number" class="form-control col-sm" #modelYear id="modelYear"
             required autofocus
-            (ngModel)="receipt.model_year" name="model_year">
+            [(ngModel)]="receipt.model_year" name="model_year">
         </div>
         <div class="row form-group">
             <label class="col-4" for="make">Make</label>
             <input type="text" class="form-control col-sm" id="make"
             required
-            (ngModel)="receipt.make" name="make">
+            [(ngModel)]="receipt.make" name="make">
         </div>
         <div class="row form-group">
             <label class="col-4" for="vin">Vin</label>
             <input type="text" class="form-control col-sm" id="vin"
             required
-            (ngModel)="receipt.vin" name="vin">
+            [(ngModel)]="receipt.vin" name="vin">
         </div>
         <div class="row form-group">
             <label class="col-4" for="firstName">First Name</label>
             <input type="text" class="form-control col-sm" id="firstName"
             required
-            (ngModel)="receipt.first_name" name="first_name">
+            [(ngModel)]="receipt.first_name" name="first_name">
         </div>
         <div class="row form-group">
             <label class="col-4" for="lastName">Last Name</label>
             <input type="text" class="form-control col-sm" id="lastName"
             required
-            (ngModel)="receipt.last_name" name="last_name">
+            [(ngModel)]="receipt.last_name" name="last_name">
         </div>
         <div class="row form-group">
             <label class="col-4" for="state">State</label>
             <input type="text" class="form-control col-sm" id="state"
             required
-            (ngModel)="receipt.state" name="state">
+            [(ngModel)]="receipt.state" name="state">
         </div>
         <div class="row form-group">
             <label class="col-4" for="date_added">Date Added</label>
-            <input type="date" class="form-control col-sm" id="date_Added"
+            <input type="text" class="form-control col-sm" id="date_added"
+            required disabled
+            [(ngModel)]="receipt.date_added" name="date_added">
+        </div>
+        <div class="row form-group">
+            <label class="col-4" for="qa_score">QA Score</label>
+            <input type="number" class="form-control col-sm" id="qa_score"
             required
-            (ngModel)="receipt.date_added" name="date_added">
+            [(ngModel)]="receipt.qa_score" name="qa_score">
+        </div>
+        <div class="row form-group">
+            <label class="col-4" for="qa_date">QA Date</label>
+            <input type="text" class="form-control col-sm" id="qa_date"
+            required disabled
+            [(ngModel)]="receipt.qa_date" name="qa_date">
         </div>
         <div class="row form-group">
             <div class="col-8"></div>
-            <button type="submit" class="btn btn-primary col-sm" (click)="updateReceipt()">Add</button>
+            <button type="submit" class="btn btn-primary col-sm" (click)="updateReceipt()">Update</button>
             <!-- <button type="submit" [disabled]="!receiptForm.valid" class="btn btn-primary col-sm" (click)="newReceipt(); receiptForm.reset()">Add</button> -->
         </div>
     </div>
