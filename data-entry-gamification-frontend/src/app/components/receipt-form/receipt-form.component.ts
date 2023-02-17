@@ -12,7 +12,7 @@ import { Emitters } from 'src/app/emitters/emitters';
 export class ReceiptFormComponent implements OnInit {
   @ViewChild("modelYear", {  }) modelYear: ElementRef;
 
-  receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: ""};
+  receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: "", date_added: "", qa_score: 0, qa_date: ""};
 
   constructor(
     private receiptService: ReceiptService,
