@@ -3,12 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InterfaceReceipt } from '../interfaces/interface-receipt';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { ReceiptDTO } from '../entities/receipt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReceiptService {
   private receiptsUrl = 'http://localhost:8080/receipts';  // URL to web api
+  private updateVerifiedReceiptURL = "http://localhost:8080/api/receipts/verified";
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true
@@ -30,6 +33,14 @@ export class ReceiptService {
     return this.http.post<InterfaceReceipt>(this.receiptsUrl, receipt, this.httpOptions).pipe(
       tap((newReceipt: InterfaceReceipt) => console.info(`added receipt w/ id=${newReceipt.id}`)),
       catchError(this.handleError<InterfaceReceipt>('addReceipt'))
+    );
+  }
+
+  /** PUT: update a rceipt with QA Score and Date */
+  updateVerifiedReceipt(receipt: ReceiptDTO): Observable<ReceiptDTO> {
+    return this.http.put<ReceiptDTO>(this.updateVerifiedReceiptURL, receipt, this.httpOptions).pipe(
+      tap((newReceipt: ReceiptDTO) => console.info(`updated receipt w/ id=${newReceipt.id}`)),
+      catchError(this.handleError<ReceiptDTO>('updateVerifiedReceipt'))
     );
   }
 

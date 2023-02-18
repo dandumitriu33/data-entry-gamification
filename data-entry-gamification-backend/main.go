@@ -69,6 +69,7 @@ func main() {
 	router.GET("/api/receipts/allcounttoday", receipts.GetAllCountToday)
 	router.GET("/api/receipts/unverified", receipts.GetUnverifiedReceipt)
 	router.PUT("/api/receipts", receipts.UpdateReceipt)
+	router.PUT("/api/receipts/verified", receipts.UpdateReceipt)
 
 	router.POST("/api/register", users.Register)
 	router.POST("/api/login", users.Login)
