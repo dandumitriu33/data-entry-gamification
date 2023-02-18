@@ -34,12 +34,11 @@ export class QaComponent implements OnInit {
 
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
     console.log("this.receipt: ", this.receipt)
-    receiptFromForm.id = 0;
     console.log("receiptFromForm: ", receiptFromForm)
     // TODO: UPDATE RECEIPT
-    this.receiptService.addReceipt(receiptFromForm)
+    this.receiptService.updateVerifiedReceipt(receiptFromForm)
       .subscribe(receiptFromForm => {
-        console.log("receipt added successfully: ", receiptFromForm);
+        console.log("receipt updated successfully: ", receiptFromForm);
       });
     console.log("Emitting input event.");
     Emitters.inputEmitter.emit();
