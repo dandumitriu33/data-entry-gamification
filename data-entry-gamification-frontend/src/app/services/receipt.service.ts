@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InterfaceReceipt } from '../interfaces/interface-receipt';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { ReceiptDTO } from '../entities/receipt';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +37,10 @@ export class ReceiptService {
   }
 
   /** PUT: update a rceipt with QA Score and Date */
-  updateVerifiedReceipt(receipt: InterfaceReceipt): Observable<InterfaceReceipt> {
-    return this.http.put<InterfaceReceipt>(this.updateVerifiedReceiptURL, receipt, this.httpOptions).pipe(
-      tap((newReceipt: InterfaceReceipt) => console.info(`updated receipt w/ id=${newReceipt.id}`)),
-      catchError(this.handleError<InterfaceReceipt>('updateVerifiedReceipt'))
+  updateVerifiedReceipt(receipt: ReceiptDTO): Observable<ReceiptDTO> {
+    return this.http.put<ReceiptDTO>(this.updateVerifiedReceiptURL, receipt, this.httpOptions).pipe(
+      tap((newReceipt: ReceiptDTO) => console.info(`updated receipt w/ id=${newReceipt.id}`)),
+      catchError(this.handleError<ReceiptDTO>('updateVerifiedReceipt'))
     );
   }
 

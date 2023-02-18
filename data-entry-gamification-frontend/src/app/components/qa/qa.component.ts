@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Receipt } from 'src/app/entities/receipt';
+import { Receipt, ReceiptDTO } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +14,31 @@ export class QaComponent implements OnInit {
 
   getLatestUnverifiedReceiptURL = "http://localhost:8080/api/receipts/unverified";
 
-  receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: "", date_added: "", qa_score: 0, qa_date: ""};
+  receipt: Receipt = {
+                      id: 0, 
+                      model_year: 0, 
+                      make: "", 
+                      vin: "", 
+                      first_name: "", 
+                      last_name: "", 
+                      state: "", 
+                      date_added: "", 
+                      qa_score: 0, 
+                      qa_date: ""
+                    };
+
+  receiptDTO: ReceiptDTO = {
+                      id: 0, 
+                      model_year: 0, 
+                      make: "", 
+                      vin: "", 
+                      first_name: "", 
+                      last_name: "", 
+                      state: "", 
+                      date_added: {String: "", Valid: true}, 
+                      qa_score: {Int64: 0, Valid: false}, 
+                      qa_date: {String: "", Valid: false}
+  } 
 
   constructor(
     private receiptService: ReceiptService,
@@ -36,9 +60,23 @@ export class QaComponent implements OnInit {
     console.log("this.receipt: ", this.receipt)
     console.log("receiptFromForm: ", receiptFromForm)
     // TODO: UPDATE RECEIPT
-    this.receiptService.updateVerifiedReceipt(receiptFromForm)
-      .subscribe(receiptFromForm => {
-        console.log("receipt updated successfully: ", receiptFromForm);
+    this.receiptDTO.id = this.receipt.id
+    this.receiptDTO.model_year = receiptFromForm.model_year
+    this.receiptDTO.make = receiptFromForm.make
+    this.receiptDTO.vin = receiptFromForm.vin
+    this.receiptDTO.first_name = receiptFromForm.first_name
+    this.receiptDTO.last_name = receiptFromForm.last_name
+    this.receiptDTO.state = receiptFromForm.state
+    this.receiptDTO.date_added.String = this.receipt.date_added
+    this.receiptDTO.date_added.Valid = true
+    this.receiptDTO.qa_score.Int64 = receiptFromForm.qa_score
+    this.receiptDTO.qa_score.Valid = false
+    this.receiptDTO.qa_date.String = this.receipt.qa_date
+    this.receiptDTO.qa_date.Valid = false
+    console.log("receiptDTO: ", this.receiptDTO)
+    this.receiptService.updateVerifiedReceipt(this.receiptDTO)
+      .subscribe(res => {
+        console.log("receipt updated successfully: ", res);
       });
     console.log("Emitting input event.");
     Emitters.inputEmitter.emit();

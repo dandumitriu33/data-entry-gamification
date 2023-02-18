@@ -4,7 +4,6 @@ import (
 	"data-entry-gamification/model"
 	"data-entry-gamification/service"
 	"data-entry-gamification/utils/errors"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -118,7 +117,6 @@ func UpdateReceipt(c *gin.Context) {
 
 	// PUT request
 	var receipt model.Receipt
-	log.Println(receipt)
 
 	if err := c.ShouldBind(&receipt); err != nil {
 		err := errors.NewBadRequestError("invalid receipt data")
