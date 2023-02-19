@@ -97,7 +97,7 @@ points and level on multiple pages as indicated in the wireframes.
 On my account, new entry and analytics page at minimum
 
 --------------------------------------------------------------------------------
-Quality database table | Priority 4 | Estimate 4 days
+[x] Quality database table | Priority 4 | Estimate 4 days
 As a database QA user
 I want to have a day/quality percentage table
 So that I can check random entries and enter the correctness percentage for 
