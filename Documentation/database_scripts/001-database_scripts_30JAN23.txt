@@ -40,3 +40,10 @@ CREATE TABLE `user_info` (
   `level` int NOT NULL,
   `img_uri` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+USER ROLES
+
+CREATE TABLE `user_roles` (
+  `user_id` int NOT NULL,
+  `user_role` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
