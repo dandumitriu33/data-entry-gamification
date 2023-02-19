@@ -12,3 +12,8 @@ type UserInfo struct {
 type UserAvatar struct {
 	Avatar *multipart.FileHeader `form:"avatar" binding:"required"`
 }
+
+type UserRole struct {
+	UserID    int64    `json:"user_id"`
+	UserRole string `json:"user_roles"`
+}

@@ -75,3 +75,14 @@ func PutUserAvatar(ctx *gin.Context, userInfo model.UserInfo, userAvatar model.U
 
 	return &userAvatar, nil
 }
+
+func UserRoles(ctx *gin.Context, userId int64) ([]string, *errors.RestErr){
+	result := &model.UserInfo{UserID: userId}
+
+	userRoles, err := result.UserRolesByID(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return userRoles, nil
+}

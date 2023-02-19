@@ -13,6 +13,7 @@ import (
 var (
 	queryGetUserInfoByID = "SELECT user_id, points, level, img_uri FROM user_info WHERE user_id=?;"
 	queryUpdateUserImgURI = "UPDATE user_info SET img_uri=? WHERE user_id=?;"
+	queryGetUserRolesByID = "SELECT user_id, user_role FROM user_roles WHERE user_id=?;"
 )
 
 func (userInfo *UserInfo) GetUserInfoByID() *errors.RestErr {
@@ -65,4 +66,25 @@ func (userInfo *UserInfo) UpdateAvatar(ctx *gin.Context, userAvatar UserAvatar, 
 	}
 	log.Println("transaction commited")
 	return nil
+}
+
+func (userInfo *UserInfo) UserRolesByID(ctx *gin.Context) ([]string, *errors.RestErr) {
+	log.Println("user ID is", userInfo.UserID)
+	stmt, err := users_db.Client.Prepare(queryGetUserRolesByID)
+	if err != nil {
+		return nil, errors.NewInternalServerError("database get user roles error")
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.QueryContext(ctx, userInfo.UserID)
+	var allUserRoles []string;
+	for rows.Next() {
+		roleEntry := new(UserRole)
+		if getErr := rows.Scan(&roleEntry.UserID, &roleEntry.UserRole); getErr != nil {
+			return nil, errors.NewInternalServerError("database user role extraction error")
+		}
+		allUserRoles = append(allUserRoles, roleEntry.UserRole)
+	}
+
+	return allUserRoles, nil
 }
