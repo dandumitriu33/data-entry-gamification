@@ -1,0 +1,21 @@
+Refactor Backend API routes and flows Clean Code | Priority 1 | Estimate 1 days
+As a backend engineer
+I want to refactor the backend API routes and flows
+So that I can have Clean Code and Clean Architecture in all situations 
+consistently.  
+
+Acceptance criteria: all flows to the backend are consistent with regards to 
+the API route, the flow main-controller-service and other Clean Code and Clean 
+Architecture principles.
+
+--------------------------------------------------------------------------------
+Refactor Dates conversion to String for DB | Priority 1 | Estimate 1 days
+As a backend engineer
+I want to refactor the backend entities and methods to convert dates to string
+So that I can send simpler or more intuitive JSON from the frontend.  
+
+Acceptance criteria: the DTO DAO mapping will no longer use the Object for dates
+and will use strings. The conversion to date must be done as close to the DB as 
+possible to make the other comms simpler/more intuitive.
+
+--------------------------------------------------------------------------------
