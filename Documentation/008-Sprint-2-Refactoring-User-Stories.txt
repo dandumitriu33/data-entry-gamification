@@ -19,3 +19,31 @@ and will use strings. The conversion to date must be done as close to the DB as
 possible to make the other comms simpler/more intuitive.
 
 --------------------------------------------------------------------------------
+Refactor Frontend FORMS | Priority 1 | Estimate 1 days
+As a frontend engineer
+I want to refactor the forms used in Angular
+So that the architecture is more consistent.  
+
+Acceptance criteria: research on the Angular documentation which type of form 
+is more appropriate to use and implement in the frontend.
+
+--------------------------------------------------------------------------------
+Refactor QA display based on Roles | Priority 1 | Estimate 1 days
+As a frontend engineer
+I want to refactor the pages to display the links and data based on roles
+So that the appropriate pages are displayed to the correct roles.  
+
+Acceptance criteria: QA page and links are only visible to QA roles. The 
+validation remains on the backend on QA update based on DB role.  
+
+--------------------------------------------------------------------------------
+Refactor UI and refresh scenarios | Priority 1 | Estimate 1 days
+As a frontend engineer
+I want to refactor the UI and refresh scenarios for data from components
+So that the data is always up updated and the UI is consistent.  
+
+Acceptance criteria: the picture on the Profile and Avatar components must have 
+a default and the loading .gif must be proportional in size. Refresh of data 
+from Avatar and other components must be updated on changes such as Input/QA.  
+
+--------------------------------------------------------------------------------
