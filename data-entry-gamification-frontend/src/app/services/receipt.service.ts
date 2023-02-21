@@ -9,7 +9,7 @@ import { ReceiptDTO } from '../entities/receipt';
   providedIn: 'root'
 })
 export class ReceiptService {
-  private receiptsUrl = 'http://localhost:8080/receipts';  // URL to web api
+  private receiptsUrl = 'http://localhost:8080/api/receipts';  // URL to web api
   private updateVerifiedReceiptURL = "http://localhost:8080/api/receipts/verified";
 
   httpOptions = {

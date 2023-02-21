@@ -63,7 +63,7 @@ func main() {
 	// 	c.JSON(http.StatusOK, newReceipt)
 	// })
 
-	router.POST("/receipts", receipts.AddReceipt)
+	router.POST("/api/receipts", receipts.AddReceipt)
 
 	router.GET("/api/receipts/allcount", receipts.GetAllCount)
 	router.GET("/api/receipts/allcounttoday", receipts.GetAllCountToday)
