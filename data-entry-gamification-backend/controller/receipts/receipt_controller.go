@@ -8,14 +8,8 @@ import (
 	"data-entry-gamification/utils/authentication"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
-	jwt "github.com/golang-jwt/jwt/v4"
-)
-
-const (
-	SecretKey = "abc123"
 )
 
 func AddReceipt(c *gin.Context) {
@@ -78,28 +72,10 @@ func GetUnverifiedReceipt(c *gin.Context) {
 }
 
 func UpdateReceipt(c *gin.Context) {
-	cookie, err := c.Cookie("jwt")
+	// Authenticate From JWT
+	issuer, err := authentication.AuthenticateFromJWT(c);
 	if err != nil {
-		getErr := errors.NewInternalServerError("could not retrieve cookie")
-		c.JSON(getErr.Status, getErr)
-		return
-	}
-
-	// token, err := jwt.ParseWithClaims(cookie, &jwt.RegisteredClaims{}, func(*jwt.Token) (interface{}, error) {
-	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(*jwt.Token) (interface{}, error) {
-		return []byte(SecretKey), nil
-	})
-	if err != nil {
-		restErr := errors.NewInternalServerError("error parsing cookie")
-		c.JSON(restErr.Status, restErr)
-		return
-	}
-
-	claims := token.Claims.(*jwt.StandardClaims)
-	issuer, err := strconv.ParseInt(claims.Issuer, 10, 64)
-	if err != nil {
-		restErr := errors.NewBadRequestError("user id should be a number")
-		c.JSON(restErr.Status, restErr)
+		c.JSON(err.Status, err)
 		return
 	}
 
