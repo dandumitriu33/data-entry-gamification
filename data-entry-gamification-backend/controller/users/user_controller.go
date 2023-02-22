@@ -93,33 +93,12 @@ func Logout(c *gin.Context) {
 }
 
 func GetUserInfo(c *gin.Context) {
-	cookie, err := c.Cookie("jwt")
-	log.Println(cookie);
-	log.Println(err);
+	// Authenticate From JWT
+	issuer, err := authentication.AuthenticateFromJWT(c);
 	if err != nil {
-		getErr := errors.NewInternalServerError("GetUserInfo could not retrieve cookie")
-		c.JSON(getErr.Status, getErr)
+		c.JSON(err.Status, err)
 		return
 	}
-
-	// token, err := jwt.ParseWithClaims(cookie, &jwt.RegisteredClaims{}, func(*jwt.Token) (interface{}, error) {
-	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(*jwt.Token) (interface{}, error) {
-		return []byte(SecretKey), nil
-	})
-	if err != nil {
-		restErr := errors.NewInternalServerError("error parsing cookie")
-		c.JSON(restErr.Status, restErr)
-		return
-	}
-
-	claims := token.Claims.(*jwt.StandardClaims)
-	issuer, err := strconv.ParseInt(claims.Issuer, 10, 64)
-	if err != nil {
-		restErr := errors.NewBadRequestError("user id should be a number")
-		c.JSON(restErr.Status, restErr)
-		return
-	}
-
 	result, restErr := service.GetUserInfoByID(issuer)
 	if restErr != nil {
 		c.JSON(restErr.Status, restErr)
