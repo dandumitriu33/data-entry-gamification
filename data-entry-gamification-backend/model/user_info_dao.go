@@ -1,7 +1,6 @@
 package model
 
 import (
-	// "context"
 	"data-entry-gamification/storage/users_db"
 	"data-entry-gamification/utils/errors"
 	"log"
@@ -14,6 +13,7 @@ var (
 	queryGetUserInfoByID = "SELECT user_id, points, level, img_uri FROM user_info WHERE user_id=?;"
 	queryUpdateUserImgURI = "UPDATE user_info SET img_uri=? WHERE user_id=?;"
 	queryGetUserRolesByID = "SELECT user_id, user_role FROM user_roles WHERE user_id=?;"
+	queryInsertDefaultUserInfo = "INSERT INTO user_info (user_id, points, level, img_uri) VALUES (?, 0, 0, '../assets/user-avatars/001-Default-Avatar-2.jpg');"
 )
 
 func (userInfo *UserInfo) GetUserInfoByID() *errors.RestErr {
@@ -87,4 +87,18 @@ func (userInfo *UserInfo) UserRolesByID(ctx *gin.Context) ([]string, *errors.Res
 	}
 
 	return allUserRoles, nil
+}
+
+func (userInfo *UserInfo) PostDefaultUserInfo() *errors.RestErr {
+	stmt, err := users_db.Client.Prepare(queryInsertDefaultUserInfo)
+	if err != nil {
+		return errors.NewInternalServerError("database error")
+	}
+	defer stmt.Close()	
+	insertResult, saveErr := stmt.Exec(userInfo.UserID)
+	if saveErr != nil {
+		return errors.NewInternalServerError("database error")
+	}
+	log.Println("insertResult", insertResult)
+	return nil
 }

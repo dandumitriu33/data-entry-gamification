@@ -28,6 +28,9 @@ func CreateUser(user model.User) (*model.User, *errors.RestErr) {
 		return nil, err
 	}
 
+	userInfo := &model.UserInfo{UserID: user.ID}
+	userInfo.PostDefaultUserInfo()
+
 	return &user, nil
 }
 
