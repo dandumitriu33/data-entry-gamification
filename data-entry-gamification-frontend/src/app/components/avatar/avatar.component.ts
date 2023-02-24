@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Emitters } from 'src/app/emitters/emitters';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,7 +14,8 @@ export class AvatarComponent implements OnInit {
   // avatarURI = "/assets/img/001-Default-Avatar.jpg"
   avatarURI = "http://localhost:8080/api/user/avatar"
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private cdr: ChangeDetectorRef) {
 
   }
 
@@ -24,6 +25,7 @@ export class AvatarComponent implements OnInit {
       (input: boolean) => {
         console.log("avatar refreshing points input")
         setTimeout(() => {
+          console.log("input point refresh 5s")
           this.refreshPoints()
         }, 5000); 
       }
@@ -32,6 +34,15 @@ export class AvatarComponent implements OnInit {
       (auth: boolean) => {
         console.log("avatar refreshing points auth")
         this.refreshPoints()
+        this.avatarURI = "/assets/img/loading.gif" + new Date().getTime();
+        console.log("detect changes 1", this.avatarURI);
+        this.cdr.detectChanges();
+        setTimeout(() => {
+          this.avatarURI = "http://localhost:8080/api/user/avatar?t=" + new Date().getTime();
+          console.log("detect changes 2", this.avatarURI);
+          this.cdr.detectChanges();
+        }, 1000);
+        
       }
     );
     Emitters.uploadAvatarEmitter.subscribe(
@@ -44,7 +55,6 @@ export class AvatarComponent implements OnInit {
   }  
 
   refreshPoints(): void {
-    console.log("refreshing points in 5 seconds")
     this.http.get(this.getUserInfoUrl, {withCredentials: true}).subscribe(
       (res: any) => {
         console.log(res)
