@@ -27,6 +27,13 @@ export class ProfileComponent implements OnInit {
         setTimeout(() => this.downloadUserAvatarURL = "http://localhost:8080/api/user/avatar", 1000);
       }
     );
+    Emitters.authEmitter.subscribe(
+      (auth: boolean) => {
+        console.log("login event - loading avatar image")
+        this.downloadUserAvatarURL = "/assets/img/loading.gif";
+        setTimeout(() => this.downloadUserAvatarURL = "http://localhost:8080/api/user/avatar", 1000);
+      }
+    );
   }
 
   refreshData() {

@@ -38,7 +38,10 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.http.get(this.logoutUrl, {withCredentials: true})
-      .subscribe(() => this.authenticated = false);
+      .subscribe(() => {
+        this.authenticated = false;
+        Emitters.authEmitter.emit(false);
+      });
   }
 
 }

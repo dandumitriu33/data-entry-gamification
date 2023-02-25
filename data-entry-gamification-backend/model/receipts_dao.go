@@ -14,7 +14,6 @@ var (
 	queryGetAllCountToday      = "SELECT COUNT(*) FROM receipts WHERE DATE(date_added) = DATE(NOW());"
 	queryInsertUserIDReceiptID = "INSERT INTO user_receipts (user_id, receipt_id) VALUES (?, ?);"
 	queryGetUserPointsByUserID = "SELECT points FROM user_info WHERE user_id = ?;"
-	queryInsertNewUserPoints   = "INSERT INTO user_info (user_id, points, level) VALUES (?, ?, ?);"
 	queryUpdateUserPoints      = "UPDATE user_info SET points = ?, level = ? WHERE user_id = ?;"
 	queryGetLatestUnverifiedReceipt = "SELECT id, model_year, make, vin, first_name, last_name, state, date_added, qa_date FROM receipts WHERE qa_score IS NULL ORDER BY date_added DESC LIMIT 1;"
 	queryUpdateReceipt = "UPDATE receipts SET model_year = ?, make = ?, vin = ?, first_name = ?, last_name = ?, state = ?, qa_score = ?, qa_date = ? WHERE id = ?;"
@@ -53,19 +52,11 @@ func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr 
 		return errors.NewInternalServerError("database transaction get points error")
 	}
 
-	if userPoints == 0 {
-		// Insert User Points - first user input recording
-		_, pointsErr := tx.ExecContext(ctx, queryInsertNewUserPoints, userID, 1, 0)
-		if pointsErr != nil {
-			return errors.NewInternalServerError("database transaction add new points error")
-		}
-	} else {
-		// Update User Points
-		_, pointsErr := tx.ExecContext(ctx, queryUpdateUserPoints, userPoints+1, 0, userID)
-		if pointsErr != nil {
-			return errors.NewInternalServerError("database transaction add points error")
-		}
-	}	
+	// Update User Points
+	_, pointsErr := tx.ExecContext(ctx, queryUpdateUserPoints, userPoints+1, 0, userID)
+	if pointsErr != nil {
+		return errors.NewInternalServerError("database transaction add points error")
+	}
 
 	// Commit the transaction.
 	if err = tx.Commit(); err != nil {
