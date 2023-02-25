@@ -12,7 +12,7 @@ export class AvatarComponent implements OnInit {
   userLevel = 0;
   getUserInfoUrl = "http://localhost:8080/api/user/info";
   // avatarURI = "/assets/img/001-Default-Avatar.jpg"
-  avatarURI = "http://localhost:8080/api/user/avatar"
+  avatarURI = "http://localhost:8080/api/user/avatar?t=" + new Date().getTime();
 
   constructor(private http: HttpClient,
               private cdr: ChangeDetectorRef) {
@@ -34,7 +34,7 @@ export class AvatarComponent implements OnInit {
       (auth: boolean) => {
         console.log("avatar refreshing points auth")
         this.refreshPoints()
-        this.avatarURI = "/assets/img/loading.gif" + new Date().getTime();
+        this.avatarURI = "/assets/img/loading.gif"
         console.log("detect changes 1", this.avatarURI);
         this.cdr.detectChanges();
         setTimeout(() => {
