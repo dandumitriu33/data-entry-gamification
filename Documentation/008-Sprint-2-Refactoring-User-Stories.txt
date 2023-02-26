@@ -44,6 +44,7 @@ So that the data is always up updated and the UI is consistent.
 
 Acceptance criteria: the picture on the Profile and Avatar components must have 
 a default and the loading .gif must be proportional in size. Refresh of data 
-from Avatar and other components must be updated on changes such as Input/QA.  
+from Avatar and other components must be updated on changes such as Input/QA.
+- QA point system: 1 point per 1 Update  
 
 --------------------------------------------------------------------------------
