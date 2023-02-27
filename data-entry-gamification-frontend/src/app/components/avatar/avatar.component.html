@@ -1,5 +1,10 @@
-<div class="avatar">
-    <img class="avatar-image" src={{avatarURI}} alt="Avatar"/>
+<div class="avatar avatar-loading ">
+    <div *ngIf='avatarURI === ""'>
+        <div class="loader"></div>
+    </div>
+    <div *ngIf='!(avatarURI === "")'>
+        <img class="avatar-image" src={{avatarURI}} alt="Avatar"/>
+    </div>
     <div class="number-box">{{userPoints}}</div>
     <div class="level-box">{{userLevel}}</div>
 </div>  

@@ -1,8 +1,8 @@
 <div class="row justify-content-center mt-5 avatar-loading">
-    <div *ngIf='downloadUserAvatarURL === "/assets/img/loading.gif"' class="img-responsive">
+    <div *ngIf='downloadUserAvatarURL === ""' class="img-responsive">
         <div class="loader"></div>
     </div>
-    <div *ngIf='!(downloadUserAvatarURL === "/assets/img/loading.gif")'>
+    <div *ngIf='!(downloadUserAvatarURL === "")'>
         <img src="{{downloadUserAvatarURL}}" class="rounded img-responsive">
     </div>
 </div>

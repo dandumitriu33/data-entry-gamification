@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Emitters } from 'src/app/emitters/emitters';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,44 +11,34 @@ export class AvatarComponent implements OnInit {
   userPoints = "0"; // points over 1k will be dislpayed as 1.2 K
   userLevel = 0;
   getUserInfoUrl = "http://localhost:8080/api/user/info";
-  // avatarURI = "/assets/img/001-Default-Avatar.jpg"
   avatarURI = "http://localhost:8080/api/user/avatar?t=" + new Date().getTime();
 
-  constructor(private http: HttpClient,
-              private cdr: ChangeDetectorRef) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.refreshPoints(); 
     Emitters.inputEmitter.subscribe(
       (input: boolean) => {
-        console.log("avatar refreshing points input")
         setTimeout(() => {
-          console.log("input point refresh 5s")
           this.refreshPoints()
         }, 5000); 
       }
     );
+    // Because of browser image caching, if we log in with a different user on the same
+    // device, the avatar image will not be uploaded on /avatar
+    // adding a parameter t that is not used in the backend to refresh the image 
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
-        console.log("avatar refreshing points auth")
         this.refreshPoints()
-        this.avatarURI = "/assets/img/loading.gif"
-        console.log("detect changes 1", this.avatarURI);
-        this.cdr.detectChanges();
+        this.avatarURI = ""
         setTimeout(() => {
           this.avatarURI = "http://localhost:8080/api/user/avatar?t=" + new Date().getTime();
-          console.log("detect changes 2", this.avatarURI);
-          this.cdr.detectChanges();
-        }, 1000);
-        
+        }, 1000);        
       }
     );
     Emitters.uploadAvatarEmitter.subscribe(
       (auth: boolean) => {
-        console.log("avatar refreshing image auth")
-        this.avatarURI = "/assets/img/loading.gif";
+        this.avatarURI = "";
         setTimeout(() => this.avatarURI = "http://localhost:8080/api/user/avatar", 1000);
       }
     );
