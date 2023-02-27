@@ -34,7 +34,8 @@ export class AvatarComponent implements OnInit {
       (auth: boolean) => {
         console.log("avatar refreshing points auth")
         this.refreshPoints()
-        this.avatarURI = "/assets/img/loading.gif"
+        // this.avatarURI = "/assets/img/loading.gif"
+        this.avatarURI = ""
         console.log("detect changes 1", this.avatarURI);
         this.cdr.detectChanges();
         setTimeout(() => {
@@ -48,7 +49,8 @@ export class AvatarComponent implements OnInit {
     Emitters.uploadAvatarEmitter.subscribe(
       (auth: boolean) => {
         console.log("avatar refreshing image auth")
-        this.avatarURI = "/assets/img/loading.gif";
+        // this.avatarURI = "/assets/img/loading.gif";
+        this.avatarURI = "";
         setTimeout(() => this.avatarURI = "http://localhost:8080/api/user/avatar", 1000);
       }
     );
