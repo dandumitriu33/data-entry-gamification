@@ -23,14 +23,16 @@ export class ProfileComponent implements OnInit {
       () => {
         console.log("upload of profile image detected. Refreshing");
         console.log("avatar refreshing image auth")
-        this.downloadUserAvatarURL = "/assets/img/loading.gif";
+        // this.downloadUserAvatarURL = "/assets/img/loading.gif";
+        this.downloadUserAvatarURL = "";
         setTimeout(() => this.downloadUserAvatarURL = "http://localhost:8080/api/user/avatar", 1000);
       }
     );
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         console.log("login event - loading avatar image")
-        this.downloadUserAvatarURL = "/assets/img/loading.gif";
+        // this.downloadUserAvatarURL = "/assets/img/loading.gif";
+        this.downloadUserAvatarURL = "";
         setTimeout(() => this.downloadUserAvatarURL = "http://localhost:8080/api/user/avatar", 1000);
       }
     );
