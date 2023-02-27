@@ -37,7 +37,7 @@ Acceptance criteria: QA page and links are only visible to QA roles. The
 validation remains on the backend on QA update based on DB role.  
 
 --------------------------------------------------------------------------------
-Refactor UI and refresh scenarios | Priority 1 | Estimate 1 days
+[x] Refactor UI and refresh scenarios | Priority 1 | Estimate 1 days
 As a frontend engineer
 I want to refactor the UI and refresh scenarios for data from components
 So that the data is always up updated and the UI is consistent.  
@@ -45,6 +45,6 @@ So that the data is always up updated and the UI is consistent.
 Acceptance criteria: the picture on the Profile and Avatar components must have 
 a default and the loading .gif must be proportional in size. Refresh of data 
 from Avatar and other components must be updated on changes such as Input/QA.
-- QA point system: 1 point per 1 Update  
+ 
 
 --------------------------------------------------------------------------------
