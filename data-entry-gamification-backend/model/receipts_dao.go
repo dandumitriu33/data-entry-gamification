@@ -27,9 +27,7 @@ func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr 
 	defer tx.Rollback()
 
 	// Add receipt and get the ID
-	currentTime := time.Now()
-	date_added := currentTime.Format("20060102150405")
-	addResult, addErr := tx.ExecContext(ctx, queryInsertReceipt, receipt.ModelYear, receipt.Make, receipt.Vin, receipt.FirstName, receipt.LastName, receipt.State, date_added)
+	addResult, addErr := tx.ExecContext(ctx, queryInsertReceipt, receipt.ModelYear, receipt.Make, receipt.Vin, receipt.FirstName, receipt.LastName, receipt.State, receipt.DateAdded)
 	if addErr != nil {
 		return errors.NewInternalServerError("database transaction add error")
 	}
@@ -64,6 +62,52 @@ func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr 
 	}
 	return nil
 }
+
+// func (receipt *Receipt) Save2(ctx context.Context, userID int64) *errors.RestErr {
+// 	tx, err := receipts_db.Client.BeginTx(ctx, nil)
+// 	if err != nil {
+// 		return errors.NewInternalServerError("database transaction error")
+// 	}
+// 	defer tx.Rollback()
+
+// 	// Add receipt and get the ID
+// 	currentTime := time.Now()
+// 	date_added := currentTime.Format("20060102150405")
+// 	addResult, addErr := tx.ExecContext(ctx, queryInsertReceipt, receipt.ModelYear, receipt.Make, receipt.Vin, receipt.FirstName, receipt.LastName, receipt.State, date_added)
+// 	if addErr != nil {
+// 		return errors.NewInternalServerError("database transaction add error")
+// 	}
+// 	receiptID, err := addResult.LastInsertId()
+// 	if err != nil {
+// 		return errors.NewInternalServerError("database transaction receipt ID retrieval error")
+// 	}
+// 	receipt.ID = receiptID
+
+// 	// Add userID and receiptID to user_receipts table
+// 	_, pairErr := tx.ExecContext(ctx, queryInsertUserIDReceiptID, userID, receiptID)
+// 	if pairErr != nil {
+// 		return errors.NewInternalServerError("database transaction pair error")
+// 	}
+
+// 	// Get User points
+// 	var userPoints int64
+// 	getPointsErr := tx.QueryRowContext(ctx, queryGetUserPointsByUserID, userID).Scan(&userPoints)
+// 	if getPointsErr != nil {
+// 		return errors.NewInternalServerError("database transaction get points error")
+// 	}
+
+// 	// Update User Points
+// 	_, pointsErr := tx.ExecContext(ctx, queryUpdateUserPoints, userPoints+1, 0, userID)
+// 	if pointsErr != nil {
+// 		return errors.NewInternalServerError("database transaction add points error")
+// 	}
+
+// 	// Commit the transaction.
+// 	if err = tx.Commit(); err != nil {
+// 		return errors.NewInternalServerError("database transaction commit error")
+// 	}
+// 	return nil
+// }
 
 func (receipt *Receipt) Save2() *errors.RestErr {
 	stmt, err := receipts_db.Client.Prepare(queryInsertReceipt)

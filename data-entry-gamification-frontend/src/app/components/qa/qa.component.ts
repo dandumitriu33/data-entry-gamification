@@ -35,7 +35,8 @@ export class QaComponent implements OnInit {
                       first_name: "", 
                       last_name: "", 
                       state: "", 
-                      date_added: {String: "", Valid: true}, 
+                      // date_added: {String: "", Valid: true}, 
+                      date_added: "",
                       qa_score: {Int64: 0, Valid: false}, 
                       qa_date: {String: "", Valid: false}
   } 
@@ -67,8 +68,9 @@ export class QaComponent implements OnInit {
     this.receiptDTO.first_name = receiptFromForm.first_name
     this.receiptDTO.last_name = receiptFromForm.last_name
     this.receiptDTO.state = receiptFromForm.state
-    this.receiptDTO.date_added.String = this.receipt.date_added
-    this.receiptDTO.date_added.Valid = true
+    // this.receiptDTO.date_added.String = this.receipt.date_added
+    // this.receiptDTO.date_added.Valid = true
+    this.receiptDTO.date_added = receiptFromForm.date_added
     this.receiptDTO.qa_score.Int64 = receiptFromForm.qa_score
     this.receiptDTO.qa_score.Valid = false
     this.receiptDTO.qa_date.String = this.receipt.qa_date

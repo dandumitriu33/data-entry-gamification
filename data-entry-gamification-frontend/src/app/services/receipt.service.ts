@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InterfaceReceipt } from '../interfaces/interface-receipt';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { ReceiptDTO } from '../entities/receipt';
+import { Receipt, ReceiptDTO } from '../entities/receipt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,18 @@ import { ReceiptDTO } from '../entities/receipt';
 export class ReceiptService {
   private receiptsUrl = 'http://localhost:8080/api/receipts';  // URL to web api
   private updateVerifiedReceiptURL = "http://localhost:8080/api/receipts/verified";
+  receiptDTO: ReceiptDTO = {
+    id: 0, 
+    model_year: 0, 
+    make: "", 
+    vin: "", 
+    first_name: "", 
+    last_name: "", 
+    state: "", 
+    date_added: "", 
+    qa_score: {Int64: 0, Valid: false}, 
+    qa_date: {String: "", Valid: false}
+  };
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -29,12 +41,32 @@ export class ReceiptService {
   }
 
   /** POST: add a new receipt to the server */
-  addReceipt(receipt: InterfaceReceipt): Observable<InterfaceReceipt> {
-    return this.http.post<InterfaceReceipt>(this.receiptsUrl, receipt, this.httpOptions).pipe(
-      tap((newReceipt: InterfaceReceipt) => console.info(`added receipt w/ id=${newReceipt.id}`)),
-      catchError(this.handleError<InterfaceReceipt>('addReceipt'))
+  addReceipt(receipt: Receipt): Observable<ReceiptDTO> {
+    // convert receipt to ReceiptDTO
+    this.receiptDTO.id = receipt.id;
+    this.receiptDTO.model_year = receipt.model_year, 
+    this.receiptDTO.make = receipt.make, 
+    this.receiptDTO.vin = receipt.vin, 
+    this.receiptDTO.first_name = receipt.first_name, 
+    this.receiptDTO.last_name = receipt.last_name, 
+    this.receiptDTO.state = receipt.state, 
+    this.receiptDTO.date_added = receipt.date_added, 
+    this.receiptDTO.qa_score = {Int64: 0, Valid: false}, 
+    this.receiptDTO.qa_date = {String: "", Valid: false}
+    
+    return this.http.post<ReceiptDTO>(this.receiptsUrl, this.receiptDTO, this.httpOptions).pipe(
+      tap((newReceipt: ReceiptDTO) => console.info(`added receipt w/ id=${newReceipt.id}`)),
+      catchError(this.handleError<ReceiptDTO>('addReceipt'))
     );
   }
+
+  // /** POST: add a new receipt to the server */
+  // addReceipt2(receipt: InterfaceReceipt): Observable<InterfaceReceipt> {
+  //   return this.http.post<InterfaceReceipt>(this.receiptsUrl, receipt, this.httpOptions).pipe(
+  //     tap((newReceipt: InterfaceReceipt) => console.info(`added receipt w/ id=${newReceipt.id}`)),
+  //     catchError(this.handleError<InterfaceReceipt>('addReceipt'))
+  //   );
+  // }
 
   /** PUT: update a rceipt with QA Score and Date */
   updateVerifiedReceipt(receipt: ReceiptDTO): Observable<ReceiptDTO> {
