@@ -14,7 +14,7 @@ type Receipt struct {
 	State     string         `json:"state"`
 	Vin       string         `json:"vin"`
 	DateAdded time.Time      `json:"date_added"`
-	QAScore   sql.NullInt64  `json:"qa_score"`
+	QAScore   int            `json:"qa_score"`
 	QADate    sql.NullString `json:"qa_date"`
 }
 
@@ -27,6 +27,6 @@ type ReceiptDTO struct {
 	State     string         `json:"state"`
 	Vin       string         `json:"vin"`
 	DateAdded string         `json:"date_added"`
-	QAScore   sql.NullInt64  `json:"qa_score"`
+	QAScore   int            `json:"qa_score"`
 	QADate    sql.NullString `json:"qa_date"`
 }
