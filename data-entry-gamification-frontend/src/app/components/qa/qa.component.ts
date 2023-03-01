@@ -37,7 +37,7 @@ export class QaComponent implements OnInit {
                       state: "", 
                       // date_added: {String: "", Valid: true}, 
                       date_added: "",
-                      qa_score: {Int64: 0, Valid: false}, 
+                      qa_score: 0, 
                       qa_date: {String: "", Valid: false}
   } 
 
@@ -71,8 +71,9 @@ export class QaComponent implements OnInit {
     // this.receiptDTO.date_added.String = this.receipt.date_added
     // this.receiptDTO.date_added.Valid = true
     this.receiptDTO.date_added = receiptFromForm.date_added
-    this.receiptDTO.qa_score.Int64 = receiptFromForm.qa_score
-    this.receiptDTO.qa_score.Valid = false
+    // this.receiptDTO.qa_score.Int64 = receiptFromForm.qa_score
+    // this.receiptDTO.qa_score.Valid = false
+    this.receiptDTO.qa_score = receiptFromForm.qa_score
     this.receiptDTO.qa_date.String = this.receipt.qa_date
     this.receiptDTO.qa_date.Valid = false
     console.log("receiptDTO: ", this.receiptDTO)

@@ -20,7 +20,7 @@ export class ReceiptService {
     last_name: "", 
     state: "", 
     date_added: "", 
-    qa_score: {Int64: 0, Valid: false}, 
+    qa_score: 0, 
     qa_date: {String: "", Valid: false}
   };
 
@@ -51,7 +51,7 @@ export class ReceiptService {
     this.receiptDTO.last_name = receipt.last_name, 
     this.receiptDTO.state = receipt.state, 
     this.receiptDTO.date_added = receipt.date_added, 
-    this.receiptDTO.qa_score = {Int64: 0, Valid: false}, 
+    this.receiptDTO.qa_score = receipt.qa_score, 
     this.receiptDTO.qa_date = {String: "", Valid: false}
     
     return this.http.post<ReceiptDTO>(this.receiptsUrl, this.receiptDTO, this.httpOptions).pipe(
