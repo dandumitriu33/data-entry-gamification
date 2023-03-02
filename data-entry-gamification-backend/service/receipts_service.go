@@ -4,6 +4,8 @@ import (
 	"context"
 	"data-entry-gamification/model"
 	"data-entry-gamification/utils/errors"
+
+	"log"
 )
 
 func CreateReceipt(ctx context.Context, receipt model.Receipt, user model.User) (*model.Receipt, *errors.RestErr) {
@@ -38,15 +40,16 @@ func GetAllCountToday() (int64, *errors.RestErr) {
 	return count, nil
 }
 
-func GetUnverifiedReceipt() (*model.Receipt, *errors.RestErr) {
-	result := &model.Receipt{}
+func GetUnverifiedReceipt() (model.Receipt, *errors.RestErr) {
+	result := &model.ReceiptDAO{}
 
-	err := result.GetUnverifiedReceipt()
+	resultReceipt, err := result.GetUnverifiedReceipt()
 	if err != nil {
-		return nil, err
+		log.Println("Error getting Unverified Receipt from DAO:", err)
+		return resultReceipt, err
 	}
 
-	return result, nil
+	return resultReceipt, nil
 }
 
 func UpdateReceipt(receipt model.Receipt) (*model.Receipt, *errors.RestErr) {

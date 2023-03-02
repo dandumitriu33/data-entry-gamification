@@ -21,7 +21,7 @@ export class ReceiptService {
     state: "", 
     date_added: "", 
     qa_score: 0, 
-    qa_date: {String: "", Valid: false}
+    qa_date: ""
   };
 
   httpOptions = {
@@ -52,7 +52,7 @@ export class ReceiptService {
     this.receiptDTO.state = receipt.state, 
     this.receiptDTO.date_added = receipt.date_added, 
     this.receiptDTO.qa_score = receipt.qa_score, 
-    this.receiptDTO.qa_date = {String: "", Valid: false}
+    this.receiptDTO.qa_date = receipt.qa_date
     
     return this.http.post<ReceiptDTO>(this.receiptsUrl, this.receiptDTO, this.httpOptions).pipe(
       tap((newReceipt: ReceiptDTO) => console.info(`added receipt w/ id=${newReceipt.id}`)),

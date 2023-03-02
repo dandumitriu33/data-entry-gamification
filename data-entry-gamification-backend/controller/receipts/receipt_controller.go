@@ -44,15 +44,25 @@ func AddReceipt(c *gin.Context) {
 	receipt.FirstName = receiptDTO.FirstName
 	receipt.LastName = receiptDTO.LastName
 	receipt.State = receiptDTO.State
-	parsedTime, parseErr := time.Parse(time.RFC3339, receiptDTO.DateAdded)
+	parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDTO.DateAdded)
 	if parseErr != nil {
-		parseErrToDisplay := errors.NewBadRequestError("invalid datetime format in DTO")
+		parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DTO")
 		c.JSON(err.Status, parseErrToDisplay)
 		return
 	}
-	receipt.DateAdded = parsedTime
+	receipt.DateAdded = parsedDateAdded
 	receipt.QAScore = receiptDTO.QAScore
-	receipt.QADate = receiptDTO.QADate
+	parsedQADate := time.Time{}
+	if receiptDTO.QADate != "" {
+		parsedQADate, parseErr = time.Parse(time.RFC3339, receiptDTO.QADate)
+		if parseErr != nil {
+			parseErrToDisplay := errors.NewBadRequestError("invalid QADate datetime format in DTO")
+			c.JSON(err.Status, parseErrToDisplay)
+			return
+		}
+	}
+	
+	receipt.QADate = parsedQADate
 	log.Println("RECEPIT afoter DTO map:", receipt)
 	// Add Receipt and other transaction parts (points, level)
 	result, saveErr := service.CreateReceipt(c, receipt, *user)
@@ -116,11 +126,25 @@ func GetAllCountToday(c *gin.Context) {
 
 func GetUnverifiedReceipt(c *gin.Context) {
 	result, err := service.GetUnverifiedReceipt()
+	// map Receipt result model to DTO to transfer
+	resultDTO := new (model.ReceiptDTO)
+	log.Println("result:", result)
+	resultDTO.ID = result.ID
+	resultDTO.ModelYear = result.ModelYear
+	resultDTO.Make = result.Make
+	resultDTO.Vin = result.Vin
+	resultDTO.FirstName = result.FirstName
+	resultDTO.LastName = result.LastName
+	resultDTO.State = result.State
+	resultDTO.DateAdded = result.DateAdded.String()
+	resultDTO.QAScore = result.QAScore
+	resultDTO.QADate = result.QADate.String()
+
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
 	}
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, resultDTO)
 }
 
 func UpdateReceipt(c *gin.Context) {

@@ -38,7 +38,7 @@ export class QaComponent implements OnInit {
                       // date_added: {String: "", Valid: true}, 
                       date_added: "",
                       qa_score: 0, 
-                      qa_date: {String: "", Valid: false}
+                      qa_date: ""
   } 
 
   constructor(
@@ -74,8 +74,9 @@ export class QaComponent implements OnInit {
     // this.receiptDTO.qa_score.Int64 = receiptFromForm.qa_score
     // this.receiptDTO.qa_score.Valid = false
     this.receiptDTO.qa_score = receiptFromForm.qa_score
-    this.receiptDTO.qa_date.String = this.receipt.qa_date
-    this.receiptDTO.qa_date.Valid = false
+    // this.receiptDTO.qa_date.String = this.receipt.qa_date
+    // this.receiptDTO.qa_date.Valid = false
+    this.receiptDTO.qa_date
     console.log("receiptDTO: ", this.receiptDTO)
     this.receiptService.updateVerifiedReceipt(this.receiptDTO)
       .subscribe(res => {
