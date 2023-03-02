@@ -27,7 +27,7 @@ export class ReceiptDTO {
     public state: string,
     public date_added: string,
     public qa_score: number,
-    public qa_date: {"String": string, "Valid": boolean}
+    public qa_date: string
   ) {  }
 
 }
