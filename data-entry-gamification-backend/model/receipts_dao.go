@@ -182,22 +182,25 @@ func (receiptDAO *ReceiptDAO) GetUnverifiedReceipt() (Receipt, *errors.RestErr) 
 	receipt.FirstName = receiptDAO.FirstName
 	receipt.LastName = receiptDAO.LastName
 	receipt.State = receiptDAO.State
-	parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDAO.DateAdded)
-	if parseErr != nil {
-		parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DAO")
-		log.Println(parseErrToDisplay)
-	}
-	receipt.DateAdded = parsedDateAdded
+	// parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDAO.DateAdded)
+	// if parseErr != nil {
+	// 	parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DAO")
+	// 	log.Println(parseErrToDisplay)
+	// }
+	// receipt.DateAdded = parsedDateAdded
+	receipt.DateAdded = receiptDAO.DateAdded
+	// var parseErr error
 	receipt.QAScore = receiptDAO.QAScore
-	parsedQADate := time.Time{}
-	if receiptDAO.QADate != "" {
-		parsedQADate, parseErr = time.Parse(time.RFC3339, receiptDAO.QADate)
-		if parseErr != nil {
-			parseErrToDisplay := errors.NewBadRequestError("invalid QADate datetime format in DTO")
-			log.Println(parseErrToDisplay)
-		}
-	}
-	receipt.QADate = parsedQADate
+	// parsedQADate := time.Time{}
+	// if receiptDAO.QADate != "" {
+	// 	parsedQADate, parseErr = time.Parse(time.RFC3339, receiptDAO.QADate)
+	// 	if parseErr != nil {
+	// 		parseErrToDisplay := errors.NewBadRequestError("invalid QADate datetime format in DTO")
+	// 		log.Println(parseErrToDisplay)
+	// 	}
+	// }
+	// receipt.QADate = parsedQADate
+	receipt.QADate = receiptDAO.QADate
 	log.Println("receipt:", receipt)
 	if receipt.ID == int64(0) {
 		// No valid receipts were found - all verified

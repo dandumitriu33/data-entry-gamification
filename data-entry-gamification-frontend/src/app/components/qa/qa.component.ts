@@ -100,9 +100,9 @@ export class QaComponent implements OnInit {
         this.receipt.first_name = res.first_name;
         this.receipt.last_name = res.last_name;
         this.receipt.state = res.state;
-        this.receipt.date_added = res.date_added.String;
-        this.receipt.qa_score = res.qa_score.Int64;
-        this.receipt.qa_date = res.qa_date.String;
+        this.receipt.date_added = res.date_added;
+        this.receipt.qa_score = res.qa_score;
+        this.receipt.qa_date = res.qa_date;
         console.log("got unverified receipt:", res.id);
         this.modelYear.nativeElement.focus()
 
