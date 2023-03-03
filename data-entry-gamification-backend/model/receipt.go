@@ -38,7 +38,7 @@ type ReceiptDAO struct {
 	ModelYear int    `json:"model_year"`
 	State     string `json:"state"`
 	Vin       string `json:"vin"`
-	DateAdded string `json:"date_added"`
+	DateAdded time.Time `json:"date_added"`
 	QAScore   int    `json:"qa_score"`
 	QADate    string `json:"qa_date"`
 }

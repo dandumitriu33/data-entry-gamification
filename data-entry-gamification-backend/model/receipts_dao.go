@@ -182,12 +182,13 @@ func (receiptDAO *ReceiptDAO) GetUnverifiedReceipt() (Receipt, *errors.RestErr) 
 	receipt.FirstName = receiptDAO.FirstName
 	receipt.LastName = receiptDAO.LastName
 	receipt.State = receiptDAO.State
-	parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDAO.DateAdded)
-	if parseErr != nil {
-		parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DAO")
-		log.Println(parseErrToDisplay)
-	}
-	receipt.DateAdded = parsedDateAdded
+	// parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDAO.DateAdded)
+	// if parseErr != nil {
+	// 	parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DAO")
+	// 	log.Println(parseErrToDisplay)
+	// }
+	// receipt.DateAdded = parsedDateAdded
+	var parseErr error
 	receipt.QAScore = receiptDAO.QAScore
 	parsedQADate := time.Time{}
 	if receiptDAO.QADate != "" {
