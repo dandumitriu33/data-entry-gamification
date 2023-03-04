@@ -16,7 +16,7 @@ var (
 	queryGetUserPointsByUserID = "SELECT points FROM user_info WHERE user_id = ?;"
 	queryUpdateUserPoints      = "UPDATE user_info SET points = ?, level = ? WHERE user_id = ?;"
 	// queryGetLatestUnverifiedReceipt = "SELECT id, model_year, make, vin, first_name, last_name, state, date_added, qa_score, qa_date FROM receipts WHERE qa_score IS NULL ORDER BY date_added DESC LIMIT 1;"
-	queryGetLatestUnverifiedReceipt = "SELECT id, model_year, make, vin, first_name, last_name, state, date_added, qa_score FROM receipts WHERE qa_score IS NULL ORDER BY date_added DESC LIMIT 1;"
+	queryGetLatestUnverifiedReceipt = "SELECT id, model_year, make, vin, first_name, last_name, state, date_added, qa_score, qa_date FROM receipts WHERE qa_score IS NULL ORDER BY date_added DESC LIMIT 1;"
 	queryUpdateReceipt = "UPDATE receipts SET model_year = ?, make = ?, vin = ?, first_name = ?, last_name = ?, state = ?, qa_score = ?, qa_date = ? WHERE id = ?;"
 )
 
@@ -169,7 +169,7 @@ func (receiptDAO *ReceiptDAO) GetUnverifiedReceipt() (Receipt, *errors.RestErr) 
 	log.Println("datetime before:", receiptDAO.DateAdded, receiptDAO.QAScore, receiptDAO.QADate, receiptDAO.ID)
 	result := stmt.QueryRow()
 	// if getErr := result.Scan(&receipt.ID, &receipt.ModelYear, &receipt.Make, &receipt.Vin, &receipt.FirstName, &receipt.LastName, &receipt.State, &receipt.DateAdded, &receipt.QAScore, &receipt.QADate); getErr != nil {
-	if getErr := result.Scan(&receiptDAO.ID, &receiptDAO.ModelYear, &receiptDAO.Make, &receiptDAO.Vin, &receiptDAO.FirstName, &receiptDAO.LastName, &receiptDAO.State, &receiptDAO.DateAdded, &receiptDAO.QAScore); getErr != nil {
+	if getErr := result.Scan(&receiptDAO.ID, &receiptDAO.ModelYear, &receiptDAO.Make, &receiptDAO.Vin, &receiptDAO.FirstName, &receiptDAO.LastName, &receiptDAO.State, &receiptDAO.DateAdded, &receiptDAO.QAScore, &receiptDAO.QADate); getErr != nil {
 		log.Println(receiptDAO)
 		return receipt, errors.NewInternalServerError("error retrieving unverified receipt")
 	}
@@ -201,7 +201,7 @@ func (receiptDAO *ReceiptDAO) GetUnverifiedReceipt() (Receipt, *errors.RestErr) 
 	// 	}
 	// }
 	// receipt.QADate = parsedQADate
-	receipt.QADate = receiptDAO.QADate
+	receipt.QADate = receiptDAO.QADate.Time
 	log.Println("receipt:", receipt)
 	if receipt.ID == int64(0) {
 		// No valid receipts were found - all verified
