@@ -84,3 +84,16 @@ func MapFromDTOToModel(receiptDTO ReceiptDTO, receipt *Receipt) *errors.RestErr 
 	receipt.QADate = parsedQADate
 	return nil
 }
+
+func MapFromModelToDTO (receipt Receipt, receiptDTO *ReceiptDTO) {
+	receiptDTO.ID = receipt.ID
+	receiptDTO.ModelYear = receipt.ModelYear
+	receiptDTO.Make = receipt.Make
+	receiptDTO.Vin = receipt.Vin
+	receiptDTO.FirstName = receipt.FirstName
+	receiptDTO.LastName = receipt.LastName
+	receiptDTO.State = receipt.State
+	receiptDTO.DateAdded = receipt.DateAdded.String()
+	receiptDTO.QAScore = receipt.QAScore
+	receiptDTO.QADate = receipt.QADate.String()
+}

@@ -71,26 +71,15 @@ func GetAllCountToday(c *gin.Context) {
 }
 
 func GetUnverifiedReceipt(c *gin.Context) {
-	result, err := service.GetUnverifiedReceipt()
+	reciptFromDB, err := service.GetUnverifiedReceipt()
 	// map Receipt result model to DTO to transfer
-	resultDTO := new (model.ReceiptDTO)
-	log.Println("result:", result)
-	resultDTO.ID = result.ID
-	resultDTO.ModelYear = result.ModelYear
-	resultDTO.Make = result.Make
-	resultDTO.Vin = result.Vin
-	resultDTO.FirstName = result.FirstName
-	resultDTO.LastName = result.LastName
-	resultDTO.State = result.State
-	resultDTO.DateAdded = result.DateAdded.String()
-	resultDTO.QAScore = result.QAScore
-	resultDTO.QADate = result.QADate.String()
-
+	var receiptDTO model.ReceiptDTO
+	model.MapFromModelToDTO(reciptFromDB, &receiptDTO)	
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
 	}
-	c.JSON(http.StatusOK, resultDTO)
+	c.JSON(http.StatusOK, receiptDTO)
 }
 
 func UpdateReceipt(c *gin.Context) {
