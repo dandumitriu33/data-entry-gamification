@@ -8,8 +8,6 @@ import (
 	"time"
 )
 
-
-
 func (receipt *Receipt) Validate() *errors.RestErr {
 	receipt.FirstName = strings.TrimSpace(receipt.FirstName)
 	if receipt.FirstName == "" {

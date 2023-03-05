@@ -8,7 +8,6 @@ import (
 	"data-entry-gamification/utils/authentication"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,33 +36,12 @@ func AddReceipt(c *gin.Context) {
 
 	// map ReceiptDTO to Receipt
 	var receipt model.Receipt
-	receipt.ID = receiptDTO.ID
-	receipt.ModelYear = receiptDTO.ModelYear
-	receipt.Make = receiptDTO.Make
-	receipt.Vin = receiptDTO.Vin
-	receipt.FirstName = receiptDTO.FirstName
-	receipt.LastName = receiptDTO.LastName
-	receipt.State = receiptDTO.State
-	parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDTO.DateAdded)
+	parseErr := model.MapFromDTOToModel(receiptDTO, &receipt)
 	if parseErr != nil {
-		parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DTO")
-		c.JSON(err.Status, parseErrToDisplay)
+		c.JSON(err.Status, parseErr)
 		return
 	}
-	receipt.DateAdded = parsedDateAdded
-	receipt.QAScore = receiptDTO.QAScore
-	parsedQADate := time.Time{}
-	if receiptDTO.QADate != "" {
-		parsedQADate, parseErr = time.Parse(time.RFC3339, receiptDTO.QADate)
-		if parseErr != nil {
-			parseErrToDisplay := errors.NewBadRequestError("invalid QADate datetime format in DTO")
-			c.JSON(err.Status, parseErrToDisplay)
-			return
-		}
-	}
 	
-	receipt.QADate = parsedQADate
-	log.Println("RECEPIT afoter DTO map:", receipt)
 	// Add Receipt and other transaction parts (points, level)
 	result, saveErr := service.CreateReceipt(c, receipt, *user)
 	if saveErr != nil {
@@ -73,38 +51,6 @@ func AddReceipt(c *gin.Context) {
 
 	c.JSON(http.StatusOK, result)
 }
-
-// func AddReceipt2(c *gin.Context) {
-// 	// Bind JSON from form
-// 	var receipt model.Receipt
-// 	if err := c.ShouldBindJSON(&receipt); err != nil {
-// 		err := errors.NewBadRequestError("invalid json body")
-// 		c.JSON(err.Status, err)
-// 		return
-// 	}
-
-// 	// Authenticate From JWT
-// 	issuer, err := authentication.AuthenticateFromJWT(c);
-// 	if err != nil {
-// 		c.JSON(err.Status, err)
-// 		return
-// 	}
-
-// 	user, restErr := service.GetUserByID(issuer)
-// 	if restErr != nil {
-// 		c.JSON(restErr.Status, restErr)
-// 		return
-// 	}
-
-// 	// Add Receipt and other transaction parts (points, level)
-// 	result, saveErr := service.CreateReceipt(c, receipt, *user)
-// 	if saveErr != nil {
-// 		c.JSON(saveErr.Status, saveErr)
-// 		return
-// 	}
-
-// 	c.JSON(http.StatusOK, result)
-// }
 
 func GetAllCount(c *gin.Context) {
 	result, err := service.GetAllCount()

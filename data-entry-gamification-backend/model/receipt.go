@@ -1,6 +1,7 @@
 package model
 
 import (
+	"data-entry-gamification/utils/errors"
 	"database/sql"
 	"time"
 )
@@ -55,4 +56,31 @@ func MapFromDAOToModel(receiptDAO ReceiptDAO, receipt *Receipt) {
 	receipt.DateAdded = receiptDAO.DateAdded
 	receipt.QAScore = int(receiptDAO.QAScore.Int64)
 	receipt.QADate = receiptDAO.QADate.Time
+}
+
+func MapFromDTOToModel(receiptDTO ReceiptDTO, receipt *Receipt) *errors.RestErr {
+	receipt.ID = receiptDTO.ID
+	receipt.ModelYear = receiptDTO.ModelYear
+	receipt.Make = receiptDTO.Make
+	receipt.Vin = receiptDTO.Vin
+	receipt.FirstName = receiptDTO.FirstName
+	receipt.LastName = receiptDTO.LastName
+	receipt.State = receiptDTO.State
+	parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDTO.DateAdded)
+	if parseErr != nil {
+		parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DTO")
+		return parseErrToDisplay
+	}
+	receipt.DateAdded = parsedDateAdded
+	receipt.QAScore = receiptDTO.QAScore
+	parsedQADate := time.Time{}
+	if receiptDTO.QADate != "" {
+		parsedQADate, parseErr = time.Parse(time.RFC3339, receiptDTO.QADate)
+		if parseErr != nil {
+			parseErrToDisplay := errors.NewBadRequestError("invalid QADate datetime format in DTO")
+			return parseErrToDisplay
+		}
+	}	
+	receipt.QADate = parsedQADate
+	return nil
 }
