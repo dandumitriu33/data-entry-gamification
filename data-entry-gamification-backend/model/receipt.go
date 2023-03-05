@@ -6,16 +6,16 @@ import (
 )
 
 type Receipt struct {
-	ID        int64     `json:"id"`
-	FirstName string    `json:"first_name"`
-	LastName  string    `json:"last_name"`
-	Make      string    `json:"make"`
-	ModelYear int       `json:"model_year"`
-	State     string    `json:"state"`
-	Vin       string    `json:"vin"`
-	DateAdded time.Time `json:"date_added"`
-	QAScore   int       `json:"qa_score"`
-	QADate    time.Time `json:"qa_date"`
+	ID        int64
+	FirstName string
+	LastName  string
+	Make      string
+	ModelYear int
+	State     string
+	Vin       string
+	DateAdded time.Time
+	QAScore   int
+	QADate    time.Time
 }
 
 type ReceiptDTO struct {
@@ -53,6 +53,6 @@ func MapFromDAOToModel(receiptDAO ReceiptDAO, receipt *Receipt) {
 	receipt.LastName = receiptDAO.LastName
 	receipt.State = receiptDAO.State
 	receipt.DateAdded = receiptDAO.DateAdded
-	receipt.QAScore = int(receiptDAO.QAScore.Int64)	
+	receipt.QAScore = int(receiptDAO.QAScore.Int64)
 	receipt.QADate = receiptDAO.QADate.Time
 }
