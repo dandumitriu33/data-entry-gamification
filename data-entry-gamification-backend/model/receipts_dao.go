@@ -9,17 +9,18 @@ import (
 )
 
 var (
-	queryInsertReceipt         = "INSERT INTO receipts (model_year, make, vin, first_name, last_name, state, date_added) VALUES (?, ?, ?, ?, ?, ?, ?);"
-	queryGetAllCount           = "SELECT COUNT(*) FROM receipts;"
-	queryGetAllCountToday      = "SELECT COUNT(*) FROM receipts WHERE DATE(date_added) = DATE(NOW());"
-	queryInsertUserIDReceiptID = "INSERT INTO user_receipts (user_id, receipt_id) VALUES (?, ?);"
-	queryGetUserPointsByUserID = "SELECT points FROM user_info WHERE user_id = ?;"
-	queryUpdateUserPoints      = "UPDATE user_info SET points = ?, level = ? WHERE user_id = ?;"
+	queryInsertReceipt              = "INSERT INTO receipts (model_year, make, vin, first_name, last_name, state, date_added) VALUES (?, ?, ?, ?, ?, ?, ?);"
+	queryGetAllCount                = "SELECT COUNT(*) FROM receipts;"
+	queryGetAllCountToday           = "SELECT COUNT(*) FROM receipts WHERE DATE(date_added) = DATE(NOW());"
+	queryInsertUserIDReceiptID      = "INSERT INTO user_receipts (user_id, receipt_id) VALUES (?, ?);"
+	queryGetUserPointsByUserID      = "SELECT points FROM user_info WHERE user_id = ?;"
+	queryUpdateUserPoints           = "UPDATE user_info SET points = ?, level = ? WHERE user_id = ?;"
 	queryGetLatestUnverifiedReceipt = "SELECT id, model_year, make, vin, first_name, last_name, state, date_added, qa_score, qa_date FROM receipts WHERE qa_score IS NULL ORDER BY date_added DESC LIMIT 1;"
-	queryUpdateReceipt = "UPDATE receipts SET model_year = ?, make = ?, vin = ?, first_name = ?, last_name = ?, state = ?, qa_score = ?, qa_date = ? WHERE id = ?;"
+	queryUpdateReceipt              = "UPDATE receipts SET model_year = ?, make = ?, vin = ?, first_name = ?, last_name = ?, state = ?, qa_score = ?, qa_date = ? WHERE id = ?;"
 )
 
-func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr {
+func (receiptDAO *ReceiptDAO) Save(ctx context.Context, userID int64, receipt Receipt) *errors.RestErr {
+	MapFromModelToDAO(receipt, receiptDAO)
 	tx, err := receipts_db.Client.BeginTx(ctx, nil)
 	if err != nil {
 		return errors.NewInternalServerError("database transaction error")
@@ -27,18 +28,18 @@ func (receipt *Receipt) Save(ctx context.Context, userID int64) *errors.RestErr 
 	defer tx.Rollback()
 
 	// Add receipt and get the ID
-	addResult, addErr := tx.ExecContext(ctx, queryInsertReceipt, receipt.ModelYear, receipt.Make, receipt.Vin, receipt.FirstName, receipt.LastName, receipt.State, receipt.DateAdded)
+	addResult, addErr := tx.ExecContext(ctx, queryInsertReceipt, receiptDAO.ModelYear, receiptDAO.Make, receiptDAO.Vin, receiptDAO.FirstName, receiptDAO.LastName, receiptDAO.State, receiptDAO.DateAdded)
 	if addErr != nil {
 		return errors.NewInternalServerError("database transaction add error")
 	}
-	receiptID, err := addResult.LastInsertId()
+	receiptFromDBID, err := addResult.LastInsertId()
 	if err != nil {
 		return errors.NewInternalServerError("database transaction receipt ID retrieval error")
 	}
-	receipt.ID = receiptID
+	receiptDAO.ID = receiptFromDBID
 
-	// Add userID and receiptID to user_receipts table
-	_, pairErr := tx.ExecContext(ctx, queryInsertUserIDReceiptID, userID, receiptID)
+	// Add userID and new receiptID to user_receipts table
+	_, pairErr := tx.ExecContext(ctx, queryInsertUserIDReceiptID, userID, receiptFromDBID)
 	if pairErr != nil {
 		return errors.NewInternalServerError("database transaction pair error")
 	}

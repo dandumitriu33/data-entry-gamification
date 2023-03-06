@@ -97,3 +97,16 @@ func MapFromModelToDTO (receipt Receipt, receiptDTO *ReceiptDTO) {
 	receiptDTO.QAScore = receipt.QAScore
 	receiptDTO.QADate = receipt.QADate.String()
 }
+
+func MapFromModelToDAO (receipt Receipt, receiptDAO *ReceiptDAO) {
+	receiptDAO.ID = receipt.ID
+	receiptDAO.ModelYear = receipt.ModelYear
+	receiptDAO.Make = receipt.Make
+	receiptDAO.Vin = receipt.Vin
+	receiptDAO.FirstName = receipt.FirstName
+	receiptDAO.LastName = receipt.LastName
+	receiptDAO.State = receipt.State
+	receiptDAO.DateAdded = receipt.DateAdded
+	receiptDAO.QAScore = sql.NullInt64{ Int64: int64(receipt.QAScore), Valid: true}  
+	receiptDAO.QADate = sql.NullTime{ Time: receipt.QADate, Valid: true} 
+}

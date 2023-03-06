@@ -13,7 +13,8 @@ func CreateReceipt(ctx context.Context, receipt model.Receipt, user model.User) 
 		return nil, err
 	}
 
-	if err := receipt.Save(ctx, user.ID); err != nil {
+	var receiptDAO model.ReceiptDAO
+	if err := receiptDAO.Save(ctx, user.ID, receipt); err != nil {
 		return nil, err
 	}
 
