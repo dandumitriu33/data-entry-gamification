@@ -53,10 +53,14 @@ func GetUnverifiedReceipt() (model.Receipt, *errors.RestErr) {
 	return resultReceipt, nil
 }
 
-func UpdateReceipt(receipt model.Receipt) (*model.Receipt, *errors.RestErr) {
+func UpdateReceipt(receiptDTO model.ReceiptDTO) (*model.ReceiptDTO, *errors.RestErr) {
+	var receipt model.Receipt
+	log.Println("receipt before map:", receipt)
+	model.MapFromDTOToModel(receiptDTO, &receipt)
+	log.Println("receipt after map:", receipt)
 	if err := receipt.UpdateReceipt(); err != nil {
 		return nil, err
 	}
-
-	return &receipt, nil
+	model.MapFromModelToDTO(receipt, &receiptDTO)
+	return &receiptDTO, nil
 }

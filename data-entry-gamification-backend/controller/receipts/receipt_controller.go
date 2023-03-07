@@ -106,15 +106,16 @@ func UpdateReceipt(c *gin.Context) {
 	}
 
 	// PUT request
-	var receipt model.Receipt
+	var receiptDTO model.ReceiptDTO
 
-	if err := c.ShouldBind(&receipt); err != nil {
+	if err := c.ShouldBind(&receiptDTO); err != nil {
 		err := errors.NewBadRequestError("invalid receipt data")
 		c.JSON(err.Status, err)
 		return
 	}
+	log.Println("binding did:", receiptDTO)
 
-	result, restErr := service.UpdateReceipt(receipt)
+	result, restErr := service.UpdateReceipt(receiptDTO)
 	if restErr != nil {
 		c.JSON(restErr.Status, restErr)
 		return
