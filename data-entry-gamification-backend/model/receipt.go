@@ -3,6 +3,7 @@ package model
 import (
 	"data-entry-gamification/utils/errors"
 	"database/sql"
+	"log"
 	"time"
 )
 
@@ -59,6 +60,7 @@ func MapFromDAOToModel(receiptDAO ReceiptDAO, receipt *Receipt) {
 }
 
 func MapFromDTOToModel(receiptDTO ReceiptDTO, receipt *Receipt) *errors.RestErr {
+	log.Println("Mapping from DTO to Model")
 	receipt.ID = receiptDTO.ID
 	receipt.ModelYear = receiptDTO.ModelYear
 	receipt.Make = receiptDTO.Make
@@ -66,18 +68,23 @@ func MapFromDTOToModel(receiptDTO ReceiptDTO, receipt *Receipt) *errors.RestErr 
 	receipt.FirstName = receiptDTO.FirstName
 	receipt.LastName = receiptDTO.LastName
 	receipt.State = receiptDTO.State
-	parsedDateAdded, parseErr := time.Parse(time.RFC3339, receiptDTO.DateAdded)
+	log.Println("DateAdded:",receiptDTO.DateAdded)
+	parsedDateAdded, parseErr := time.Parse("2006-01-02 03:04:00 +0000 UTC", receiptDTO.DateAdded)
+	log.Println("ParsedDateAdded:",parsedDateAdded)
 	if parseErr != nil {
 		parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DTO")
+		log.Println(parseErrToDisplay)
 		return parseErrToDisplay
 	}
 	receipt.DateAdded = parsedDateAdded
+	log.Println("QAScore pre DTO map to Model:", receiptDTO.QAScore)
 	receipt.QAScore = receiptDTO.QAScore
 	parsedQADate := time.Time{}
 	if receiptDTO.QADate != "" {
-		parsedQADate, parseErr = time.Parse(time.RFC3339, receiptDTO.QADate)
+		parsedQADate, parseErr = time.Parse("2006-01-02 03:04:00 +0000 UTC", receiptDTO.QADate)
 		if parseErr != nil {
 			parseErrToDisplay := errors.NewBadRequestError("invalid QADate datetime format in DTO")
+			log.Println(parseErrToDisplay)
 			return parseErrToDisplay
 		}
 	}	

@@ -135,7 +135,7 @@ func (receiptDAO *ReceiptDAO) GetUnverifiedReceipt() (Receipt, *errors.RestErr) 
 }
 
 func (receipt *Receipt) UpdateReceipt() *errors.RestErr {
-	log.Println(receipt)
+	log.Println("receipt inside update:", receipt)
 	stmt, err := receipts_db.Client.Prepare(queryUpdateReceipt)
 	if err != nil {
 		return errors.NewInternalServerError("database error update receipt stmt")

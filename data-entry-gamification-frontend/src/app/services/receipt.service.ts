@@ -69,8 +69,8 @@ export class ReceiptService {
   // }
 
   /** PUT: update a rceipt with QA Score and Date */
-  updateVerifiedReceipt(receipt: ReceiptDTO): Observable<ReceiptDTO> {
-    return this.http.put<ReceiptDTO>(this.updateVerifiedReceiptURL, receipt, this.httpOptions).pipe(
+  updateVerifiedReceipt(receiptDTO: ReceiptDTO): Observable<ReceiptDTO> {
+    return this.http.put<ReceiptDTO>(this.updateVerifiedReceiptURL, receiptDTO, this.httpOptions).pipe(
       tap((newReceipt: ReceiptDTO) => console.info(`updated receipt w/ id=${newReceipt.id}`)),
       catchError(this.handleError<ReceiptDTO>('updateVerifiedReceipt'))
     );
