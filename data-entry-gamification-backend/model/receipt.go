@@ -60,7 +60,6 @@ func MapFromDAOToModel(receiptDAO ReceiptDAO, receipt *Receipt) {
 }
 
 func MapFromDTOToModel(receiptDTO ReceiptDTO, receipt *Receipt) *errors.RestErr {
-	log.Println("Mapping from DTO to Model")
 	receipt.ID = receiptDTO.ID
 	receipt.ModelYear = receiptDTO.ModelYear
 	receipt.Make = receiptDTO.Make
@@ -68,23 +67,20 @@ func MapFromDTOToModel(receiptDTO ReceiptDTO, receipt *Receipt) *errors.RestErr 
 	receipt.FirstName = receiptDTO.FirstName
 	receipt.LastName = receiptDTO.LastName
 	receipt.State = receiptDTO.State
-	log.Println("DateAdded:",receiptDTO.DateAdded)
-	parsedDateAdded, parseErr := time.Parse("2006-01-02 03:04:00 +0000 UTC", receiptDTO.DateAdded)
-	log.Println("ParsedDateAdded:",parsedDateAdded)
+	parsedDateAdded, parseErr := time.Parse("2006-01-02 03:04:05 +0000 UTC", receiptDTO.DateAdded)
 	if parseErr != nil {
 		parseErrToDisplay := errors.NewBadRequestError("invalid DateAdded datetime format in DTO")
-		log.Println(parseErrToDisplay)
+		log.Println("ERROR", parseErrToDisplay, parseErr)
 		return parseErrToDisplay
 	}
 	receipt.DateAdded = parsedDateAdded
-	log.Println("QAScore pre DTO map to Model:", receiptDTO.QAScore)
 	receipt.QAScore = receiptDTO.QAScore
 	parsedQADate := time.Time{}
 	if receiptDTO.QADate != "" {
-		parsedQADate, parseErr = time.Parse("2006-01-02 03:04:00 +0000 UTC", receiptDTO.QADate)
+		parsedQADate, parseErr = time.Parse("2006-01-02 03:04:05 +0000 UTC", receiptDTO.QADate)
 		if parseErr != nil {
 			parseErrToDisplay := errors.NewBadRequestError("invalid QADate datetime format in DTO")
-			log.Println(parseErrToDisplay)
+			log.Println("ERROR", parseErrToDisplay, parseErr)
 			return parseErrToDisplay
 		}
 	}	
