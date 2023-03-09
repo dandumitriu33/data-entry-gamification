@@ -6,7 +6,6 @@ import (
 	"data-entry-gamification/utils/errors"
 	"data-entry-gamification/utils/string_utils"
 	"data-entry-gamification/utils/authentication"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -90,7 +89,6 @@ func UpdateReceipt(c *gin.Context) {
 		return
 	}
 
-	log.Println("getting user roles by user ID", issuer)
 	// Confirm user has QA role
 	userRoles, restErr := service.UserRoles(c, issuer)
 	if err != nil {
@@ -98,7 +96,6 @@ func UpdateReceipt(c *gin.Context) {
 		c.JSON(err.Status, restErr)
 		return
 	}
-	log.Println("checking user roles", userRoles)
 	if !string_utils.Contains(userRoles, "qa") {
 		err := errors.NewBadRequestError("invalid user athorization")
 		c.JSON(err.Status, err)
@@ -107,13 +104,11 @@ func UpdateReceipt(c *gin.Context) {
 
 	// PUT request
 	var receiptDTO model.ReceiptDTO
-
 	if err := c.ShouldBind(&receiptDTO); err != nil {
 		err := errors.NewBadRequestError("invalid receipt data")
 		c.JSON(err.Status, err)
 		return
 	}
-	log.Println("binding did:", receiptDTO)
 
 	result, restErr := service.UpdateReceipt(receiptDTO)
 	if restErr != nil {
