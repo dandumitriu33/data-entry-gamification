@@ -141,7 +141,7 @@ func (receipt *Receipt) UpdateReceipt() *errors.RestErr {
 		return errors.NewInternalServerError("database error update receipt stmt")
 	}
 	defer stmt.Close()
-	currentTime := time.Now()
+	currentTime := time.Now().UTC()
 	qaDate := currentTime.Format("20060102150405")
 	// "UPDATE receipts SET model_year = ?, make = ?, vin = ?, first_name = ?, last_name = ?, state = ?, qa_score = ?, qa_date = ? WHERE id = ?;"
 	updateResult, saveErr := stmt.Exec(receipt.ModelYear, receipt.Make, receipt.Vin, receipt.FirstName, receipt.LastName, receipt.State, receipt.QAScore, qaDate, receipt.ID)

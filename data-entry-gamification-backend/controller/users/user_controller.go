@@ -3,9 +3,8 @@ package users
 import (
 	"data-entry-gamification/model"
 	"data-entry-gamification/service"
-	"data-entry-gamification/utils/errors"
 	"data-entry-gamification/utils/authentication"
-	"log"
+	"data-entry-gamification/utils/errors"
 	"net/http"
 	"strconv"
 	"time"
@@ -70,7 +69,7 @@ func Login(c *gin.Context) {
 
 func Get(c *gin.Context) {
 	// Authenticate From JWT
-	issuer, err := authentication.AuthenticateFromJWT(c);
+	issuer, err := authentication.AuthenticateFromJWT(c)
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
@@ -94,7 +93,7 @@ func Logout(c *gin.Context) {
 
 func GetUserInfo(c *gin.Context) {
 	// Authenticate From JWT
-	issuer, err := authentication.AuthenticateFromJWT(c);
+	issuer, err := authentication.AuthenticateFromJWT(c)
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
@@ -110,19 +109,17 @@ func GetUserInfo(c *gin.Context) {
 
 func GetUserAvatar(c *gin.Context) {
 	// Authenticate From JWT
-	issuer, err := authentication.AuthenticateFromJWT(c);
+	issuer, err := authentication.AuthenticateFromJWT(c)
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
 	}
 
-	log.Println("getting user by user ID", issuer)
 	userInfo, restErr := service.GetUserInfoByID(issuer)
 	if restErr != nil {
 		c.JSON(restErr.Status, restErr)
 		return
 	}
-	log.Println("got user info:", userInfo)
 
 	// Serving the avatar file
 	c.File(userInfo.ImageURI)
@@ -130,19 +127,17 @@ func GetUserAvatar(c *gin.Context) {
 
 func PutUserAvatar(c *gin.Context) {
 	// Authenticate From JWT
-	issuer, err := authentication.AuthenticateFromJWT(c);
+	issuer, err := authentication.AuthenticateFromJWT(c)
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
 	}
 
-	log.Println("getting user by user ID", issuer)
 	userInfo, restErr := service.GetUserInfoByID(issuer)
 	if restErr != nil {
 		c.JSON(restErr.Status, restErr)
 		return
 	}
-	log.Println("got user info:", userInfo)
 
 	// PUT avatar based on user ID
 	var requestUserAvatar model.UserAvatar
@@ -152,12 +147,9 @@ func PutUserAvatar(c *gin.Context) {
 		c.JSON(err.Status, err)
 		return
 	}
-	log.Println("av bod: ", requestUserAvatar)
 
-	log.Println("PUT user start:", requestUserAvatar)
 	result, restErr := service.PutUserAvatar(c, *userInfo, requestUserAvatar)
 	if restErr != nil {
-		log.Println("put err")
 		c.JSON(restErr.Status, restErr)
 		return
 	}
