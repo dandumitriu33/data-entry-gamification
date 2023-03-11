@@ -9,7 +9,7 @@ the API route, the flow main-controller-service and other Clean Code and Clean
 Architecture principles.
 
 --------------------------------------------------------------------------------
-Refactor Dates conversion to String for DB | Priority 1 | Estimate 1 days
+[x] Refactor Dates conversion to String for DB | Priority 1 | Estimate 1 days
 As a backend engineer
 I want to refactor the backend entities and methods to convert dates to string
 So that I can send simpler or more intuitive JSON from the frontend.  
