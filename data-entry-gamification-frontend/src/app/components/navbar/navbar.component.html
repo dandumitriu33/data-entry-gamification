@@ -12,7 +12,7 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/statistics">Statistics</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="rolesContainsQA()">
           <a class="nav-link" routerLink="/qa">QA</a>
         </li>
       </ul>

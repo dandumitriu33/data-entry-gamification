@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   authenticated = false;
   logoutUrl = "http://localhost:8080/api/logout";
   getUserUrl = "http://localhost:8080/api/user";
+  roles: string[] = [];
 
   constructor(private http: HttpClient) {
 
@@ -36,12 +37,19 @@ export class NavbarComponent implements OnInit {
     );
   }
 
+  
   logout(): void {
     this.http.get(this.logoutUrl, {withCredentials: true})
-      .subscribe(() => {
-        this.authenticated = false;
-        Emitters.authEmitter.emit(false);
-      });
+    .subscribe(() => {
+      this.authenticated = false;
+      Emitters.authEmitter.emit(false);
+    });
   }
-
+  
+  rolesContainsQA(): boolean {
+    if (this.roles.indexOf("qa") != -1) {
+      return true
+    }
+    return false
+  }
 }
