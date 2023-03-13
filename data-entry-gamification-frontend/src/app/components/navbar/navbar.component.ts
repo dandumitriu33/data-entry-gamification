@@ -10,9 +10,10 @@ import { Emitters } from 'src/app/emitters/emitters';
 export class NavbarComponent implements OnInit {
 
   authenticated = false;
+  userLoggedIn = false;
   logoutUrl = "http://localhost:8080/api/logout";
   getUserUrl = "http://localhost:8080/api/user";
-  roles: string[] = [];
+  roles: string[] = ['qa'];
 
   constructor(private http: HttpClient) {
 
@@ -35,6 +36,18 @@ export class NavbarComponent implements OnInit {
         this.authenticated = auth;
       }
     );
+    Emitters.loginEmitter.subscribe(
+      (auth: boolean) => {
+        this.userLoggedIn = auth;
+      }
+    );
+    Emitters.logoutEmitter.subscribe(
+      (auth: boolean) => {
+        if (auth == true) {
+          this.userLoggedIn = false;
+        }
+      }
+    );
   }
 
   
@@ -43,11 +56,12 @@ export class NavbarComponent implements OnInit {
     .subscribe(() => {
       this.authenticated = false;
       Emitters.authEmitter.emit(false);
+      Emitters.logoutEmitter.emit(true);
     });
   }
   
   rolesContainsQA(): boolean {
-    if (this.roles.indexOf("qa") != -1) {
+    if (this.roles.indexOf("qa") != -1 && this.userLoggedIn) {
       return true
     }
     return false
