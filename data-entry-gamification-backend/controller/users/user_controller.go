@@ -107,6 +107,22 @@ func GetUserInfo(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
+func GetUserRoles(c *gin.Context) {
+	// Authenticate From JWT
+	issuer, err := authentication.AuthenticateFromJWT(c)
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+	result, restErr := service.GetUserRolesByID(c, issuer)
+	if restErr != nil {
+		c.JSON(restErr.Status, restErr)
+		return
+	}
+
+	c.JSON(http.StatusOK, result)
+}
+
 func GetUserAvatar(c *gin.Context) {
 	// Authenticate From JWT
 	issuer, err := authentication.AuthenticateFromJWT(c)
