@@ -68,6 +68,17 @@ func GetUserInfoByID(userId int64) (*model.UserInfo, *errors.RestErr) {
 	return result, nil
 }
 
+func GetUserRolesByID(ctx *gin.Context, userId int64) ([]string, *errors.RestErr) {
+	result := &model.UserInfo{UserID: userId}
+
+	roles, err := result.UserRolesByID(ctx);
+	if err != nil {
+		return nil, err
+	}
+
+	return roles, nil
+}
+
 func PutUserAvatar(ctx *gin.Context, userInfo model.UserInfo, userAvatar model.UserAvatar) (*model.UserAvatar, *errors.RestErr) {
 	// TODO: validate avatar
 	log.Println("service reached")

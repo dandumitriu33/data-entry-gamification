@@ -13,7 +13,8 @@ export class NavbarComponent implements OnInit {
   userLoggedIn = false;
   logoutUrl = "http://localhost:8080/api/logout";
   getUserUrl = "http://localhost:8080/api/user";
-  roles: string[] = ['qa'];
+  getUserRolesUrl = "http://localhost:8080/api/user/roles";
+  roles: string[] = [];
 
   constructor(private http: HttpClient) {
 
@@ -31,6 +32,17 @@ export class NavbarComponent implements OnInit {
         Emitters.authEmitter.emit(false);
       }
     );
+    this.http.get(this.getUserRolesUrl, {withCredentials: true}).subscribe(
+      (res: any) => {
+        console.log(res)
+        this.roles = res;
+        console.log(this.roles)
+      },
+      err => {
+        console.error(err);
+        console.log("navbar emitter - auth false");
+      }
+    );
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth;
@@ -39,6 +51,17 @@ export class NavbarComponent implements OnInit {
     Emitters.loginEmitter.subscribe(
       (auth: boolean) => {
         this.userLoggedIn = auth;
+        this.http.get(this.getUserRolesUrl, {withCredentials: true}).subscribe(
+          (res: any) => {
+            console.log(res)
+            this.roles = res;
+            console.log(this.roles)
+          },
+          err => {
+            console.error(err);
+            console.log("navbar emitter - auth false");
+          }
+        );
       }
     );
     Emitters.logoutEmitter.subscribe(
@@ -52,6 +75,7 @@ export class NavbarComponent implements OnInit {
 
   
   logout(): void {
+    this.roles = [];
     this.http.get(this.logoutUrl, {withCredentials: true})
     .subscribe(() => {
       this.authenticated = false;
@@ -61,7 +85,8 @@ export class NavbarComponent implements OnInit {
   }
   
   rolesContainsQA(): boolean {
-    if (this.roles.indexOf("qa") != -1 && this.userLoggedIn) {
+    if (this.roles == null) return false
+    if (this.roles.indexOf("qa") != -1 && this.authenticated) {
       return true
     }
     return false
