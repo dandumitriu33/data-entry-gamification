@@ -1,3 +1,4 @@
+<div *ngIf="this.roles.indexOf('qa') != -1">
 <h1>QA</h1>
 
 <form #receiptForm="ngForm" (ngSubmit)="onSubmitTemplateBased(receiptForm.value); receiptForm.reset()"  class="mx-auto" style="width: 400px;">
@@ -69,3 +70,4 @@
         </div>
     </div>
 </form>
+</div>
