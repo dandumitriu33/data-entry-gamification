@@ -3,6 +3,7 @@ import { Receipt, ReceiptDTO } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-qa',
@@ -13,6 +14,8 @@ export class QaComponent implements OnInit {
   @ViewChild("modelYear", {  }) modelYear: ElementRef;
 
   getLatestUnverifiedReceiptURL = "http://localhost:8080/api/receipts/unverified";
+  getUserRolesUrl = "http://localhost:8080/api/user/roles";
+  roles: string[] = [];
 
   receipt: Receipt = {
                       id: 0, 
@@ -43,17 +46,39 @@ export class QaComponent implements OnInit {
 
   constructor(
     private receiptService: ReceiptService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.refreshData();
-    Emitters.inputEmitter.subscribe(
-      () => {
-        this.modelYear.nativeElement.focus()
-        console.log("focus true")
+    console.log("init")
+    this.http.get(this.getUserRolesUrl, {withCredentials: true}).subscribe(
+      (res: any) => {
+        console.log(res)
+        if (res != null) {
+          this.roles = res;
+        }
+        console.log("got roles", this.roles)
+        if (this.roles.indexOf("qa") == -1) {
+          this.router.navigate(['/']);
+        } else {
+          this.refreshData();
+          Emitters.inputEmitter.subscribe(
+            () => {
+              this.modelYear.nativeElement.focus()
+              console.log("focus true")
+            }
+          );
+        }
+        
+      },
+      err => {
+        console.error(err);
+        console.log("did not get roles");
       }
     );
+    
+    
   }
 
 
