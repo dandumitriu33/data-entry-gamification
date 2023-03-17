@@ -40,9 +40,9 @@ export class ReceiptService {
     );
   }
 
-  /** POST: add a new receipt to the server */
+  /** POST: add a new receipt*/
   addReceipt(receipt: Receipt): Observable<ReceiptDTO> {
-    // convert receipt to ReceiptDTO
+    // map receipt to ReceiptDTO
     this.receiptDTO.id = receipt.id;
     this.receiptDTO.model_year = receipt.model_year, 
     this.receiptDTO.make = receipt.make, 
@@ -59,14 +59,6 @@ export class ReceiptService {
       catchError(this.handleError<ReceiptDTO>('addReceipt'))
     );
   }
-
-  // /** POST: add a new receipt to the server */
-  // addReceipt2(receipt: InterfaceReceipt): Observable<InterfaceReceipt> {
-  //   return this.http.post<InterfaceReceipt>(this.receiptsUrl, receipt, this.httpOptions).pipe(
-  //     tap((newReceipt: InterfaceReceipt) => console.info(`added receipt w/ id=${newReceipt.id}`)),
-  //     catchError(this.handleError<InterfaceReceipt>('addReceipt'))
-  //   );
-  // }
 
   /** PUT: update a rceipt with QA Score and Date */
   updateVerifiedReceipt(receiptDTO: ReceiptDTO): Observable<ReceiptDTO> {

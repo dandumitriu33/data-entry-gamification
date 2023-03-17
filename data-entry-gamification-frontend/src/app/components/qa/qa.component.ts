@@ -38,7 +38,6 @@ export class QaComponent implements OnInit {
                       first_name: "", 
                       last_name: "", 
                       state: "", 
-                      // date_added: {String: "", Valid: true}, 
                       date_added: "",
                       qa_score: 0, 
                       qa_date: ""
@@ -66,7 +65,6 @@ export class QaComponent implements OnInit {
           Emitters.inputEmitter.subscribe(
             () => {
               this.modelYear.nativeElement.focus()
-              console.log("focus true")
             }
           );
         }
@@ -83,9 +81,6 @@ export class QaComponent implements OnInit {
 
 
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
-    console.log("this.receipt: ", this.receipt)
-    console.log("receiptFromForm: ", receiptFromForm)
-    // TODO: UPDATE RECEIPT
     this.receiptDTO.id = this.receipt.id
     this.receiptDTO.model_year = receiptFromForm.model_year
     this.receiptDTO.make = receiptFromForm.make
@@ -93,21 +88,13 @@ export class QaComponent implements OnInit {
     this.receiptDTO.first_name = receiptFromForm.first_name
     this.receiptDTO.last_name = receiptFromForm.last_name
     this.receiptDTO.state = receiptFromForm.state
-    // this.receiptDTO.date_added.String = this.receipt.date_added
-    // this.receiptDTO.date_added.Valid = true
     this.receiptDTO.date_added = receiptFromForm.date_added
-    // this.receiptDTO.qa_score.Int64 = receiptFromForm.qa_score
-    // this.receiptDTO.qa_score.Valid = false
     this.receiptDTO.qa_score = receiptFromForm.qa_score
-    // this.receiptDTO.qa_date.String = this.receipt.qa_date
-    // this.receiptDTO.qa_date.Valid = false
     this.receiptDTO.qa_date
-    console.log("receiptDTO: ", this.receiptDTO)
     this.receiptService.updateVerifiedReceipt(this.receiptDTO)
       .subscribe(res => {
         console.log("receipt updated successfully: ", res);
       });
-    console.log("Emitting input event.");
     Emitters.inputEmitter.emit();
   }
 
@@ -128,9 +115,7 @@ export class QaComponent implements OnInit {
         this.receipt.date_added = res.date_added;
         this.receipt.qa_score = res.qa_score;
         this.receipt.qa_date = res.qa_date;
-        console.log("got unverified receipt:", res.id);
         this.modelYear.nativeElement.focus()
-
       },
       err => {
         console.error(err);        
