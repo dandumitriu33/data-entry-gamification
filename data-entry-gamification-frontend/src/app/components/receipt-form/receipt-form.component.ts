@@ -30,30 +30,15 @@ export class ReceiptFormComponent implements OnInit {
     receiptFromForm.id = 0;
     if (this.receipt.date_added === "") {
       this.receipt.date_added = new Date().toISOString(); // UTC
-      console.log("datetime: ", this.receipt.date_added);
     }
     receiptFromForm.date_added = this.receipt.date_added;
-    console.log("receiptFromForm: ", receiptFromForm)
     this.receiptService.addReceipt(receiptFromForm)
       .subscribe(receiptFromForm => {
         console.log("receipt added successfully: ", receiptFromForm);
       });
-    console.log("Emitting input event.");
     Emitters.inputEmitter.emit();
   }
-
-  // onSubmitTemplateBased2(receiptFromForm: Receipt) { 
-  //   console.log("this.receipt: ", this.receipt)
-  //   receiptFromForm.id = 0;
-  //   console.log("receiptFromForm: ", receiptFromForm)
-  //   this.receiptService.addReceipt(receiptFromForm)
-  //     .subscribe(receiptFromForm => {
-  //       console.log("receipt added successfully: ", receiptFromForm);
-  //     });
-  //   console.log("Emitting input event.");
-  //   Emitters.inputEmitter.emit();
-  // }
-
+  
   newReceipt() {
     console.log("new receipt added")
   }

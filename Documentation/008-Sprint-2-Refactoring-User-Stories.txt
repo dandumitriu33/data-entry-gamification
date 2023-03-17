@@ -1,4 +1,4 @@
-Refactor Backend API routes and flows Clean Code | Priority 1 | Estimate 1 days
+[x] Refactor Backend API routes and flows Clean Code | Priority 1 | Estimate 1 days
 As a backend engineer
 I want to refactor the backend API routes and flows
 So that I can have Clean Code and Clean Architecture in all situations 
@@ -7,6 +7,10 @@ consistently.
 Acceptance criteria: all flows to the backend are consistent with regards to 
 the API route, the flow main-controller-service and other Clean Code and Clean 
 Architecture principles.
+Note: At this tme, the application is rather small with a few routes and 
+refactoring into multiple projects (domain, API, Storage) does not bring a 
+significant advantage over having these components in separate packages.
+Clean architecture is on hold for now until the project size demands it.
 
 --------------------------------------------------------------------------------
 [x] Refactor Dates conversion to String for DB | Priority 1 | Estimate 1 days
@@ -28,7 +32,7 @@ Acceptance criteria: research on the Angular documentation which type of form
 is more appropriate to use and implement in the frontend.
 
 --------------------------------------------------------------------------------
-Refactor QA display based on Roles | Priority 1 | Estimate 1 days
+[x] Refactor QA display based on Roles | Priority 1 | Estimate 1 days
 As a frontend engineer
 I want to refactor the pages to display the links and data based on roles
 So that the appropriate pages are displayed to the correct roles.  
