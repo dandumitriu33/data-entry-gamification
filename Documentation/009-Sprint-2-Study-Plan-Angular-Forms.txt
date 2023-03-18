@@ -1,0 +1,64 @@
+Angular Forms study plan - w/ paid resources
+Week 1: Introduction to Angular Forms
+
+Read the official Angular documentation on forms: 
+https://angular.io/guide/forms-overview
+Watch the "Angular Forms Tutorial" series by Fireship on YouTube: 
+https://www.youtube.com/watch?v=UxMfzL-9kQA&list=PL0vfts4VzfNiQWwxfkltqY1HuC1BcnyAQ
+Complete the "Getting Started with Angular Forms" tutorial on Scrimba: 
+https://scrimba.com/learn/angularforms
+Week 2: Template-driven Forms
+
+Read the official Angular documentation on Template-driven forms: 
+https://angular.io/guide/forms
+Watch the "Angular Template-driven Forms" tutorial by Traversy Media on YouTube: 
+https://www.youtube.com/watch?v=oa9cnWTpqP8
+Complete the "Angular Template-driven Forms" tutorial on Udemy: 
+https://www.udemy.com/course/angular-template-driven-forms/
+Week 3: Reactive Forms
+
+Read the official Angular documentation on Reactive forms: 
+https://angular.io/guide/reactive-forms
+Watch the "Angular Reactive Forms" tutorial by Fireship on YouTube: 
+https://www.youtube.com/watch?v=cdlbFEsCk7o
+Complete the "Angular Reactive Forms" tutorial on Pluralsight: 
+https://www.pluralsight.com/courses/angular-2-reactive-forms
+Week 4: Advanced Forms Topics
+
+Read about form validation, form submission, and handling form events in Angular
+Watch the "Angular Forms Deep Dive" series by Fireship on YouTube: 
+https://www.youtube.com/watch?v=3YDiloj8_d0&list=PL0vfts4VzfNj_IKGNsVjTqTqU6VvTBlxB
+
+
+Angular Forms study plan - free resources only
+Week 1: Introduction to Angular Forms
+
+Read the official Angular documentation on forms: 
+https://angular.io/guide/forms-overview
+Watch the "Angular Forms Tutorial" series by Fireship on YouTube: 
+https://www.youtube.com/watch?v=UxMfzL-9kQA&list=PL0vfts4VzfNiQWwxfkltqY1HuC1BcnyAQ
+Complete the "Getting Started with Angular Forms" tutorial on Scrimba: 
+https://scrimba.com/learn/angularforms
+Week 2: Template-driven Forms
+
+Read the official Angular documentation on Template-driven forms: 
+https://angular.io/guide/forms
+Watch the "Angular Template-driven Forms" tutorial by Traversy Media on YouTube: 
+https://www.youtube.com/watch?v=oa9cnWTpqP8
+Complete the "Angular Template-driven Forms" tutorial on Angular University: 
+https://angular-university.io/lesson/angular-template-driven-forms
+Week 3: Reactive Forms
+
+Read the official Angular documentation on Reactive forms: 
+https://angular.io/guide/reactive-forms
+Watch the "Angular Reactive Forms" tutorial by Fireship on YouTube: 
+https://www.youtube.com/watch?v=cdlbFEsCk7o
+Complete the "Angular Reactive Forms" tutorial on Angular University: 
+https://angular-university.io/lesson/angular-reactive-forms
+Week 4: Advanced Forms Topics
+
+Read about form validation, form submission, and handling form events in Angular
+Watch the "Angular Forms Deep Dive" series by Fireship on YouTube: 
+https://www.youtube.com/watch?v=3YDiloj8_d0&list=PL0vfts4VzfNj_IKGNsVjTqTqU6VvTBlxB
+Practice creating complex forms using both template-driven and reactive forms, 
+incorporating validation and handling form events.
