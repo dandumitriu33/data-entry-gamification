@@ -30,12 +30,8 @@ export class ReceiptFormComponent implements OnInit {
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
     receiptFromForm.id = 0;
     if (this.receipt.date_added === "") {
-      // this.receipt.date_added = new Date().toISOString(); // UTC
-      var g = new Date()
-      var eg = formatDate(g, 'yyyy-MM-dd hh:mm:ss Z UTC', "en-US", "UTC")
-      console.log("eg " + eg)
-      // this.receipt.date_added = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss Z', "UTC");
-      this.receipt.date_added = eg.toString();
+      var tempDate = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss Z UTC', "en-US", "UTC").toString()
+      this.receipt.date_added = tempDate;
     }
     receiptFromForm.date_added = this.receipt.date_added;
     this.receiptService.addReceipt(receiptFromForm)
