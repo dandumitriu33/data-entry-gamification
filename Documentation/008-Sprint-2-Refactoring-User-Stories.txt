@@ -31,6 +31,9 @@ So that the architecture is more consistent.
 Acceptance criteria: research on the Angular documentation which type of form 
 is more appropriate to use and implement in the frontend.
 
+Note: Reactive forms are the suitable type of form as they are more efficient, 
+scalable and easier to test.
+
 --------------------------------------------------------------------------------
 [x] Refactor QA display based on Roles | Priority 1 | Estimate 1 days
 As a frontend engineer

@@ -31,14 +31,15 @@ https://www.youtube.com/watch?v=3YDiloj8_d0&list=PL0vfts4VzfNj_IKGNsVjTqTqU6VvTB
 
 
 Angular Forms study plan - free resources only
-Week 1: Introduction to Angular Forms
 
-Read the official Angular documentation on forms: 
-https://angular.io/guide/forms-overview
+Week 1: Introduction to Angular Forms
+[1/4] Read the official Angular documentation on forms: 
+[] https://angular.io/guide/forms-overview
 Watch the "Angular Forms Tutorial" series by Fireship on YouTube: 
 https://www.youtube.com/watch?v=UxMfzL-9kQA&list=PL0vfts4VzfNiQWwxfkltqY1HuC1BcnyAQ
 Complete the "Getting Started with Angular Forms" tutorial on Scrimba: 
 https://scrimba.com/learn/angularforms
+
 Week 2: Template-driven Forms
 
 Read the official Angular documentation on Template-driven forms: 
