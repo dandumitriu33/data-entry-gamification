@@ -21,28 +21,31 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get(this.getUserUrl, {withCredentials: true}).subscribe(
-      (res: any) => {
-        console.log("navbar emitter - auth true");
-        Emitters.authEmitter.emit(true);
-      },
-      err => {
-        console.error(err);
-        console.log("navbar emitter - auth false");
-        Emitters.authEmitter.emit(false);
-      }
-    );
-    this.http.get(this.getUserRolesUrl, {withCredentials: true}).subscribe(
-      (res: any) => {
-        console.log(res)
-        this.roles = res;
-        console.log(this.roles)
-      },
-      err => {
-        console.error(err);
-        console.log("navbar emitter - auth false");
-      }
-    );
+    if (this.authenticated) {
+      this.http.get(this.getUserUrl, {withCredentials: true}).subscribe(
+        (res: any) => {
+          console.log("navbar emitter - auth true");
+          Emitters.authEmitter.emit(true);
+        },
+        err => {
+          console.error(err);
+          console.log("navbar emitter - auth false");
+          Emitters.authEmitter.emit(false);
+        }
+      );
+      this.http.get(this.getUserRolesUrl, {withCredentials: true}).subscribe(
+        (res: any) => {
+          console.log(res)
+          this.roles = res;
+          console.log(this.roles)
+        },
+        err => {
+          console.error(err);
+          console.log("navbar emitter - auth false");
+        }
+      );
+    }
+    
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth;
