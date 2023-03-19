@@ -43,6 +43,7 @@ export class NavbarComponent implements OnInit {
         console.log("navbar emitter - auth false");
       }
     );
+    
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         this.authenticated = auth;

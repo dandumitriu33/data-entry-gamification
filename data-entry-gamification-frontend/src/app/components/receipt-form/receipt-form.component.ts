@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
+import {DatePipe, formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-receipt-form',
@@ -29,7 +30,8 @@ export class ReceiptFormComponent implements OnInit {
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
     receiptFromForm.id = 0;
     if (this.receipt.date_added === "") {
-      this.receipt.date_added = new Date().toISOString(); // UTC
+      var tempDate = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss Z UTC', "en-US", "UTC").toString()
+      this.receipt.date_added = tempDate;
     }
     receiptFromForm.date_added = this.receipt.date_added;
     this.receiptService.addReceipt(receiptFromForm)
