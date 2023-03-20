@@ -2,7 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
-import {DatePipe, formatDate} from '@angular/common';
+import { formatDate} from '@angular/common';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-receipt-form',
@@ -13,6 +14,14 @@ export class ReceiptFormComponent implements OnInit {
   @ViewChild("modelYear", {  }) modelYear: ElementRef;
 
   receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: "", date_added: "", qa_score: 0, qa_date: ""};
+
+  // Reactive form parts
+  model_year_reactive = new FormControl();
+  make_reactive = new FormControl('');
+  vin_reactive = new FormControl('');
+  first_name_reactive = new FormControl('');
+  last_name_reactive = new FormControl('');
+  state_reactive = new FormControl('');
 
   constructor(
     private receiptService: ReceiptService
