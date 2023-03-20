@@ -75,6 +75,21 @@
                 <label class="col-4" for="state_reactive">State</label>
                 <input class="form-control col-sm" id="state_reactive" type="text" [formControl]="state_reactive">
             </div>
+
+            <div class="row">
+                <p>
+                    <span class="font-weight-bold">Model Year: </span><span>{{ model_year_reactive.value }} </span>
+                    <span class="font-weight-bold">Make: </span><span>{{ make_reactive.value }} </span>
+                    <span class="font-weight-bold">Vin: </span><span>{{ vin_reactive.value }} </span>
+                </p>                
+            </div>
+            <div class="row">
+                <p>
+                    <span class="font-weight-bold">First Name: </span><span>{{ first_name_reactive.value }} </span>
+                    <span class="font-weight-bold">Last Name: </span><span>{{ last_name_reactive.value }} </span>
+                    <span class="font-weight-bold">State: </span><span>{{ state_reactive.value }} </span>
+                </p>                
+            </div>
             
         </div>
     </div>
