@@ -56,4 +56,24 @@ export class ReceiptFormComponent implements OnInit {
     console.log("new receipt added")
   }
 
+  onSubmit(){
+    console.warn(this.receiptFormGroup.value);
+    let tempId = 0
+    let tempDate = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss Z UTC', "en-US", "UTC").toString()
+    let receiptFromForm = new Receipt(tempId, 0, "", "", "", "", "", tempDate, 0, "");
+    
+    receiptFromForm.model_year = this.receiptFormGroup.controls['model_year_reactive'].value
+    receiptFromForm.make = this.receiptFormGroup.controls['make_reactive'].value??"N/A"
+    receiptFromForm.vin = this.receiptFormGroup.controls['vin_reactive'].value??"N/A"
+    receiptFromForm.first_name = this.receiptFormGroup.controls['first_name_reactive'].value??"N/A"
+    receiptFromForm.last_name = this.receiptFormGroup.controls['last_name_reactive'].value??"N/A"
+    receiptFromForm.state = this.receiptFormGroup.controls['state_reactive'].value??"N/A"
+    console.log(receiptFromForm)
+    this.receiptService.addReceipt(receiptFromForm)
+      .subscribe(receiptFromForm => {
+        console.log("receipt from formGroup added successfully: ", receiptFromForm);
+      });
+    Emitters.inputEmitter.emit();
+  }
+
 }
