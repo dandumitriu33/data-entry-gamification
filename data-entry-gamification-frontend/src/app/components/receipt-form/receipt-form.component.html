@@ -51,45 +51,97 @@
         </div>
         <div class="col-6">
             <br>
-            <div class="row form-group">
-                <label class="col-4" for="model_year_reactive">Model Year</label>
-                <input class="form-control col-sm" id="model_year_reactive" type="number" [formControl]="model_year_reactive">
-            </div>
-            <div class="row form-group">
-                <label class="col-4" for="make_reactive">Make</label>
-                <input class="form-control col-sm" id="make_reactive" type="text" [formControl]="make_reactive">
-            </div>
-            <div class="row form-group">
-                <label class="col-4" for="vin_reactive">Vin</label>
-                <input class="form-control col-sm" id="vin_reactive" type="text" [formControl]="vin_reactive">
-            </div>
-            <div class="row form-group">
-                <label class="col-4" for="first_name_reactive">First Name</label>
-                <input class="form-control col-sm" id="first_name_reactive" type="text" [formControl]="first_name_reactive">
-            </div>
-            <div class="row form-group">
-                <label class="col-4" for="last_name_reactive">Last Name</label>
-                <input class="form-control col-sm" id="last_name_reactive" type="text" [formControl]="last_name_reactive">
-            </div>
-            <div class="row form-group">
-                <label class="col-4" for="state_reactive">State</label>
-                <input class="form-control col-sm" id="state_reactive" type="text" [formControl]="state_reactive">
-            </div>
+            <form [formGroup]="receiptFormGroup" (ngSubmit)="onSubmit()">
+                <div class="row form-group">
+                    <label class="col-4" for="model_year_reactive">Model Year</label>
+                    <input class="form-control col-8" id="model_year_reactive" type="number" formControlName="model_year_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="make_reactive">Make</label>
+                    <input class="form-control col-sm" id="make_reactive" type="text" formControlName="make_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="vin_reactive">Vin</label>
+                    <input class="form-control col-sm" id="vin_reactive" type="text" formControlName="vin_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="first_name_reactive">First Name</label>
+                    <input class="form-control col-sm" id="first_name_reactive" type="text" formControlName="first_name_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="last_name_reactive">Last Name</label>
+                    <input class="form-control col-sm" id="last_name_reactive" type="text" formControlName="last_name_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="state_reactive">State</label>
+                    <input class="form-control col-sm" id="state_reactive" type="text" formControlName="state_reactive">
+                </div>
+    
+                <div class="row">
+                    <p>Form Value: {{ receiptFormGroup.value | json }}</p>    
+                </div>
+                <div class="row">
+                    <p>
+                        <span class="font-weight-bold">Model Year: </span><span>{{ this.receiptFormGroup.controls['model_year_reactive'].value }} </span>
+                        <span class="font-weight-bold">Make: </span><span>{{ this.receiptFormGroup.controls['make_reactive'].value }} </span>
+                        <span class="font-weight-bold">Vin: </span><span>{{ this.receiptFormGroup.controls['vin_reactive'].value }} </span>
+                    </p>                
+                </div>
+                <div class="row">
+                    <p>
+                        <span class="font-weight-bold">First Name: </span><span>{{ this.receiptFormGroup.controls['first_name_reactive'].value }} </span>
+                        <span class="font-weight-bold">Last Name: </span><span>{{ this.receiptFormGroup.controls['last_name_reactive'].value }} </span>
+                        <span class="font-weight-bold">State: </span><span>{{ this.receiptFormGroup.controls['state_reactive'].value }} </span>
+                    </p>                
+                </div>
 
-            <div class="row">
-                <p>
-                    <span class="font-weight-bold">Model Year: </span><span>{{ model_year_reactive.value }} </span>
-                    <span class="font-weight-bold">Make: </span><span>{{ make_reactive.value }} </span>
-                    <span class="font-weight-bold">Vin: </span><span>{{ vin_reactive.value }} </span>
-                </p>                
-            </div>
-            <div class="row">
-                <p>
-                    <span class="font-weight-bold">First Name: </span><span>{{ first_name_reactive.value }} </span>
-                    <span class="font-weight-bold">Last Name: </span><span>{{ last_name_reactive.value }} </span>
-                    <span class="font-weight-bold">State: </span><span>{{ state_reactive.value }} </span>
-                </p>                
-            </div>
+                <div class="row form-group">
+                    <div class="col-4"></div>
+                    <button type="submit" class="btn btn-primary col-sm" [disabled]="!receiptFormGroup.valid">Add</button>
+                    <div class="col-4"></div>
+                </div>
+                
+                <!-- <div class="row form-group">
+                    <label class="col-4" for="model_year_reactive">Model Year</label>
+                    <input class="form-control col-sm" id="model_year_reactive" type="number" [formControl]="model_year_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="make_reactive">Make</label>
+                    <input class="form-control col-sm" id="make_reactive" type="text" [formControl]="make_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="vin_reactive">Vin</label>
+                    <input class="form-control col-sm" id="vin_reactive" type="text" [formControl]="vin_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="first_name_reactive">First Name</label>
+                    <input class="form-control col-sm" id="first_name_reactive" type="text" [formControl]="first_name_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="last_name_reactive">Last Name</label>
+                    <input class="form-control col-sm" id="last_name_reactive" type="text" [formControl]="last_name_reactive">
+                </div>
+                <div class="row form-group">
+                    <label class="col-4" for="state_reactive">State</label>
+                    <input class="form-control col-sm" id="state_reactive" type="text" [formControl]="state_reactive">
+                </div>
+    
+                <div class="row">
+                    <p>
+                        <span class="font-weight-bold">Model Year: </span><span>{{ model_year_reactive.value }} </span>
+                        <span class="font-weight-bold">Make: </span><span>{{ make_reactive.value }} </span>
+                        <span class="font-weight-bold">Vin: </span><span>{{ vin_reactive.value }} </span>
+                    </p>                
+                </div>
+                <div class="row">
+                    <p>
+                        <span class="font-weight-bold">First Name: </span><span>{{ first_name_reactive.value }} </span>
+                        <span class="font-weight-bold">Last Name: </span><span>{{ last_name_reactive.value }} </span>
+                        <span class="font-weight-bold">State: </span><span>{{ state_reactive.value }} </span>
+                    </p>                
+                </div> -->
+            </form>
+            
             
         </div>
     </div>
