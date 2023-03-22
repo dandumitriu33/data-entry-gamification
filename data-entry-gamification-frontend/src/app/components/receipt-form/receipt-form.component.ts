@@ -3,7 +3,7 @@ import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
 import { formatDate} from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-receipt-form',
@@ -15,18 +15,28 @@ export class ReceiptFormComponent implements OnInit {
 
   receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: "", date_added: "", qa_score: 0, qa_date: ""};
 
-  receiptFormGroup = new FormGroup({
-    model_year_reactive: new FormControl(),
-    make_reactive: new FormControl(''),
-    vin_reactive: new FormControl(''),
-    first_name_reactive: new FormControl(''),
-    last_name_reactive: new FormControl(''),
-    state_reactive: new FormControl(''),
+  // receiptFormGroup = new FormGroup({
+  //   model_year_reactive: new FormControl(),
+  //   make_reactive: new FormControl(''),
+  //   vin_reactive: new FormControl(''),
+  //   first_name_reactive: new FormControl(''),
+  //   last_name_reactive: new FormControl(''),
+  //   state_reactive: new FormControl(''),
+  // })
+
+  receiptFormGroup = this.fb.group({
+    model_year_reactive: ['', [Validators.required, Validators.min(1800), Validators.max(2200), Validators.pattern(/^\d{4}$/)]],
+    make_reactive: ['', Validators.required],
+    vin_reactive: ['', Validators.required],
+    first_name_reactive: ['', Validators.required],
+    last_name_reactive: ['', Validators.required],
+    state_reactive: ['', Validators.required],
   })
   
 
   constructor(
-    private receiptService: ReceiptService
+    private receiptService: ReceiptService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +46,8 @@ export class ReceiptFormComponent implements OnInit {
       }
     );
   }
+
+  get model_year_reactive() { return this.receiptFormGroup.get('model_year_reactive'); }
   
 
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
@@ -62,7 +74,7 @@ export class ReceiptFormComponent implements OnInit {
     let tempDate = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss Z UTC', "en-US", "UTC").toString()
     let receiptFromForm = new Receipt(tempId, 0, "", "", "", "", "", tempDate, 0, "");
     
-    receiptFromForm.model_year = this.receiptFormGroup.controls['model_year_reactive'].value
+    receiptFromForm.model_year = Number(this.receiptFormGroup.controls['model_year_reactive'].value??"0")
     receiptFromForm.make = this.receiptFormGroup.controls['make_reactive'].value??"N/A"
     receiptFromForm.vin = this.receiptFormGroup.controls['vin_reactive'].value??"N/A"
     receiptFromForm.first_name = this.receiptFormGroup.controls['first_name_reactive'].value??"N/A"
@@ -72,6 +84,7 @@ export class ReceiptFormComponent implements OnInit {
     this.receiptService.addReceipt(receiptFromForm)
       .subscribe(receiptFromForm => {
         console.log("receipt from formGroup added successfully: ", receiptFromForm);
+        this.receiptFormGroup.reset();
       });
     Emitters.inputEmitter.emit();
   }

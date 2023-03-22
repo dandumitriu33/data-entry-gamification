@@ -54,7 +54,23 @@
             <form [formGroup]="receiptFormGroup" (ngSubmit)="onSubmit()">
                 <div class="row form-group">
                     <label class="col-4" for="model_year_reactive">Model Year</label>
-                    <input class="form-control col-8" id="model_year_reactive" type="number" formControlName="model_year_reactive">
+                    <input class="form-control col-8" id="model_year_reactive" type="number" formControlName="model_year_reactive" required>                    
+                </div>
+                <div class="row form-group">
+                    <div class="col-4"></div>
+                    <div *ngIf="model_year_reactive!.invalid && (model_year_reactive!.dirty || model_year_reactive!.touched)"
+                        class="text-danger col-8">
+
+                        <div *ngIf="model_year_reactive!.errors?.['required']">
+                            Model year is required.
+                        </div>
+                        <div *ngIf="model_year_reactive!.errors?.['pattern']">
+                            Model year must be a 4 digit number.
+                        </div>
+                        <div *ngIf="model_year_reactive!.errors?.['min'] || model_year_reactive!.errors?.['max']">
+                            Model year must be between 1800 and 2200.
+                        </div>                        
+                    </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-4" for="make_reactive">Make</label>
