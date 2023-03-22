@@ -25,7 +25,7 @@ export class ReceiptFormComponent implements OnInit {
   // })
 
   receiptFormGroup = this.fb.group({
-    model_year_reactive: ['', Validators.required],
+    model_year_reactive: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
     make_reactive: ['', Validators.required],
     vin_reactive: ['', Validators.required],
     first_name_reactive: ['', Validators.required],
@@ -46,6 +46,8 @@ export class ReceiptFormComponent implements OnInit {
       }
     );
   }
+
+  get model_year_reactive() { return this.receiptFormGroup.get('model_year_reactive'); }
   
 
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
