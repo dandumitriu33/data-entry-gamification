@@ -82,7 +82,20 @@
                 </div>
                 <div class="row form-group">
                     <label class="col-4" for="first_name_reactive">First Name</label>
-                    <input class="form-control col-sm" id="first_name_reactive" type="text" formControlName="first_name_reactive">
+                    <input class="form-control col-sm" id="first_name_reactive" type="text" formControlName="first_name_reactive" required>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4"></div>
+                    <div *ngIf="first_name_reactive!.invalid && (first_name_reactive!.dirty || first_name_reactive!.touched)"
+                        class="text-danger col-8">
+
+                        <div *ngIf="first_name_reactive!.errors?.['required']">
+                            First Name is required.
+                        </div>
+                        <div *ngIf="first_name_reactive!.errors?.['forbiddenName']">
+                            First Name cannot be Bob.
+                        </div>                        
+                    </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-4" for="last_name_reactive">Last Name</label>

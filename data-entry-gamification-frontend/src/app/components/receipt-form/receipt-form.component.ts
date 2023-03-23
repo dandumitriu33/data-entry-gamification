@@ -3,7 +3,7 @@ import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
 import { formatDate} from '@angular/common';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-receipt-form',
@@ -15,24 +15,14 @@ export class ReceiptFormComponent implements OnInit {
 
   receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: "", date_added: "", qa_score: 0, qa_date: ""};
 
-  // receiptFormGroup = new FormGroup({
-  //   model_year_reactive: new FormControl(),
-  //   make_reactive: new FormControl(''),
-  //   vin_reactive: new FormControl(''),
-  //   first_name_reactive: new FormControl(''),
-  //   last_name_reactive: new FormControl(''),
-  //   state_reactive: new FormControl(''),
-  // })
-
   receiptFormGroup = this.fb.group({
     model_year_reactive: ['', [Validators.required, Validators.min(1800), Validators.max(2200), Validators.pattern(/^\d{4}$/)]],
     make_reactive: ['', Validators.required],
     vin_reactive: ['', Validators.required],
-    first_name_reactive: ['', Validators.required],
+    first_name_reactive: ['', [Validators.required, this.forbiddenNameValidator(/bob/i)]],
     last_name_reactive: ['', Validators.required],
     state_reactive: ['', Validators.required],
-  })
-  
+  })  
 
   constructor(
     private receiptService: ReceiptService,
@@ -48,7 +38,11 @@ export class ReceiptFormComponent implements OnInit {
   }
 
   get model_year_reactive() { return this.receiptFormGroup.get('model_year_reactive'); }
-  
+  get make_reactive() { return this.receiptFormGroup.get('make_reactive'); }
+  get vin_reactive() { return this.receiptFormGroup.get('vin_reactive'); }
+  get first_name_reactive() { return this.receiptFormGroup.get('first_name_reactive'); }
+  get last_name_reactive() { return this.receiptFormGroup.get('last_name_reactive'); }
+  get state_reactive() { return this.receiptFormGroup.get('state_reactive'); }  
 
   onSubmitTemplateBased(receiptFromForm: Receipt) { 
     receiptFromForm.id = 0;
@@ -87,6 +81,14 @@ export class ReceiptFormComponent implements OnInit {
         this.receiptFormGroup.reset();
       });
     Emitters.inputEmitter.emit();
+  }
+
+  /** A hero's name can't match the given regular expression */
+  forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const forbidden = nameRe.test(control.value);
+      return forbidden ? {forbiddenName: {value: control.value}} : null;
+    };
   }
 
 }
