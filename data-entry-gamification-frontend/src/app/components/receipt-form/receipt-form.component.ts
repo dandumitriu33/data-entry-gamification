@@ -3,7 +3,7 @@ import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
 import { formatDate} from '@angular/common';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-receipt-form',
@@ -19,7 +19,7 @@ export class ReceiptFormComponent implements OnInit {
     model_year_reactive: ['', [Validators.required, Validators.min(1800), Validators.max(2200), Validators.pattern(/^\d{4}$/)]],
     make_reactive: ['', Validators.required],
     vin_reactive: ['', Validators.required],
-    first_name_reactive: ['', Validators.required],
+    first_name_reactive: ['', [Validators.required, this.forbiddenNameValidator(/bob/i)]],
     last_name_reactive: ['', Validators.required],
     state_reactive: ['', Validators.required],
   })  
@@ -81,6 +81,14 @@ export class ReceiptFormComponent implements OnInit {
         this.receiptFormGroup.reset();
       });
     Emitters.inputEmitter.emit();
+  }
+
+  /** A hero's name can't match the given regular expression */
+  forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const forbidden = nameRe.test(control.value);
+      return forbidden ? {forbiddenName: {value: control.value}} : null;
+    };
   }
 
 }
