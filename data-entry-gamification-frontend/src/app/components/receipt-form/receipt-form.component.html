@@ -60,7 +60,6 @@
                     <div class="col-4"></div>
                     <div *ngIf="model_year_reactive!.invalid && (model_year_reactive!.dirty || model_year_reactive!.touched)"
                         class="text-danger col-8">
-
                         <div *ngIf="model_year_reactive!.errors?.['required']">
                             Model year is required.
                         </div>
@@ -77,6 +76,15 @@
                     <input class="form-control col-sm" id="make_reactive" type="text" formControlName="make_reactive">
                 </div>
                 <div class="row form-group">
+                    <div class="col-4"></div>
+                    <div *ngIf="make_reactive!.invalid && (make_reactive!.dirty || make_reactive!.touched)"
+                            class="text-danger col-8">
+                            <div *ngIf="make_reactive!.errors?.['required']">
+                                Make is required.
+                            </div>                                              
+                    </div>
+                </div>                
+                <div class="row form-group">
                     <label class="col-4" for="vin_reactive">Vin</label>
                     <input class="form-control col-sm" id="vin_reactive" type="text" formControlName="vin_reactive">
                 </div>
@@ -84,7 +92,6 @@
                     <div class="col-4"></div>
                     <div *ngIf="vin_reactive!.invalid && (vin_reactive!.dirty || vin_reactive!.touched)"
                         class="text-danger col-8">
-
                         <div *ngIf="vin_reactive!.errors?.['required']">
                             Vin is required.
                         </div>
@@ -109,7 +116,7 @@
                             First Name is required.
                         </div>
                         <div *ngIf="first_name_reactive!.errors?.['forbiddenName']">
-                            First Name cannot be Bob.
+                            First Name cannot be Boob.
                         </div>                        
                     </div>
                 </div>
@@ -117,6 +124,15 @@
                     <label class="col-4" for="last_name_reactive">Last Name</label>
                     <input class="form-control col-sm" id="last_name_reactive" type="text" formControlName="last_name_reactive">
                 </div>
+                <div class="row form-group">
+                    <div class="col-4"></div>
+                    <div *ngIf="last_name_reactive!.invalid && (last_name_reactive!.dirty || last_name_reactive!.touched)"
+                            class="text-danger col-8">
+                            <div *ngIf="last_name_reactive!.errors?.['required']">
+                                Last Name is required.
+                            </div>                                              
+                    </div>
+                </div>  
                 <div class="row form-group">
                     <label class="col-4" for="state_reactive">State</label>
                     <input class="form-control col-sm" id="state_reactive" type="text" formControlName="state_reactive">
