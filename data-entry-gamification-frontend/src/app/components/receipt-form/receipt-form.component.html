@@ -81,6 +81,22 @@
                     <input class="form-control col-sm" id="vin_reactive" type="text" formControlName="vin_reactive">
                 </div>
                 <div class="row form-group">
+                    <div class="col-4"></div>
+                    <div *ngIf="vin_reactive!.invalid && (vin_reactive!.dirty || vin_reactive!.touched)"
+                        class="text-danger col-8">
+
+                        <div *ngIf="vin_reactive!.errors?.['required']">
+                            Vin is required.
+                        </div>
+                        <div *ngIf="vin_reactive!.errors?.['minlength']">
+                            Vin length is too short. 17 characters required.
+                        </div>    
+                        <div *ngIf="vin_reactive!.errors?.['maxlength']">
+                            Vin length is too long. 17 characters required.
+                        </div>        
+                    </div>
+                </div>
+                <div class="row form-group">
                     <label class="col-4" for="first_name_reactive">First Name</label>
                     <input class="form-control col-sm" id="first_name_reactive" type="text" formControlName="first_name_reactive" required>
                 </div>

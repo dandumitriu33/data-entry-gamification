@@ -18,7 +18,7 @@ export class ReceiptFormComponent implements OnInit {
   receiptFormGroup = this.fb.group({
     model_year_reactive: ['', [Validators.required, Validators.min(1800), Validators.max(2200), Validators.pattern(/^\d{4}$/)]],
     make_reactive: ['', Validators.required],
-    vin_reactive: ['', Validators.required],
+    vin_reactive: ['', [Validators.required, Validators.minLength(17), Validators.maxLength(17)]],
     first_name_reactive: ['', [Validators.required, this.forbiddenNameValidator(/bob/i)]],
     last_name_reactive: ['', Validators.required],
     state_reactive: ['', Validators.required],
