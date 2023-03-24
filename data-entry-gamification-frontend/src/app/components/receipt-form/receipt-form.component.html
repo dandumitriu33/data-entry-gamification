@@ -137,6 +137,15 @@
                     <label class="col-4" for="state_reactive">State</label>
                     <input class="form-control col-sm" id="state_reactive" type="text" formControlName="state_reactive">
                 </div>
+                <div class="row form-group">
+                    <div class="col-4"></div>
+                    <div *ngIf="state_reactive!.invalid && (state_reactive!.dirty || state_reactive!.touched)"
+                            class="text-danger col-8">
+                            <div *ngIf="state_reactive!.errors?.['required']">
+                                State is required.
+                            </div>                                              
+                    </div>
+                </div>  
     
                 <div class="row">
                     <p>Form Value: {{ receiptFormGroup.value | json }}</p>    
