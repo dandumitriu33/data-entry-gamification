@@ -1,54 +1,8 @@
 
 <div class="container">
-    <div class="row">
-        <div class="col-6">
-            <br>
-            <form #receiptForm="ngForm" (ngSubmit)="onSubmitTemplateBased(receiptForm.value); receiptForm.reset()"  class="mx-auto" style="width: 400px;">
-                <div class="container">
-                    <div class="row form-group">
-                        <label class="col-4" for="modelYear">Model Year</label>
-                        <input type="number" class="form-control col-sm" #modelYear id="modelYear"
-                        required autofocus
-                        (ngModel)="receipt.model_year" name="model_year">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-4" for="make">Make</label>
-                        <input type="text" class="form-control col-sm" id="make"
-                        required
-                        (ngModel)="receipt.make" name="make">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-4" for="vin">Vin</label>
-                        <input type="text" class="form-control col-sm" id="vin"
-                        required
-                        (ngModel)="receipt.vin" name="vin">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-4" for="firstName">First Name</label>
-                        <input type="text" class="form-control col-sm" id="firstName"
-                        required
-                        (ngModel)="receipt.first_name" name="first_name">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-4" for="lastName">Last Name</label>
-                        <input type="text" class="form-control col-sm" id="lastName"
-                        required
-                        (ngModel)="receipt.last_name" name="last_name">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-4" for="state">State</label>
-                        <input type="text" class="form-control col-sm" id="state"
-                        required
-                        (ngModel)="receipt.state" name="state">
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-8"></div>
-                        <button type="submit" class="btn btn-primary col-sm" (click)="newReceipt()">Add</button>
-                        <!-- <button type="submit" [disabled]="!receiptForm.valid" class="btn btn-primary col-sm" (click)="newReceipt(); receiptForm.reset()">Add</button> -->
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div class="row">  
+        <div class="col-3">
+        </div>      
         <div class="col-6">
             <br>
             <form [formGroup]="receiptFormGroup" (ngSubmit)="onSubmit()">
@@ -170,49 +124,7 @@
                     <button type="submit" class="btn btn-primary col-sm" [disabled]="!receiptFormGroup.valid">Add</button>
                     <div class="col-4"></div>
                 </div>
-                
-                <!-- <div class="row form-group">
-                    <label class="col-4" for="model_year_reactive">Model Year</label>
-                    <input class="form-control col-sm" id="model_year_reactive" type="number" [formControl]="model_year_reactive">
-                </div>
-                <div class="row form-group">
-                    <label class="col-4" for="make_reactive">Make</label>
-                    <input class="form-control col-sm" id="make_reactive" type="text" [formControl]="make_reactive">
-                </div>
-                <div class="row form-group">
-                    <label class="col-4" for="vin_reactive">Vin</label>
-                    <input class="form-control col-sm" id="vin_reactive" type="text" [formControl]="vin_reactive">
-                </div>
-                <div class="row form-group">
-                    <label class="col-4" for="first_name_reactive">First Name</label>
-                    <input class="form-control col-sm" id="first_name_reactive" type="text" [formControl]="first_name_reactive">
-                </div>
-                <div class="row form-group">
-                    <label class="col-4" for="last_name_reactive">Last Name</label>
-                    <input class="form-control col-sm" id="last_name_reactive" type="text" [formControl]="last_name_reactive">
-                </div>
-                <div class="row form-group">
-                    <label class="col-4" for="state_reactive">State</label>
-                    <input class="form-control col-sm" id="state_reactive" type="text" [formControl]="state_reactive">
-                </div>
-    
-                <div class="row">
-                    <p>
-                        <span class="font-weight-bold">Model Year: </span><span>{{ model_year_reactive.value }} </span>
-                        <span class="font-weight-bold">Make: </span><span>{{ make_reactive.value }} </span>
-                        <span class="font-weight-bold">Vin: </span><span>{{ vin_reactive.value }} </span>
-                    </p>                
-                </div>
-                <div class="row">
-                    <p>
-                        <span class="font-weight-bold">First Name: </span><span>{{ first_name_reactive.value }} </span>
-                        <span class="font-weight-bold">Last Name: </span><span>{{ last_name_reactive.value }} </span>
-                        <span class="font-weight-bold">State: </span><span>{{ state_reactive.value }} </span>
-                    </p>                
-                </div> -->
             </form>
-            
-            
         </div>
     </div>
 </div>
