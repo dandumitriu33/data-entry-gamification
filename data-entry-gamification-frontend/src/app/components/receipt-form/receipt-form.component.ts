@@ -1,9 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Receipt } from 'src/app/entities/receipt';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Emitters } from 'src/app/emitters/emitters';
 import { formatDate} from '@angular/common';
-import { FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-receipt-form',
@@ -11,8 +11,7 @@ import { FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, AbstractC
   styleUrls: ['./receipt-form.component.css']
 })
 export class ReceiptFormComponent implements OnInit {
-  @ViewChild("modelYear", {  }) modelYear: ElementRef;
-
+  @ViewChild('model_year_reactive_autofocus') modelYearReactiveElement: ElementRef;
   receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: "", date_added: "", qa_score: 0, qa_date: ""};
 
   receiptFormGroup = this.fb.group({
@@ -30,11 +29,9 @@ export class ReceiptFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    Emitters.inputEmitter.subscribe(
-      () => {
-        this.modelYear.nativeElement.focus()
-      }
-    );
+    setTimeout(() => {
+      this.focusInputElement();
+    }, 100);
   }
 
   get model_year_reactive() { return this.receiptFormGroup.get('model_year_reactive'); }
@@ -43,24 +40,6 @@ export class ReceiptFormComponent implements OnInit {
   get first_name_reactive() { return this.receiptFormGroup.get('first_name_reactive'); }
   get last_name_reactive() { return this.receiptFormGroup.get('last_name_reactive'); }
   get state_reactive() { return this.receiptFormGroup.get('state_reactive'); }  
-
-  onSubmitTemplateBased(receiptFromForm: Receipt) { 
-    receiptFromForm.id = 0;
-    if (this.receipt.date_added === "") {
-      var tempDate = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss Z UTC', "en-US", "UTC").toString()
-      this.receipt.date_added = tempDate;
-    }
-    receiptFromForm.date_added = this.receipt.date_added;
-    this.receiptService.addReceipt(receiptFromForm)
-      .subscribe(receiptFromForm => {
-        console.log("receipt added successfully: ", receiptFromForm);
-      });
-    Emitters.inputEmitter.emit();
-  }
-  
-  newReceipt() {
-    console.log("new receipt added")
-  }
 
   onSubmit(){
     console.warn(this.receiptFormGroup.value);
@@ -79,16 +58,28 @@ export class ReceiptFormComponent implements OnInit {
       .subscribe(receiptFromForm => {
         console.log("receipt from formGroup added successfully: ", receiptFromForm);
         this.receiptFormGroup.reset();
+        setTimeout(() => {
+          this.focusInputElement();
+        }, 100);
       });
     Emitters.inputEmitter.emit();
   }
 
-  /** A hero's name can't match the given regular expression */
+  /** A First Name can't match the given regular expression */
   forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const forbidden = nameRe.test(control.value);
       return forbidden ? {forbiddenName: {value: control.value}} : null;
     };
+  }
+
+  focusInputElement() {
+    if (this.modelYearReactiveElement && this.modelYearReactiveElement.nativeElement) {
+
+      this.modelYearReactiveElement.nativeElement.focus();        
+    } else {
+      console.log("not reacive? ", this.modelYearReactiveElement)
+    }
   }
 
 }

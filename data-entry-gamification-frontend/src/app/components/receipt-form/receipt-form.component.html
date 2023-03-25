@@ -8,7 +8,7 @@
             <form [formGroup]="receiptFormGroup" (ngSubmit)="onSubmit()">
                 <div class="row form-group">
                     <label class="col-4" for="model_year_reactive">Model Year</label>
-                    <input class="form-control col-8" id="model_year_reactive" type="number" formControlName="model_year_reactive" required>                    
+                    <input #model_year_reactive_autofocus class="form-control col-8" id="model_year_reactive" type="number" formControlName="model_year_reactive" required>                    
                 </div>
                 <div class="row form-group">
                     <div class="col-4"></div>
