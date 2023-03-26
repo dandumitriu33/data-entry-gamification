@@ -12,7 +12,7 @@ import { Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors
 })
 export class ReceiptFormComponent implements OnInit {
   @ViewChild('model_year_reactive_autofocus') modelYearReactiveElement: ElementRef;
-  receipt: Receipt = {id: 0, model_year: 0, make: "", vin: "", first_name: "", last_name: "", state: "", date_added: "", qa_score: 0, qa_date: ""};
+  showSuccessMessage = false;
 
   receiptFormGroup = this.fb.group({
     model_year_reactive: ['', [Validators.required, Validators.min(1800), Validators.max(2200), Validators.pattern(/^\d{4}$/)]],
@@ -42,7 +42,6 @@ export class ReceiptFormComponent implements OnInit {
   get state_reactive() { return this.receiptFormGroup.get('state_reactive'); }  
 
   onSubmit(){
-    console.warn(this.receiptFormGroup.value);
     let tempId = 0
     let tempDate = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss Z UTC', "en-US", "UTC").toString()
     let receiptFromForm = new Receipt(tempId, 0, "", "", "", "", "", tempDate, 0, "");
@@ -53,14 +52,17 @@ export class ReceiptFormComponent implements OnInit {
     receiptFromForm.first_name = this.receiptFormGroup.controls['first_name_reactive'].value??"N/A"
     receiptFromForm.last_name = this.receiptFormGroup.controls['last_name_reactive'].value??"N/A"
     receiptFromForm.state = this.receiptFormGroup.controls['state_reactive'].value??"N/A"
-    console.log(receiptFromForm)
     this.receiptService.addReceipt(receiptFromForm)
       .subscribe(receiptFromForm => {
-        console.log("receipt from formGroup added successfully: ", receiptFromForm);
+        this.showSuccessMessage = true;
+        console.log("Receipt from formGroup added successfully: ", receiptFromForm);
         this.receiptFormGroup.reset();
         setTimeout(() => {
           this.focusInputElement();
         }, 100);
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 2000);
       });
     Emitters.inputEmitter.emit();
   }
@@ -75,11 +77,8 @@ export class ReceiptFormComponent implements OnInit {
 
   focusInputElement() {
     if (this.modelYearReactiveElement && this.modelYearReactiveElement.nativeElement) {
-
       this.modelYearReactiveElement.nativeElement.focus();        
-    } else {
-      console.log("not reacive? ", this.modelYearReactiveElement)
-    }
+    } 
   }
 
 }
