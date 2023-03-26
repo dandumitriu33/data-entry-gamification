@@ -121,9 +121,13 @@
 
                 <div class="row form-group">
                     <div class="col-4"></div>
-                    <button type="submit" class="btn btn-primary col-sm" [disabled]="!receiptFormGroup.valid">Add</button>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary col-sm" [disabled]="!receiptFormGroup.valid">Add</button>
+                        <div class="text-success" *ngIf="showSuccessMessage">Successful</div>
+                    </div>
                     <div class="col-4"></div>
                 </div>
+                
             </form>
         </div>
     </div>

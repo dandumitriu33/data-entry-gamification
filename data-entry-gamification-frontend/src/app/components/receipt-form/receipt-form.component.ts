@@ -12,6 +12,7 @@ import { Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors
 })
 export class ReceiptFormComponent implements OnInit {
   @ViewChild('model_year_reactive_autofocus') modelYearReactiveElement: ElementRef;
+  showSuccessMessage = false;
 
   receiptFormGroup = this.fb.group({
     model_year_reactive: ['', [Validators.required, Validators.min(1800), Validators.max(2200), Validators.pattern(/^\d{4}$/)]],
@@ -53,11 +54,15 @@ export class ReceiptFormComponent implements OnInit {
     receiptFromForm.state = this.receiptFormGroup.controls['state_reactive'].value??"N/A"
     this.receiptService.addReceipt(receiptFromForm)
       .subscribe(receiptFromForm => {
+        this.showSuccessMessage = true;
         console.log("Receipt from formGroup added successfully: ", receiptFromForm);
         this.receiptFormGroup.reset();
         setTimeout(() => {
           this.focusInputElement();
         }, 100);
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 2000);
       });
     Emitters.inputEmitter.emit();
   }
