@@ -1,5 +1,5 @@
 # data-entry-gamification
-Educational project - practicing SDLC steps and documents  
+Educational project - practicing SDLC steps and documents with Go and Angular  
 
 This is an educational project aimed at practicing Software Development Life  
 Cycle steps and documents inside those steps.  
